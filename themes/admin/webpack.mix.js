@@ -10,9 +10,8 @@ const mix = require("laravel-mix");
  | file for the application as well as bundling up all the JS files.
  |
  */
- 
- 
+
+
 mix.setPublicPath("public/themes/admin")
-    .js(`${__dirname}/js/app.js`, "js")
+    .ts(`${__dirname}/js/index.tsx`, "js/app.js")
     .react()
-    .sass(`${__dirname}/sass/app.scss`, "css");
