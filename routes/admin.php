@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth:admin'])->group(function(){
-    Route::view('/home', 'home')->name('home');
+    Route::view('/', 'home')->name('dashboard');
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 });
 

@@ -14,7 +14,7 @@ class AuthController extends Controller
             throw ValidationException::withMessages(['email' => 'Invalid email or password.']);
         }
 
-        return redirect()->intended(route('admin.home'));
+        return redirect()->intended(route('admin.dashboard'));
     }
 
     public function destroy()
