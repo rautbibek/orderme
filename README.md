@@ -1,7 +1,9 @@
 **Installation**
 
 ```
-npm Install 
+composer install
+
+npm install 
 
 ```
 
@@ -10,6 +12,13 @@ npm Install
 ```
 npm run dev --theme=admin
 npm run dev --theme=frontend
+
+```
+
+**Database**
+
+```
+postgress
 
 ```
 
