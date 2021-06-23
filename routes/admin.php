@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
     Route::middleware(['guest:admin'])->group(function() {
         Route::view('/login', 'auth.login')->name('login');
         Route::post('/login', [AuthController::class, 'store']);
@@ -23,7 +22,13 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth:admin'])->group(function(){
+    
     Route::view('/', 'home')->name('dashboard');
+    Route::view('/home', 'home')->name('home');
+
+    //Category controller 
+    Route::resource('/category',CategoryController::class)->except('show','create');
+
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 });
 
