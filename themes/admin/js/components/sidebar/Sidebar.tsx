@@ -1,31 +1,32 @@
 import * as React from 'react'
 import './sidebar.css'
-import {Category, Dashboard, LocalOffer} from "@material-ui/icons";
-import {Link} from 'react-router-dom'
+import { Category, Dashboard, LocalOffer } from "@material-ui/icons";
+import { Link, useLocation } from 'react-router-dom'
 
 
 const Sidebar = () => {
+    const location = useLocation()
     return (
         <div className='sidebar'>
             <div className='sidebarWraper'>
                 <div className='sidebarMenu'>
                     <ul className='sidebarList'>
                         <li >
-                            <Link exact to="/" className='sidebarListItem active'>
-                                <Dashboard className='sidebarIcon'/>
+                            <Link to="/" className={`sidebarListItem ${'/' === location.pathname ? 'active' : ''}`}>
+                                <Dashboard className='sidebarIcon' />
                                 Dashboard
                             </Link>
                         </li>
                         <li>
-                            <Link exact to="/categories" className='sidebarListItem'>
-                                <Category className='sidebarIcon'/>
-                                Category
+                            <Link to="/categories" className={`sidebarListItem ${location.pathname.includes('categories') ? 'active' : ''}`}>
+                                <Category className='sidebarIcon' />
+                                Categories
                             </Link>
                         </li>
                         <li>
-                            <Link exact to="/products" className='sidebarListItem'>
-                                <LocalOffer className='sidebarIcon'/>
-                                Product
+                            <Link to="/products" className={`sidebarListItem ${location.pathname.includes('products') ? 'active' : ''}`}>
+                                <LocalOffer className='sidebarIcon' />
+                                Products
                             </Link>
                         </li>
                     </ul>
