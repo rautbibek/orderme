@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,13 +23,13 @@ Route::middleware(['guest:admin'])->group(function() {
 
 
 Route::middleware(['auth:admin'])->group(function(){
-    
-    Route::view('/', 'home')->name('dashboard');
-
+    Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     //Category controller 
     Route::resource('/category',CategoryController::class)->except('show','create');
 
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
+    
 });
+//Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');
 
 

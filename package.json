@@ -1,9 +1,9 @@
 {
     "private": true,
     "scripts": {
-        "dev": "PUBLIC_URL=/ npm run development",
+        "dev": "npm run development",
         "development": "mix",
-        "watch": "PUBLIC_URL=/ mix watch",
+        "watch": "mix watch",
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
@@ -16,7 +16,7 @@
         "browser-sync": "^2.26.14",
         "browser-sync-webpack-plugin": "^2.3.0",
         "jquery": "^3.5",
-        "laravel-mix": "^6.0.6",
+        "laravel-mix": "^6.0.24",
         "lodash": "^4.17.19",
         "popper.js": "^1.16",
         "postcss": "^8.1.14",

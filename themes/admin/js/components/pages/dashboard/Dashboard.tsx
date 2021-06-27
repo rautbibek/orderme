@@ -1,9 +1,10 @@
 import * as React from 'react'
+export default function Dashboard() {
 
-const Dashboard = () => {
-    return (
-        <div style={{flex: 5}}>This is dashboard</div>
-    )
+
+  return (
+
+    <div>Dashboard page</div>
+
+  );
 }
-
-export default Dashboard

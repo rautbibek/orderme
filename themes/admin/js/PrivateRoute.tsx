@@ -9,9 +9,7 @@ const PrivateRoute = (props) => {
     return (
         <Route {...rest} render={items => (
             <div>
-                <Topbar />
                 <div className="container">
-                    <Sidebar />
                     <Component {...items} />
                 </div>
             </div>

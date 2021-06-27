@@ -16,4 +16,4 @@ mix.setPublicPath("public/themes/admin")
     .ts(`${__dirname}/js/index.tsx`, "js/app.js")
     .react().sourceMaps()
 
-mix.browserSync('orderme.test');
+// mix.browserSync('orderme.test');
