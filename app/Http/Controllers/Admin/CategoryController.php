@@ -16,7 +16,8 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::all();
-        return response()->json($category);
+
+        return response()->json($category, 200);
     }
 
     /**
@@ -37,7 +38,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $this->validate($request,[
             'name'=>'required| max:90 |unique:categories',
         ]);

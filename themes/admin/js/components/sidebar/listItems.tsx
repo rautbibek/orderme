@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <Link to="/">
+    <Link to="/" replace>
     <ListItem button>
       <ListItemIcon>
         <DashboardIcon />
@@ -21,7 +21,7 @@ export const mainListItems = (
       <ListItemText primary="Dashboard" />
     </ListItem>
     </Link>
-    <Link to="/categories">
+    <Link to="/categories" replace>
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />

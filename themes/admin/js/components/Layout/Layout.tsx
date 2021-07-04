@@ -127,7 +127,6 @@ export default function Layout(props) {
     setOpen(false);
   };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
-  console.log(Math.random())
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -167,14 +166,13 @@ export default function Layout(props) {
         <Divider />
         <List>{mainListItems}</List>
         <Divider />
-        <List>{secondaryListItems} {Math.random()}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
         {props.children}
 
-        
+
           {/* <Box pt={4}>
             <Copyright />
           </Box> */}

@@ -1,8 +1,14 @@
 import * as React from 'react'
+import Datatables from "../../Layout/Datatables";
+import {listCategory} from "../../../createUrls";
+
+const columns = [
+    { field: 'name', headerName: 'Name', width: 300 },
+];
 
 const Category = () => {
     return (
-        <div style={{flex: 5}}>This is category</div>
+        <Datatables url={listCategory} columns={columns} title={'categories'}/>
     )
 }
 
