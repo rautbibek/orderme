@@ -1,1 +1,1 @@
-export const listCategory = `category`
+export const listCategory = `categories`

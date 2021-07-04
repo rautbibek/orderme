@@ -23,18 +23,26 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+interface CategoryEditComponentProps {
+    onSubmit: any,
+    category?: any
+}
 
-const Category = () => {
+
+const CategoryEditComponent: React.FC<CategoryEditComponentProps> = ({onSubmit, category}) => {
     const classes = useStyles();
     const history = useHistory()
 
     return (
         <Form
-            onSubmit={console.log}
+            onSubmit={onSubmit}
+            initialValues={
+                ...category
+            }
             render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit} className={classes.form}>
-                    <CustomTextField name="title" type={'text'} label={'Title'}/>
-                    <SelectTable/>
+                    <CustomTextField name="name" type={'text'} label={'Name'}/>
+                    <SelectTable name={'parentId'} label={'Select Parent Category'} table={'categories'}/>
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"}  color="primary" type="submit">Submit</Button>
                         <Button variant={"contained"}  color="secondary" onClick={() => history.push('/categories')}>Back</Button>
@@ -45,4 +53,4 @@ const Category = () => {
     )
 }
 
-export default Category
+export default CategoryEditComponent

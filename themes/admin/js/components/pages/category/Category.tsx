@@ -3,7 +3,7 @@ import Datatables from "../../Layout/Datatables";
 import {listCategory} from "../../../createUrls";
 
 const columns = [
-    { field: 'name', headerName: 'Name', width: 300 },
+    { field: 'name', headerName: 'Name', flex: 1 },
 ];
 
 const Category = () => {

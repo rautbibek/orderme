@@ -46,11 +46,12 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->slug = Str::slug($request->name);
-        $category->parent_id = $request->category_id;
+        $category->parent_id = $request->parentId ;
         $category->save();
         return response()->json([
             'message'=>'New category added succefully',
-        ]);
+            'category' => $category
+        ], 201);
     }
 
     /**
@@ -86,14 +87,11 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request,[
-            'name'=>'required| max:90 |unique:bt_categories,name,'.$id,
+            'name'=>'required| max:90 |unique:categories,name,'.$id,
         ]);
         $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->parent_id = $request->category_id;
-        $category->active = $request->active;
-        $category->featured= $request->featured;
-        $category->position = $request->position;
         $category->slug = Str::slug($request->slug);
         $category->update();
         return response()->json([
