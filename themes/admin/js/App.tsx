@@ -7,6 +7,7 @@ import Product from "./components/pages/product/Product";
 import Layout from './components/Layout/Layout';
 import AddCategory from "./components/pages/category/AddCategory";
 import EditCategory from "./components/pages/category/EditCategory";
+import AddProduct from './components/pages/product/AddCategory';
 
 const App = () => {
     return (
@@ -19,6 +20,7 @@ const App = () => {
                         <PrivateRoute exact path="/categories/new" component={AddCategory} />
                         <PrivateRoute exact path="/categories/edit/:id" component={EditCategory} />
                         <PrivateRoute exact path="/products" component={Product} />
+                        <PrivateRoute exact path="/products/new" component = {AddProduct}/>
                     </Switch>
                 </Layout>
             </HashRouter>
