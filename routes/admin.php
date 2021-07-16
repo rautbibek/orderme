@@ -28,6 +28,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::resource('/categories',CategoryController::class)->except('show','create');
 
     Route::get('/product-types', [HomeController::class, 'productTypeList']);
+    Route::resource('/products', ProductController::class);
 
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 

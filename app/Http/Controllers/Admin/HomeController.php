@@ -15,10 +15,14 @@ class HomeController extends Controller
 
     public function productTypeList(){
         
-        $category = ProductType::where("field->type", 5)->get();
+        // $category = ProductType::where("field->type", 5)->get();
+        $category = ProductType::all();
 
-        $collection = collect($category)->map(function ($name) {
-            return $name;
+        $collection = $category->map(function ($name) {
+            return collect(json_decode($name['field'], true))->map(function($ok){
+                return $ok;
+            })->union(['id' => $name->id]);
+        });
 
         return response()->json($collection, 200);
     }
