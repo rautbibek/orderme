@@ -45,8 +45,8 @@ const SelectTable: React.FC<SelectTableProps> = ({isMultiple, label, isCreateabl
                                 onChange={(item) => input.onChange(item)}
                                 SelectProps={{
                                     isCreatable: !!isCreateable,
-                                    msgNoOptionsAvailable:`All ${name}  are selected`,
-                                    msgNoOptionsMatchFilter: `No ${name} matches the filter`,
+                                    msgNoOptionsAvailable:`All options  are selected`,
+                                    msgNoOptionsMatchFilter: `No option matches the filter`,
                                 }}
                             />
                         </Grid>
@@ -71,8 +71,8 @@ const SelectTable: React.FC<SelectTableProps> = ({isMultiple, label, isCreateabl
                                     input.onChange(item)
                                 }}
                                 SelectProps={{
-                                    msgNoOptionsAvailable:`All ${name}  are selected`,
-                                    msgNoOptionsMatchFilter: `No ${name} matches the filter`,
+                                    msgNoOptionsAvailable:`No options available`,
+                                    msgNoOptionsMatchFilter: `No options matches the filter`,
                                 }}
                             />
                         </Grid>

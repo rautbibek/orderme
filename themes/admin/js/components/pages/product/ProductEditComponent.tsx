@@ -32,8 +32,9 @@ const ProductEditComponent = ({onSubmit}) => {
                 <form onSubmit={handleSubmit} className={classes.form}>
                     <CustomTextField name="title" type={'text'} label={'Title'}/>
                     <SelectTable name={'parentId'} label={'Select Category'} table={'categories'}/>
-                    <CustomTextField name="short_description" type={'textarea'} label={'Short Description'}/>
-                    <CustomTextField name="description" type={'textarea'} label={'Title'}/>
+                    <CustomTextField name="short_description" type={'textarea'} rows={3} label={'Short Description'}/>
+                    <CustomTextField name="description" type={'textarea'} label={'Description'} rows={5}/>
+                    <SelectTable name={'product_type'} label={'Select Product Type'} table={'product-types'}/>
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"}  color="primary" type="submit">Submit</Button>
                         {/* <Button variant={"contained"}  color="secondary" onClick={() => history.push('/categories')}>Back</Button> */}
@@ -45,3 +46,4 @@ const ProductEditComponent = ({onSubmit}) => {
 }
 
 export default ProductEditComponent
+
