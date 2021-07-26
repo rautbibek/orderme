@@ -25,9 +25,8 @@ class CreateProductsTable extends Migration
             $table->boolean('cart_system');
             $table->boolean('inventory_track');
             $table->jsonb('features')->nullable();
+            $table->jsonb('options')->nullable();
             $table->jsonb('image')->nullable();
-            $table->integer('price');
-            $table->integer('old_price');
             
             $table->timestamps();
         });

@@ -1,8 +1,14 @@
 import * as React from 'react'
+import Datatables from '../../Layout/Datatables';
+import { listProduct } from '../../../createUrls';
+
+const columns = [
+    { field: 'title', headerName: 'Title', flex: 1 },
+];
 
 const Product = () => {
     return (
-        <div style={{flex: 5}}>This is product</div>
+        <Datatables url={listProduct} columns={columns} title={'products'} />
     )
 }
 

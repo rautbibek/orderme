@@ -2,6 +2,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,7 +29,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::resource('/categories',CategoryController::class)->except('show','create');
 
     Route::get('/product-types', [HomeController::class, 'productTypeList']);
-    Route::resource('/products', ProductController::class);
+    Route::resource('/products', ProductController::class)->except('show', 'create');
 
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 

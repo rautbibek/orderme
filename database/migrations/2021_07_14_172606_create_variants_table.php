@@ -17,13 +17,13 @@ class CreateVariantsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products');
-            $table->integer('quantity');
-            $table->integer('onhold');
-            $table->integer('sold');
-            $table->string('code');
+            $table->integer('quantity')->default(0 );
+            $table->integer('onhold')->default(0);
+            $table->integer('sold')->default(0);
+            $table->string('code')->nullable();
             $table->integer('price');
-            $table->integer('old_price');
-            $table->jsonb('features');
+            $table->integer('old_price')->nullable();
+            $table->jsonb('features')->nullable();
             $table->timestamps();
         });
     }

@@ -4,7 +4,16 @@
         "target": "es5",
         "noImplicitAny": false,
         "sourceMap": false,
-        "jsx": "react"
+        "jsx": "react",
+        "typeRoots": [
+            "../node_modules/@types",
+            "../@types"
+        ],
+        "lib": [
+            "es2018",
+            "dom",
+            "es2019"
+        ],
     },
     "include": [
         "themes/admin/js/**/*"

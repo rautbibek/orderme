@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { HashRouter,BrowserRouter, Switch } from "react-router-dom";
+import { HashRouter, BrowserRouter, Switch } from "react-router-dom";
 import Dashboard from "./components/pages/dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Category from "./components/pages/category/Category";
@@ -7,7 +7,8 @@ import Product from "./components/pages/product/Product";
 import Layout from './components/Layout/Layout';
 import AddCategory from "./components/pages/category/AddCategory";
 import EditCategory from "./components/pages/category/EditCategory";
-import AddProduct from './components/pages/product/AddCategory';
+import AddProduct from './components/pages/product/AddProduct';
+import EditProduct from './components/pages/product/EditProduct';
 
 const App = () => {
     return (
@@ -20,7 +21,8 @@ const App = () => {
                         <PrivateRoute exact path="/categories/new" component={AddCategory} />
                         <PrivateRoute exact path="/categories/edit/:id" component={EditCategory} />
                         <PrivateRoute exact path="/products" component={Product} />
-                        <PrivateRoute exact path="/products/new" component = {AddProduct}/>
+                        <PrivateRoute exact path="/products/new" component={AddProduct} />
+                        <PrivateRoute exact path="/products/edit/:id" component={EditProduct} />
                     </Switch>
                 </Layout>
             </HashRouter>
