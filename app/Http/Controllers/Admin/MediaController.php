@@ -5,24 +5,41 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Media;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 
 class MediaController extends Controller
 {
    public function upload(Request $request){
+       $data = [];
+       $files = $request->allFiles();
+       foreach($files['files'] as $file){
 
-       $path = $request->file('file')->store('product');
+           $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+           $safeFilename = Str::slug($originalFilename);
 
-       $media = new Media();
-       $media->title = $request->title;
-       $media->image_path = '/'.$request->title.'/'.$path;
-       $media->file_size = $request->file('file')->getSize();
-       $media->save();
+           $filename = "store/".$safeFilename.'-'.uniqid().'.'.$file->guessExtension();
+           $media = new Media();
+           $media->image_path = $filename;
+           $media->file_size = $file->getSize();
+           $media->save();
 
-       $data = ['ref' => $media->id, 'url' => $media->image_path ];
+           Storage::disk('public')->put($filename, file_get_contents($file));
+
+          array_push($data, ['ref' => $media->id, 'url' => Storage::url($filename) ]) ;
+       }
 
        return response()->json($data, 200);
 
+    }
+
+    public function remove($id){
+       if(!$id){
+           $media = Media::findOrFail($id);
+           Storage::delete($media->image_path);
+           $media->delete();
+       }
+       return response()->json([], 200);
     }
 }

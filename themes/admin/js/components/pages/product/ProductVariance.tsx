@@ -73,8 +73,6 @@ const ProductVariance: React.FC<productVarianceProps> = ({ variance, productType
         }
     }, [productType, data])
 
-
-    if (variance && cartisan.length > 0 && selectType.length > 0) {
         return (
             <div>
                 <Grid container spacing={3}>
@@ -160,38 +158,7 @@ const ProductVariance: React.FC<productVarianceProps> = ({ variance, productType
                 </FieldArray>
             </div>
         )
-    }
-    return (
-        <FieldArray name={'variants[0]'}>
-            {({ fields }) =>
-            (
-                <Grid container spacing={1} >
-                    {selectType.map((item, i) => {
-                        console.log(item)
-                        return (
-                            <Grid key={i} item xs={1} style={{ marginBottom: 20 }}>
-                                <CustomTextField name={`variants[0].${item}`} type='text' label={item} />
-                            </Grid>
-                        )
-                    })}
-                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                        <CustomTextField name={`variants[0].price`} type='text' label='Price' />
-                    </Grid>
 
-                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                        <CustomTextField name={`variants[0].old_price`} type='text' label='Old Price' />
-                    </Grid>
-                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                        <CustomTextField name={`variants[0].code`} type='text' label='SKU' />
-                    </Grid>
-                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                        <CustomTextField name={`variants[0].quantity`} type='text' label='Quantity' />
-                    </Grid>
-                </Grid>
-            )
-            }
-        </FieldArray>
-    )
 }
 
 export default ProductVariance

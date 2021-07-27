@@ -19,7 +19,7 @@ class ProductController extends Controller
     {
         $products = Product::all();
 
-        return response()->json($products, 200); 
+        return response()->json($products, 200);
     }
 
     /**
@@ -40,7 +40,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        
         $product = new Product();
         $product->title = $request->title;
         $product->category_id = $request->category_id;
@@ -50,12 +49,13 @@ class ProductController extends Controller
         $product->cart_system = true;
         $product->inventory_track = true;
         $product->options = json_encode($request->options);
+        $product->image = json_encode($request->image);
         $product->save();
 
         foreach($request->variants as $variant){
             $options = [];
             foreach(json_decode($product->productType->field, true) as $option){
-            
+
                $options[$option['name']] = $variant[$option['name']];
             }
             $batch_variant[] = new Variant([
@@ -66,13 +66,13 @@ class ProductController extends Controller
                     'features' => $options,
             ]);
         }
-        
+
         $product->variants()->saveMany($batch_variant);
 
          return response()->json([
             'message'=>'New product added succefully',
             'product' => $product
-        ], 201); 
+        ], 201);
     }
 
     /**
@@ -108,7 +108,6 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $product = Product::findOrFail($id);
         $product->title = $request->title;
         $product->category_id = $request->category_id;
@@ -118,6 +117,7 @@ class ProductController extends Controller
         $product->cart_system = true;
         $product->inventory_track = true;
         $product->options = json_encode($request->options);
+        $product->image = json_encode($request->image);
         $product->update();
 
         foreach($product->variants as $checkVariant)
@@ -126,13 +126,13 @@ class ProductController extends Controller
             if($deletetedVariant === false){
                 $checkVariant->delete();
             }
-            
+
         }
 
         foreach($request->variants as $variant){
             $options = [];
             foreach(json_decode($product->productType->field, true) as $option){
-            
+
                $options[$option['name']] = $variant[$option['name']];
             }
 
@@ -167,7 +167,7 @@ class ProductController extends Controller
         return response()->json([
             'message'=>'Product Updated successfully',
             'product' => $product
-        ], 201); 
+        ], 201);
 
     }
 

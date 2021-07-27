@@ -18,6 +18,11 @@ class Product extends Model
         return json_decode($value, true);
     }
 
+    public function getImageAttribute($value)
+    {
+        return json_decode($value, true);
+    }
+
     public function productType(){
         return $this->belongsTo('App\Models\ProductType');
     }

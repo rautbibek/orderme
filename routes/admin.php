@@ -32,7 +32,8 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::resource('/products', ProductController::class)->except('show', 'create');
 
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
-    Route::post('/media/upload', [\App\Http\Controllers\Admin\MediaController::class, 'upload'])->name('upload');
+    Route::post('/media/upload', [\App\Http\Controllers\Admin\MediaController::class, 'upload'])->name('media_upload');
+    Route::get('/media/remove/{id}', [\App\Http\Controllers\Admin\MediaController::class, 'remove'])->name('media_remove');
 
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');

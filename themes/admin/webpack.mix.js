@@ -15,5 +15,6 @@ const mix = require("laravel-mix");
 mix.setPublicPath("public/themes/admin")
     .ts(`${__dirname}/js/index.tsx`, "js/app.js")
     .react().sourceMaps()
+    .setResourceRoot("/")
 
 // mix.browserSync('orderme.test');

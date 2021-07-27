@@ -1,4 +1,4 @@
-import { Button, FormControlLabel, makeStyles, Checkbox } from '@material-ui/core'
+import {Button, FormControlLabel, makeStyles, Checkbox, InputLabel} from '@material-ui/core'
 import * as React from 'react'
 import { Form } from 'react-final-form'
 import CustomTextField from '../../Layout/CustomTextField'
@@ -7,6 +7,7 @@ import SelectProductType from "./SelectProductType";
 import ProductVariance from "./ProductVariance";
 import arrayMutators from 'final-form-arrays'
 import { Field } from 'react-final-form';
+import ImageDropZone from "../../Layout/ImageDropZone";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,7 +35,7 @@ interface ProductEditComponentProps {
 const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, product }) => {
     const classes = useStyles();
     const [productType, setProductType] = React.useState([] as any)
-    const [variance, setVariance] = React.useState(!!product?.inventory_track || false)
+    const [variance, setVariance] = React.useState(product?.variants.length > 0 ? true : false)
 
     return (
         <Form
@@ -57,24 +58,22 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                     <SelectTable name={'category_id'} label={'Select Category'} table={'categories'} />
                     <CustomTextField name="short_description" type={'textarea'} rows={3} label={'Short Description'} />
                     <CustomTextField name="description" type={'textarea'} label={'Description'} rows={5} />
+                    <Field name={'image'}>
+                        {({ input, meta }) => (
+                            <div>
+                                <InputLabel>Product Images</InputLabel>
+                                <ImageDropZone onChange={images => input.onChange(images)} media={input.value} />
+                            </div>
+                        )}
+                    </Field>
                     <SelectProductType onSelect={(item) => {
                         setProductType(item[0])
                         setVariance(false)
                     }
                     } />
-                    <FormControlLabel
-                        control={
-                            <Field name='inventory_track'  >
-                                {({ input, meta }) => (
-                                    <Checkbox checked={variance} onChange={() => setVariance(!variance)} />
-                                )}
-                            </Field>
-                        }
-                        label="Does your product has multiple variance ?"
-                    />
                     <hr />
                     <br />
-                    {productType.length > 0 && (
+                    {!!values.options  && (
                         <ProductVariance variance={variance} productType={values.product_type_id} optionType={values.options} />
                     )}
                     <div className={classes.buttonWrapper}>
