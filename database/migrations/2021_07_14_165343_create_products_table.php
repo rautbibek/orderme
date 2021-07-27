@@ -20,14 +20,20 @@ class CreateProductsTable extends Migration
             $table->foreign('category_id')->references('id')->on('categories');
             $table->integer('product_type_id')->unsigned()->nullable();
             $table->foreign('product_type_id')->references('id')->on('product_types');
-            $table->string('short_description');
-            $table->string('description');
+            $table->text('short_description');
+            $table->text('description');
             $table->boolean('cart_system');
             $table->boolean('inventory_track');
-            $table->jsonb('features')->nullable();
+            $table->jsonb('config')->nullable();
             $table->jsonb('options')->nullable();
             $table->jsonb('image')->nullable();
-            
+            $table->boolean('active')->default(false);
+            $table->boolean('featured')->default(false);
+            $table->boolean('out_of_stock')->default(false);
+            $table->text('meta_tag_title')->nullable();
+            $table->text('meta_tag_description')->nullable();
+            $table->string('meta_tag_keyword')->nullable();
+
             $table->timestamps();
         });
     }
