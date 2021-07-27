@@ -53,7 +53,7 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                 },
                 values
             }) => (
-                <form onSubmit={handleSubmit} className={classes.form}>
+                <form className={classes.form}>
                     <CustomTextField name="title" type={'text'} label={'Title'} />
                     <SelectTable name={'category_id'} label={'Select Category'} table={'categories'} />
                     <CustomTextField name="short_description" type={'textarea'} rows={3} label={'Short Description'} />
@@ -66,18 +66,17 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                             </div>
                         )}
                     </Field>
-                    <SelectProductType onSelect={(item) => {
+                    <SelectProductType disabled={!!product} onSelect={(item) => {
                         setProductType(item[0])
-                        setVariance(false)
                     }
                     } />
                     <hr />
                     <br />
-                    {!!values.options  && (
+                    {(!!values.options || productType.length > 0)  && (
                         <ProductVariance variance={variance} productType={values.product_type_id} optionType={values.options} />
                     )}
                     <div className={classes.buttonWrapper}>
-                        <Button variant={"contained"} color="primary" type="submit">Submit</Button>
+                        <Button variant={"contained"} color="primary" type="button" onClick={handleSubmit} >Submit</Button>
                         {/* <Button variant={"contained"}  color="secondary" onClick={() => history.push('/categories')}>Back</Button> */}
                     </div>
                 </form>

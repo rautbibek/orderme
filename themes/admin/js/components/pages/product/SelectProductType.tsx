@@ -8,8 +8,9 @@ import * as _ from 'lodash'
 
 interface SelectProductTypeProps {
     onSelect?: any
+    disabled?: boolean
 }
-const SelectProductType: React.FC<SelectProductTypeProps> = ({ onSelect }) => {
+const SelectProductType: React.FC<SelectProductTypeProps> = ({ onSelect, disabled }) => {
 
     const fetchData = async () => {
         return await HttpClient.get('product-types')
@@ -35,6 +36,7 @@ const SelectProductType: React.FC<SelectProductTypeProps> = ({ onSelect }) => {
                     <Grid container spacing={3}>
                         <Grid item xs={12} style={{ marginBottom: 20 }}>
                             <SingleSelect
+                                disabled={!!disabled}
                                 label={'Select Product Type'}
                                 options={options}
                                 value={input.value}
