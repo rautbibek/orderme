@@ -39,7 +39,7 @@ const CssTextField = withStyles({
 const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, type, name, rows, defaultValue, disabled }) => {
     if (!!defaultValue) {
         return (
-            <Field name={`${name}`} defaultValue={defaultValue} >
+            <Field name={`${name}`} initialValue={defaultValue} >
                 {({ input, meta }) => {
 
                     return (
@@ -59,7 +59,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, type, name, ro
             {({ input, meta }) => (
                 <Grid container spacing={3}>
                     <Grid item xs={12} style={{ marginBottom: 20 }}>
-                        <CssTextField size={'small'} type={`${type}`} {...input} disabled={disabled} id="standard-basic" label={`${label}`} rows={rows} fullWidth />
+                        <CssTextField size={'small'} type={`${type}`} multiline={type === 'textarea'} {...input} disabled={disabled} id="standard-basic" label={`${label}`} rows={rows} fullWidth />
                         {meta.touched && meta.error && <span>{meta.error}</span>}
                     </Grid>
                 </Grid>

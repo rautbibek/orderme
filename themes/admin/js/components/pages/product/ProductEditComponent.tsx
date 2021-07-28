@@ -8,6 +8,7 @@ import ProductVariance from "./ProductVariance";
 import arrayMutators from 'final-form-arrays'
 import { Field } from 'react-final-form';
 import ImageDropZone from "../../Layout/ImageDropZone";
+import CustomCheckBox from "../../Layout/CustomCheckBox";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -35,7 +36,6 @@ interface ProductEditComponentProps {
 const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, product }) => {
     const classes = useStyles();
     const [productType, setProductType] = React.useState([] as any)
-    const [variance, setVariance] = React.useState(product?.variants.length > 0 ? true : false)
 
     return (
         <Form
@@ -66,15 +66,20 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                             </div>
                         )}
                     </Field>
-                    <SelectProductType disabled={!!product} onSelect={(item) => {
+                    <SelectProductType disabled={!!product?.title} onSelect={(item) => {
                         setProductType(item[0])
                     }
                     } />
                     <hr />
                     <br />
                     {(!!values.options || productType.length > 0)  && (
-                        <ProductVariance variance={variance} productType={values.product_type_id} optionType={values.options} />
+                        <ProductVariance productType={values.product_type_id} push={push} optionType={values.options} />
                     )}
+                    <CustomCheckBox color={'primary'} checked={values.featured} name={'featured'} label={'Featured'}/>
+                    <CustomCheckBox color={'secondary'} checked={values.out_of_stock} name={'out_of_stock'} label={'Out Of Stock'}/>
+                    <CustomTextField name="meta_tag_title" type={'text'} rows={3} label={'Meta Tag Title'} />
+                    <CustomTextField name="meta_tag_description" type={'textarea'} rows={3} label={'Meta Tag Description'} />
+                    <CustomTextField name="meta_tag_keyword" type={'text'} rows={3} label={'Meta Tag Keyword'} />
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"} color="primary" type="button" onClick={handleSubmit} >Submit</Button>
                         {/* <Button variant={"contained"}  color="secondary" onClick={() => history.push('/categories')}>Back</Button> */}

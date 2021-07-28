@@ -48,23 +48,25 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->cart_system = true;
         $product->inventory_track = true;
-        $product->options = json_encode($request->options);
+//        $product->options = json_encode($request->options);
+        $product->out_of_stock = $request->out_of_stock;
+        $product->featured = $request->featured;
+        $product->meta_tag_title = $request->meta_tag_title;
+        $product->meta_tag_description = $request->meta_tag_description;
+        $product->meta_tag_keyword = $request->meta_tag_keyword;
         $product->image = json_encode($request->image);
         $product->save();
 
         foreach($request->variants as $variant){
-            $options = [];
-            foreach(json_decode($product->productType->field, true) as $option){
 
-               $options[$option['name']] = $variant[$option['name']];
-            }
-            $batch_variant[] = new Variant([
+                $variance = new Variant([
                     'quantity' => $variant['quantity'],
                     'code' => $variant['code'],
                     'price' => $variant['price'],
                     'old_price' => $variant['old_price'],
-                    'features' => $options,
-            ]);
+                ]);
+                $variance->features = $variant['features'];
+                $batch_variant[] = $variance;
         }
 
         $product->variants()->saveMany($batch_variant);
@@ -114,10 +116,13 @@ class ProductController extends Controller
         $product->product_type_id = $request->product_type_id;
         $product->short_description = $request->short_description;
         $product->description = $request->description;
-        $product->cart_system = true;
-        $product->inventory_track = true;
-        $product->options = json_encode($request->options);
+//        $product->options = json_encode($request->options);
         $product->image = json_encode($request->image);
+        $product->out_of_stock = $request->out_of_stock;
+        $product->featured = $request->featured;
+        $product->meta_tag_title = $request->meta_tag_title;
+        $product->meta_tag_description = $request->meta_tag_description;
+        $product->meta_tag_keyword = $request->meta_tag_keyword;
         $product->update();
 
         foreach($product->variants as $checkVariant)
@@ -130,11 +135,6 @@ class ProductController extends Controller
         }
 
         foreach($request->variants as $variant){
-            $options = [];
-            foreach(json_decode($product->productType->field, true) as $option){
-
-               $options[$option['name']] = $variant[$option['name']];
-            }
 
             if(!isset($variant['quantity']) && !isset($variant['price']) ){
                 continue ;
@@ -142,7 +142,7 @@ class ProductController extends Controller
 
             if(!!($variant['id'] ?? null)){
                 $entryVariant = Variant::findOrFail($variant['id']);
-                $entryVariant->features = $options;
+                $entryVariant->features = $variant['features'];
                 $entryVariant->update([
                     'quantity' => $variant['quantity'],
                     'code' => $variant['code'],
@@ -157,7 +157,7 @@ class ProductController extends Controller
                     'price' => $variant['price'],
                     'old_price' => $variant['old_price'],
             ]);
-            $batch_variant->features = $options;
+            $batch_variant->features = $variant['features'];
 
             $product->variants()->save($batch_variant);
 
@@ -167,7 +167,7 @@ class ProductController extends Controller
         return response()->json([
             'message'=>'Product Updated successfully',
             'product' => $product
-        ], 201);
+        ], 200);
 
     }
 

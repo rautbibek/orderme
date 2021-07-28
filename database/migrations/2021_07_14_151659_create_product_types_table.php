@@ -17,6 +17,7 @@ class CreateProductTypesTable extends Migration
             $table->id();
             $table->string('title');
             $table->jsonb('field');
+            $table->boolean('cart_system');
             $table->timestamps();
         });
     }

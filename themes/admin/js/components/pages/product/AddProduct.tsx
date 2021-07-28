@@ -10,12 +10,13 @@ const AddProduct = () => {
     const history = useHistory()
     const handleSubmit = async (values: any) => {
         const res = await HttpClient.post(listProduct, values)
-        if (res.status === 201) {
-            console.log(res)
+        if(res.status === 201){
+            await mutate(listProduct)
+            history.push('/products')
         }
     }
     return (
-        <ProductEditComponent onSubmit={handleSubmit} />
+        <ProductEditComponent onSubmit={handleSubmit} product={{product: {variants: [{}]}}} />
     )
 }
 

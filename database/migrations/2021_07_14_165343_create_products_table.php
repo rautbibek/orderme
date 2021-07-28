@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->text('short_description');
             $table->text('description');
             $table->boolean('cart_system');
-            $table->boolean('inventory_track');
+            $table->boolean('inventory_track')->default(false);
             $table->jsonb('config')->nullable();
             $table->jsonb('options')->nullable();
             $table->jsonb('image')->nullable();

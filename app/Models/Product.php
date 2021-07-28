@@ -26,4 +26,10 @@ class Product extends Model
     public function productType(){
         return $this->belongsTo('App\Models\ProductType');
     }
+    public function setProductTypeIDAttribute($value)
+    {
+        $productTYpe = ProductType::findOrFail($value);
+        $this->attributes['product_type_id'] = $value;
+        $this->attributes['cart_system'] = $productTYpe->cart_system;
+    }
 }

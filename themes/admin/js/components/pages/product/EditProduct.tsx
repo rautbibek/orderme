@@ -15,18 +15,18 @@ const EditProduct = () => {
         return await HttpClient.get(url)
     }
 
-    const { data: data, error } = useSWR(`${url}`, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false})
+    const { data: data, error } = useSWR(url, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false})
 
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
 
     const handleSubmit = async (values: any) => {
-        console.log(values)
         const res = await HttpClient.put(`products/${match.params.id}`, values)
-        // if (res.status === 200) {
-        //     await mutate('categories')
-        //     history.push('/categories')
-        // }
+        if (res.status === 200) {
+            await mutate('products')
+            await mutate(url)
+            history.push('/products')
+        }
     }
     return (
         <ProductEditComponent onSubmit={handleSubmit} product={data.data} />
