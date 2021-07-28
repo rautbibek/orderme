@@ -9,6 +9,7 @@ import arrayMutators from 'final-form-arrays'
 import { Field } from 'react-final-form';
 import ImageDropZone from "../../Layout/ImageDropZone";
 import CustomCheckBox from "../../Layout/CustomCheckBox";
+import {useHistory} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,6 +37,7 @@ interface ProductEditComponentProps {
 const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, product }) => {
     const classes = useStyles();
     const [productType, setProductType] = React.useState([] as any)
+    const history = useHistory()
 
     return (
         <Form
@@ -82,7 +84,7 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                     <CustomTextField name="meta_tag_keyword" type={'text'} rows={3} label={'Meta Tag Keyword'} />
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"} color="primary" type="button" onClick={handleSubmit} >Submit</Button>
-                        {/* <Button variant={"contained"}  color="secondary" onClick={() => history.push('/categories')}>Back</Button> */}
+                         <Button variant={"contained"}  color="secondary" onClick={() => history.push('/products')}>Back</Button>
                     </div>
                 </form>
             )}
