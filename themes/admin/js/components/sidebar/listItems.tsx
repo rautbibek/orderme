@@ -29,6 +29,14 @@ export const mainListItems = (
         <ListItemText primary="Category" />
       </ListItem>
     </Link>
+      <Link to="/collections" replace>
+          <ListItem button>
+              <ListItemIcon>
+                  <ShoppingCartIcon />
+              </ListItemIcon>
+              <ListItemText primary="Collection" />
+          </ListItem>
+      </Link>
     <Link to="/products" replace>
       <ListItem button>
         <ListItemIcon>
@@ -37,6 +45,14 @@ export const mainListItems = (
         <ListItemText primary="Product" />
       </ListItem>
     </Link>
+      <Link to="/themes" replace>
+          <ListItem button>
+              <ListItemIcon>
+                  <PeopleIcon />
+              </ListItemIcon>
+              <ListItemText primary="Themes" />
+          </ListItem>
+      </Link>
     <ListItem button>
       <ListItemIcon>
         <BarChartIcon />

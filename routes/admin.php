@@ -25,8 +25,9 @@ Route::middleware(['guest:admin'])->group(function() {
 
 Route::middleware(['auth:admin'])->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
-    //Category controller
+    //Collection controller
     Route::resource('/categories',CategoryController::class)->except('show','create');
+    Route::resource('/collections',\App\Http\Controllers\Admin\CollectionController::class)->except('show','create');
 
     Route::get('/product-types', [HomeController::class, 'productTypeList']);
     Route::resource('/products', ProductController::class)->except('show', 'create');
@@ -34,6 +35,9 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
     Route::post('/media/upload', [\App\Http\Controllers\Admin\MediaController::class, 'upload'])->name('media_upload');
     Route::get('/media/remove/{id}', [\App\Http\Controllers\Admin\MediaController::class, 'remove'])->name('media_remove');
+
+    Route::resource('/themes', \App\Http\Controllers\Admin\ThemeController::class);
+    Route::match(array('GET','PUT'),'themes/{id}/config', [\App\Http\Controllers\Admin\ThemeController::class, 'configSetting']);
 
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');

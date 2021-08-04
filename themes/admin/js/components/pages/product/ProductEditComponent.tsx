@@ -58,13 +58,14 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                 <form className={classes.form}>
                     <CustomTextField name="title" type={'text'} label={'Title'} />
                     <SelectTable name={'category_id'} label={'Select Category'} table={'categories'} />
+                    <SelectTable name={'collections'} label={'Select Collection'} table={'collections'} isMultiple={true}/>
                     <CustomTextField name="short_description" type={'textarea'} rows={3} label={'Short Description'} />
                     <CustomTextField name="description" type={'textarea'} label={'Description'} rows={5} />
                     <Field name={'image'}>
                         {({ input, meta }) => (
                             <div>
                                 <InputLabel>Product Images</InputLabel>
-                                <ImageDropZone onChange={images => input.onChange(images)} media={input.value} />
+                                <ImageDropZone onChange={images => input.onChange(images)} media={input.value} multiple />
                             </div>
                         )}
                     </Field>
@@ -74,7 +75,7 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                     } />
                     <hr />
                     <br />
-                    {(!!values.options || productType.length > 0)  && (
+                    {(!!values.product_type_id || productType.length > 0)  && (
                         <ProductVariance productType={values.product_type_id} push={push} optionType={values.options} />
                     )}
                     <CustomCheckBox color={'primary'} checked={values.featured} name={'featured'} label={'Featured'}/>

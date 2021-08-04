@@ -95,7 +95,7 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->slug);
         $category->update();
         return response()->json([
-            'message'=>"Category updated succefully",
+            'message'=>"Collection updated succefully",
         ]);
     }
 
@@ -110,7 +110,7 @@ class CategoryController extends Controller
         $category= Category::findOrFail($id);
         $category->delete();
         return response()->json([
-            'message'=>'Category deleted succefully',
+            'message'=>'Collection deleted succefully',
         ]);
     }
 }

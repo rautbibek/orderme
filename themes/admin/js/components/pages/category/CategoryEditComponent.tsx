@@ -42,7 +42,7 @@ const CategoryEditComponent: React.FC<CategoryEditComponentProps> = ({onSubmit, 
             render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit} className={classes.form}>
                     <CustomTextField name="name" type={'text'} label={'Name'}/>
-                    <SelectTable name={'parentId'} label={'Select Parent Category'} table={'categories'}/>
+                    <SelectTable name={'parentId'} label={'Select Parent Collection'} table={'categories'}/>
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"}  color="primary" type="submit">Submit</Button>
                         <Button variant={"contained"}  color="secondary" onClick={() => history.push('/categories')}>Back</Button>

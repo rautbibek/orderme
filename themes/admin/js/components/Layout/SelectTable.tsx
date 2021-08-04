@@ -38,9 +38,8 @@ const SelectTable: React.FC<SelectTableProps> = ({ isMultiple, label, isCreateab
                         <Grid item xs={12} style={{ marginBottom: 20 }}>
                             <MultipleSelect
                                 label={label}
-                                multiline={true}
                                 options={options}
-                                value={input.value}
+                                values={input.value}
                                 helperText={helperText ?? ''}
                                 onChange={(item) => input.onChange(item)}
                                 SelectProps={{

@@ -11,7 +11,9 @@ import {Delete, Edit} from '@material-ui/icons';
 interface DatatablesProps {
     url: string
     columns: any,
-    title: string
+    title: string,
+    extraAction?: any
+    extraRouteButton?: any
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const DataTables: React.FC<DatatablesProps> = ({url, columns, title}) => {
+const DataTables: React.FC<DatatablesProps> = ({url, columns, title, extraAction, extraRouteButton}) => {
     const history = useHistory()
 
     const renderActionsButton = (row) => {
@@ -38,6 +40,12 @@ const DataTables: React.FC<DatatablesProps> = ({url, columns, title}) => {
                 <IconButton color="secondary">
                     <Delete />
                 </IconButton>
+                {extraAction}
+                {!!extraRouteButton && (
+                    <IconButton color="inherit" onClick={() => history.push(`/${extraRouteButton.url}/${row.id}`)}>
+                        {extraRouteButton.icon}
+                    </IconButton>
+                )}
             </div>
         )
     }

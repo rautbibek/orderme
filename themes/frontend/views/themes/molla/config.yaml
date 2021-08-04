@@ -1,0 +1,243 @@
+tnzerox:
+  name: molla
+  config:
+    -
+      name: General
+      type: group
+      items:
+        -
+          name: Logo
+          type: image
+          options: {  }
+          id: logo
+        -
+          name: Footer_Logo
+          type: image
+          options: {  }
+          id: footer_logo
+        -
+          name: Favicon
+          type: image
+          options: {  }
+          id: favicon
+
+    -
+      name: Slider
+      type: group
+      items:
+        -
+          name: Slider
+          id: slider
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: 'Slide Image', type: image, id: slide_image }
+              - { name: 'Slide Caption Title', type: text, id: slide_caption_title }
+              - { name: 'Slide Caption Description', type: text, id: slide_caption_description }
+              - { name: 'Slide Url', type: url, id: slide_link }
+              - { name: 'Button text', type: url, id: slide_button }
+
+    -
+      name: 'Home page'
+      type: group
+      items:
+        -
+          name: 'Deals collection'
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: Name, type: text, id: name }
+              - { name: Collection, type: collection_select, options: { multiple: false }, id: collection }
+          id: deal_col
+        -
+          name: 'Home Main Promotion'
+          id: 'Home Main Collection'
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - {name: Name, type: text, id: name }
+              - { name: Image, type: image, id: image }
+              - { name: Link, type: text, id: link }
+        -
+          name: 'Home Bottom Promotion'
+          id: home_bottom_collection
+          type: bootstrap_collection
+          options:
+            multiple: true
+            expanded: true
+            template:
+              - {name: Name, type: text, id: name }
+              - {name: Title, type: text, id: title }
+              - {name: Description, type: text, id: description }
+              - { name: Image, type: image, id: image, options: {aspect: 2.37}}
+              - { name: Link, type: text, id: link }
+        -
+          name: 'Home Text Slider'
+          id: home_text_slider
+          type: bootstrap_collection
+          options:
+            group: "home_text_slider"
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: Slide Label, type: text, id: slide_label}
+              - { name: Slide Caption Description, type: text, id: slide_caption_description}
+
+    -
+      name: 'Home Tab Collection'
+      type: group
+      items:
+        -
+          name: 'Home Tab Collection'
+          type: bootstrap_collection
+          options:
+            allow_add: false
+            allow_delete: true
+            template: [{ name: Name, type: text, id: name }, { name: Collections, type: collection_select, options: { multiple: true }, id: collections }]
+          id: Home_Tab_Collection
+      id: 'Home Tab Collection'
+
+
+    -
+      name: 'Inner Side Collection'
+      type: group
+      items:
+        -
+          name: 'Inner collection'
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: Name, type: text, id: name }
+              - { name: Collection, type: collection_select, options: { multiple: false }, id: collection }
+          id: inner_col
+        -
+          name: 'Inner Collection'
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: Name, type: text, id: name }
+              - { name: Image, type: image, id: image }
+              - { name: Link, type: url, id: link }
+          id: inner_promo
+      id: Inner_side_collection
+
+    -
+      name: 'Home Information'
+      type: group
+      items:
+        -
+          name: 'Home Information'
+          type: bootstrap_collection
+          options:
+            template:
+              - { id: name, type: text, name: 'Name'}
+              - { id: info, type: text, name: 'Information'}
+              - { name: 'Icon', type: text, id: icon }
+            multiple: true
+            expanded: true
+          id: home_info
+      id: home_info
+
+
+
+    -
+      name: Social
+      type: group
+      items:
+        -
+          name: Facebookurl
+          type: url
+          options: {  }
+          id: facebookUrl
+        -
+          name: Twitterurl
+          type: url
+          options: {  }
+          id: twitterUrl
+        -
+          name: Pinteresturl
+          type: url
+          options: {  }
+          id: pinterestUrl
+        -
+          name: Youtubeurl
+          type: url
+          options: {  }
+          id: youtubeUrl
+        -
+          name: Instagramurl
+          type: url
+          options: {  }
+          id: instagramUrl
+        -
+          name: Linkedinurl
+          type: url
+          options: {  }
+          id: linkedinUrl
+
+    -
+      name: Contact
+      type: group
+      items:
+        -
+          name: Email
+          type: email
+          options: {  }
+          id: email
+        -
+          name: 'Phone Number'
+          type: text
+          options: {  }
+          id: phone_number
+        -
+          name: Address
+          type: text
+          options: {  }
+          id: address
+        -
+          name: 'Copyright Text'
+          type: text
+          id: copyright_text
+#    -
+#      name: Menu
+#      type: group
+#      items:
+#        -
+#          name: 'Main Menu'
+#          type: menu_select
+#          options: {  }
+#          id: main_menu
+#        -
+#          name: 'Mobile Menu'
+#          type: menu_select
+#          options: {  }
+#          id: mobile_menu
+#
+#        -
+#          name: 'Pages Menu'
+#          type: menu_select
+#          options: {  }
+#          id: pages_menu
+    -
+      name: 'Payment icons'
+      type: group
+      items:
+        -
+          name: 'Payment Icons'
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template: [{ name: Title, type: text, id: title }, { name: Image, type: image, id: image }, { name: Link, type: url, id: link }]
+          id: payment_icons
+      id: 'Payment icons'

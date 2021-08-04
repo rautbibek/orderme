@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Variant;
 use App\Models\Product;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class ProductController extends Controller
@@ -40,24 +42,29 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = new Product();
-        $product->title = $request->title;
-        $product->category_id = $request->category_id;
-        $product->product_type_id = $request->product_type_id;
-        $product->short_description = $request->short_description;
-        $product->description = $request->description;
-        $product->cart_system = true;
-        $product->inventory_track = true;
+        DB::transaction(function () use  ($request) {
+            $product = new Product();
+            $product->title = $request->title;
+            $product->category_id = $request->category_id;
+            $product->product_type_id = $request->product_type_id;
+            $product->short_description = $request->short_description;
+            $product->description = $request->description;
+            $product->cart_system = true;
+            $product->inventory_track = true;
+            $product->admin_id = Auth::id();
 //        $product->options = json_encode($request->options);
-        $product->out_of_stock = $request->out_of_stock;
-        $product->featured = $request->featured;
-        $product->meta_tag_title = $request->meta_tag_title;
-        $product->meta_tag_description = $request->meta_tag_description;
-        $product->meta_tag_keyword = $request->meta_tag_keyword;
-        $product->image = json_encode($request->image);
-        $product->save();
+            $product->out_of_stock = $request->out_of_stock;
+            $product->featured = $request->featured;
+            $product->meta_tag_title = $request->meta_tag_title;
+            $product->meta_tag_description = $request->meta_tag_description;
+            $product->meta_tag_keyword = $request->meta_tag_keyword;
+            $product->image = json_encode($request->image);
+//        $collection = \App\Models\Collection::findOrFail($collection_id);
 
-        foreach($request->variants as $variant){
+            $product->save();
+            $product->collections()->attach($request->collections);
+
+            foreach($request->variants as $variant){
 
                 $variance = new Variant([
                     'quantity' => $variant['quantity'],
@@ -67,14 +74,16 @@ class ProductController extends Controller
                 ]);
                 $variance->features = $variant['features'];
                 $batch_variant[] = $variance;
-        }
+            }
 
-        $product->variants()->saveMany($batch_variant);
+            $product->variants()->saveMany($batch_variant);
 
-         return response()->json([
-            'message'=>'New product added succefully',
-            'product' => $product
-        ], 201);
+            return response()->json([
+                'message'=>'New product added succefully',
+                'product' => $product
+            ], 201);
+        });
+
     }
 
     /**
@@ -110,64 +119,69 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = Product::findOrFail($id);
-        $product->title = $request->title;
-        $product->category_id = $request->category_id;
-        $product->product_type_id = $request->product_type_id;
-        $product->short_description = $request->short_description;
-        $product->description = $request->description;
+        DB::transaction(function () use  ($request, $id) {
+
+            $product = Product::findOrFail($id);
+            $product->title = $request->title;
+            $product->category_id = $request->category_id;
+            $product->product_type_id = $request->product_type_id;
+            $product->short_description = $request->short_description;
+            $product->description = $request->description;
 //        $product->options = json_encode($request->options);
-        $product->image = json_encode($request->image);
-        $product->out_of_stock = $request->out_of_stock;
-        $product->featured = $request->featured;
-        $product->meta_tag_title = $request->meta_tag_title;
-        $product->meta_tag_description = $request->meta_tag_description;
-        $product->meta_tag_keyword = $request->meta_tag_keyword;
-        $product->update();
+            $product->image = json_encode($request->image);
+            $product->out_of_stock = $request->out_of_stock;
+            $product->featured = $request->featured;
+            $product->meta_tag_title = $request->meta_tag_title;
+            $product->meta_tag_description = $request->meta_tag_description;
+            $product->meta_tag_keyword = $request->meta_tag_keyword;
+            $collection_id = $request->collection_id;
+//        $collection = \App\Models\Collection::findOrFail($collection_id);
+            $product->update();
+            $product->collections()->sync($request->collections);
 
-        foreach($product->variants as $checkVariant)
-        {
-            $deletetedVariant = array_search($checkVariant->id, array_column($request->variants, 'id'));
-            if($deletetedVariant === false){
-                $checkVariant->delete();
-            }
-
-        }
-
-        foreach($request->variants as $variant){
-
-            if(!isset($variant['quantity']) && !isset($variant['price']) ){
-                continue ;
-            }
-
-            if(!!($variant['id'] ?? null)){
-                $entryVariant = Variant::findOrFail($variant['id']);
-                $entryVariant->features = $variant['features'];
-                $entryVariant->update([
-                    'quantity' => $variant['quantity'],
-                    'code' => $variant['code'],
-                    'price' => $variant['price'],
-                    'old_price' => $variant['old_price'],
-                ]);
-
-            }else{
-                $batch_variant = new Variant([
-                    'quantity' => $variant['quantity'],
-                    'code' => $variant['code'],
-                    'price' => $variant['price'],
-                    'old_price' => $variant['old_price'],
-            ]);
-            $batch_variant->features = $variant['features'];
-
-            $product->variants()->save($batch_variant);
+            foreach($product->variants as $checkVariant)
+            {
+                $deletetedVariant = array_search($checkVariant->id, array_column($request->variants, 'id'));
+                if($deletetedVariant === false){
+                    $checkVariant->delete();
+                }
 
             }
-        }
 
-        return response()->json([
-            'message'=>'Product Updated successfully',
-            'product' => $product
-        ], 200);
+            foreach($request->variants as $variant){
+
+                if(!isset($variant['quantity']) && !isset($variant['price']) ){
+                    continue ;
+                }
+
+                if(!!($variant['id'] ?? null)){
+                    $entryVariant = Variant::findOrFail($variant['id']);
+                    $entryVariant->features = $variant['features'];
+                    $entryVariant->update([
+                        'quantity' => $variant['quantity'],
+                        'code' => $variant['code'],
+                        'price' => $variant['price'],
+                        'old_price' => $variant['old_price'],
+                    ]);
+
+                }else{
+                    $batch_variant = new Variant([
+                        'quantity' => $variant['quantity'],
+                        'code' => $variant['code'],
+                        'price' => $variant['price'],
+                        'old_price' => $variant['old_price'],
+                    ]);
+                    $batch_variant->features = $variant['features'];
+
+                    $product->variants()->save($batch_variant);
+
+                }
+            }
+            return response()->json([
+                'message'=>'Product Updated successfully',
+                'product' => $product
+            ], 200);
+        });
 
     }
 
