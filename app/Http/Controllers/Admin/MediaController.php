@@ -12,6 +12,9 @@ use Illuminate\Support\Str;
 class MediaController extends Controller
 {
    public function upload(Request $request){
+       $this->validate($request,[
+        'files.*' => 'mimes:jpeg,png,jpg,gif,svg,webp|max:20648',
+       ]);
        $data = [];
        $files = $request->allFiles();
        foreach($files['files'] as $file){

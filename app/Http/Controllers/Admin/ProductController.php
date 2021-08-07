@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Variant;
 use App\Models\Product;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -40,9 +41,10 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
-        DB::transaction(function () use  ($request) {
+        try{
+            DB::beginTransaction();
             $product = new Product();
             $product->title = $request->title;
             $product->category_id = $request->category_id;
@@ -78,11 +80,24 @@ class ProductController extends Controller
 
             $product->variants()->saveMany($batch_variant);
 
-            return response()->json([
-                'message'=>'New product added succefully',
-                'product' => $product
-            ], 201);
-        });
+
+        DB::commit();
+        return response()->json([
+            'message'=>'Product Added successfully',
+            'product' => $product
+        ], 201);
+
+        }catch(\Exception $exception){
+            Log::error($exception);
+            DB::rollBack();
+            return $exception;
+        }
+
+
+            // return response()->json([
+            //     'message'=>'New product added successfully',
+            //     //'product' => $product
+            // ], 201);
 
     }
 
@@ -117,10 +132,10 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        DB::transaction(function () use  ($request, $id) {
-
+        try{
+            DB::beginTransaction();
             $product = Product::findOrFail($id);
             $product->title = $request->title;
             $product->category_id = $request->category_id;
@@ -177,11 +192,18 @@ class ProductController extends Controller
 
                 }
             }
+            DB::commit();
             return response()->json([
-                'message'=>'Product Updated successfully',
+                'message'=>'Product Added successfully',
                 'product' => $product
             ], 200);
-        });
+
+        }catch(\Exception $e){
+            Log::error($exception);
+            DB::rollBack();
+            return $exception;
+        }
+
 
     }
 

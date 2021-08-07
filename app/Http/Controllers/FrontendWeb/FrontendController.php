@@ -12,6 +12,10 @@ class FrontendController extends Controller
 {
     public function homeIndex(){
         $theme = Theme::find(['active' => true])->first();
+        if(!$theme){
+            return view("themes.molla.template.welcome");
+
+        }
         return view("themes.$theme->slug.template.welcome");
     }
 }

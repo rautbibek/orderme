@@ -16,7 +16,7 @@ const AddProduct = () => {
         }
     }
     return (
-        <ProductEditComponent onSubmit={handleSubmit} product={{product: {variants: [{}]}}} />
+        <ProductEditComponent onSubmit={handleSubmit} product={{}} />
     )
 }
 
