@@ -14,7 +14,7 @@ interface CustomCheckBoxProps {
 const CustomCheckBox: React.FC<CustomCheckBoxProps> = ({ name, color, checked, label }) => {
 
     return (
-        <Field name={`${name}`}  >
+        <Field name={`${name}`} defaultValue={false}  >
             {({ input, meta }) => (
                 <Grid container spacing={3}>
                     <Grid item xs={12} style={{ marginBottom: 20 }}>

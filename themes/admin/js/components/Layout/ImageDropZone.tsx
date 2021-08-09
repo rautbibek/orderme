@@ -4,6 +4,8 @@ import HttpClient from "../../HttpClient";
 import {uploadMediaFiles} from "../../createUrls";
 import CancelIcon from '@material-ui/icons/Cancel';
 import * as _ from "lodash";
+import {projectStorage} from "../../utils/firebaseConfig";
+import { v4 as uuidv4 } from 'uuid';
 
 const thumbsContainer = {
     display: 'flex',
@@ -44,35 +46,36 @@ const img = {
 
 interface ImageDropZoneProps {
     onChange: any
-    media: any,
+    media: any[],
     multiple?:boolean
 }
 const ImageDropZone: React.FC<ImageDropZoneProps> = ({onChange, media, multiple}) => {
     const [files, setFiles] = React.useState([]);
 
-    const uploadMedia = async (uploadFile, fields= {}) => {
-        console.log(uploadFile)
-        const formData = new FormData()
-        uploadFile.forEach(f => {
-            formData.append('files[]', f)
-        })
+    const uploadMedia = async (uploadFile) => {
+        // console.log(uploadFile)
+        const formData = []
+        await Promise.all(
+            uploadFile.map(async (f) => {
+                const id = uuidv4()
+                const storageref = await projectStorage.ref(`${id}-${f.name}`)
+                 await storageref.put(f).then(async snapshot => {
+                    await snapshot.ref.getDownloadURL().then(url => {
+                        formData.push(url)
+                    } )
+                })
 
-        for (const property in fields) {
-            formData.append(property, fields[property])
-        }
+            })
+        )
 
-        return await HttpClient.post(uploadMediaFiles, formData)
+        return formData
 
     }
     const onDrop = async (acceptedFiles: any, rejectedFiles: any) => {
 
-        // uploadMedia(acceptedFiles)
         const response = await uploadMedia(acceptedFiles)
-        if (response.status !== 200) {
-            return null
-        }
-        // console.log(response);
-        onChange([...(media ?? []), ...response.data])
+
+        onChange([...media, ...response])
 
     }
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
@@ -82,12 +85,12 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({onChange, media, multiple}
     })
 
     const thumbs = (media || [])
-        .map((m) => {
+        .map((m, index: number) => {
             return (
-                <div style={thumb} key={m.url}>
+                <div style={thumb} key={index}>
                     <div style={thumbInner}>
                         <img
-                            src={m.url}
+                            src={m}
                             style={img}
                         />
                     </div>
