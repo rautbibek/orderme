@@ -1,6 +1,6 @@
 import * as React from 'react'
-import Datatables from '../../Layout/Datatables';
 import { listProduct } from '../../../createUrls';
+import DataTablesPaginate from "../../Layout/DatatablesPaginate";
 
 const columns = [
 
@@ -20,7 +20,7 @@ const columns = [
 
 const Product = () => {
     return (
-        <Datatables url={listProduct} columns={columns} title={'products'} />
+        <DataTablesPaginate url={listProduct} columns={columns} title={'products'} />
     )
 }
 

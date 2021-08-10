@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import Button from '@material-ui/core/Button';
-import {useHistory} from 'react-router-dom'
+import {useHistory, useLocation} from 'react-router-dom'
 import HttpClient from "../../HttpClient";
 import useSWR from 'swr'
 import {makeStyles, IconButton} from "@material-ui/core";
 import {Delete, Edit} from '@material-ui/icons';
+import Pagination from "@material-ui/lab/Pagination";
 
 
 interface DatatablesProps {
@@ -28,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
 
 const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, extraAction, extraRouteButton}) => {
     const history = useHistory()
+    const search = useLocation().search;
+    const page = new URLSearchParams(search).get('page');
+    const [currentPage , setCurrentPage] = React.useState(page || 1)
 
     const renderActionsButton = (row) => {
         const classes = useStyles()
@@ -63,21 +67,30 @@ const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, ext
     ]
 
     const fetchData = async () => {
-       return await HttpClient.get(url)
+       return await HttpClient.get(`${url}?page=${currentPage}`)
     }
 
-    const { data: data, error } = useSWR(`${url}`, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false} )
+    const { data: data, error } = useSWR(`${url}?page=${currentPage}`, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false} )
 
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
 
+    const handlePagination = (event, value) => {
+        setCurrentPage(value)
+        if(currentPage != value){
+            history.push(`${url}?page=${value}`)
+        }
+    }
     return (
         <div style={{ width: '100%' }}>
             <Button variant="contained" onClick={() => history.push(`/${title}/new`)} color="primary" style={{marginBottom: 10}}>
                 New
             </Button>
             <div>
-                <DataGrid rows={data.data} columns={columnsArray} autoHeight hideFooterPagination hideFooter disableSelectionOnClick />
+                <DataGrid rows={data.data.data} columns={columnsArray} autoHeight hideFooterPagination hideFooter disableSelectionOnClick />
+            </div>
+            <div style={{width: '100%', marginTop: 20, display:'flex', justifyContent: "center"}}>
+                <Pagination count={data.data.total} variant="outlined" color="secondary" onChange={handlePagination} />
             </div>
         </div>
     );
