@@ -4,6 +4,8 @@ import { Form, Field } from 'react-final-form'
 import CustomTextField from "../../Layout/CustomTextField";
 import {useHistory} from 'react-router-dom'
 import SelectTable from "../../Layout/SelectTable";
+import * as yup from 'yup'
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,7 +29,9 @@ interface CategoryEditComponentProps {
     onSubmit: any,
     category?: any
 }
-
+const CategoryValidationSchema = yup.object().shape({
+    name: yup.string().required('Name is required'),
+})
 
 const CategoryEditComponent: React.FC<CategoryEditComponentProps> = ({onSubmit, category}) => {
     const classes = useStyles();
@@ -39,6 +43,23 @@ const CategoryEditComponent: React.FC<CategoryEditComponentProps> = ({onSubmit, 
             initialValues={
                 ...category
             }
+            validate={async values => {
+                try {
+                    await CategoryValidationSchema.validate(values, {
+                        abortEarly: false,
+                    })
+                } catch (err) {
+                    const errors = err.inner.reduce(
+                        (formError, innerError) => ({
+                            ...formError,
+                            [innerError.path]: innerError.message,
+                        }),
+                        {}
+                    )
+
+                    return errors
+                }
+            }}
             render={({ handleSubmit }) => (
                 <form onSubmit={handleSubmit} className={classes.form}>
                     <CustomTextField name="name" type={'text'} label={'Name'}/>

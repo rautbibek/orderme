@@ -9,48 +9,25 @@ import HttpClient from '../../../HttpClient';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
+import {forEach} from "lodash";
 
 
 interface productVarianceProps {
     productType?: any,
     optionType?: any,
-    push?: any
+    push?: any,
+    pop?:any
 }
-const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionType , push}) => {
+const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionType , push, pop}) => {
     const [selectType, setSelectType] = React.useState([] as any);
     const [cartSystem, setCartSystem] = React.useState(false)
+    const [varianceCount, setVarianceCount] = React.useState(0)
 
     const fetchData = async () => {
         return await HttpClient.get('product-types')
     }
 
     const { data, error } = useSWR(`${'product-types'}`, fetchData)
-
-    // const optionCalculator = () => {
-    //
-    //     let optionsss = []
-    //     for (const [key, value] of Object.entries(optionType ?? {})) {
-    //
-    //         let values = []
-    //         for (const [k, v] of Object.entries(value)) {
-    //
-    //             values.push(v)
-    //         }
-    //         optionsss.push(values)
-    //     }
-    //
-    //     // const cartesian = (...a) => a.reduce((a, b) => a.flatMap(d => b.map(e => [d, e].flat())));
-    //     const cartesian = (list, n = 0, result = [], current = []) => {
-    //         if (n === list.length) result.push(current)
-    //         else list[n].forEach(item => cartesian(list, n + 1, result, [...current, item]))
-    //
-    //         return result
-    //     }
-    //
-    //     const blueprint = cartesian(optionsss)
-    //     setCartisan(blueprint)
-    //
-    // }
 
     React.useEffect(() =>{
 
@@ -62,83 +39,63 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
             const options = [JSON.parse(idea.field)]
             setCartSystem(idea.cart_system)
             setSelectType(options[0])
+            for (let i = 0; i <= varianceCount; i++) {
+                pop('variants')
+            }
+            setVarianceCount(0)
         }
     }, [productType, data])
-        if(!cartSystem){
-            return (
-                <FieldArray name={'variants'}>
-                    {({ fields }) => (
-                         (
-                        <Grid container spacing={1}>
-                            <FieldArray name={`variants[0]features`}>
-                                {({fields}) =>
-                                    selectType.map((i, number) => {
-                                        return (
-                                        <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
-                                            <CustomTextField name={`variants[0]features.${i.name}`} type={i.type} label={i.as} />
-                                        </Grid>
-                                    )
-                                })
-                                }
-                            </FieldArray>
-                            <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                <CustomTextField name={`variants[0].price`} type='text' label='Price' />
-                            </Grid>
-                            <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                <CustomTextField name={`variants[0].old_price`} type='text' label='Old Price' />
-                            </Grid>
-                            <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                <CustomTextField name={`variants[0].code`} type='text' label='SKU' />
-                            </Grid>
-                            <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                <CustomTextField name={`variants[0].quantity`} type='text' label='Quantity' />
-                            </Grid>
 
-                        </Grid>
-                        )
-                    )
-
-                    }
-                </FieldArray>
-            )
-        }
         return (
             <div>
-
-               <Button onClick={() => push('variants', {})} variant={"contained"} color={'secondary'} style={{marginBottom: 20}}> <AddCircleOutlineIcon fontSize={"small"}/></Button>
+                {cartSystem &&(
+                    <Button onClick={() => {
+                        push('variants', {})
+                        setVarianceCount(varianceCount + 1)
+                    }} variant={"contained"} color={'secondary'} style={{marginBottom: 20}}> <AddCircleOutlineIcon fontSize={"small"}/></Button>
+                )}
+                {!cartSystem && varianceCount < 1 &&(
+                    <Button onClick={() => {
+                        push('variants', {})
+                        setVarianceCount(varianceCount + 1)
+                    }} variant={"contained"} color={'secondary'} style={{marginBottom: 20}}> <AddCircleOutlineIcon fontSize={"small"}/></Button>
+                )}
 
                 <FieldArray name={'variants'}>
-                    {({ fields }) =>
-                        fields.map((name, index) => {
-                            return (
-                                <Grid key={index} container spacing={1}>
-                                    <FieldArray name={`variants[${index}]features`}>
-                                        {({fields}) =>
-                                            selectType.map((i, number) => {
-                                                return (
-                                                    <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
-                                                        <CustomTextField name={`variants[${index}]features.${i.name}`} type={i.type} label={i.as} />
-                                                    </Grid>
-                                                )
-                                            })
-                                        }
-                                    </FieldArray>
-                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                        <CustomTextField name={`variants[${index}].price`} type='text' label='Price' />
-                                    </Grid>
-                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                        <CustomTextField name={`variants[${index}].old_price`} type='text' label='Old Price' />
-                                    </Grid>
-                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                        <CustomTextField name={`variants[${index}].code`} type='text' label='SKU' />
-                                    </Grid>
-                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                        <CustomTextField name={`variants[${index}].quantity`} type='text' label='Quantity' />
-                                    </Grid>
-                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
+                    {({ fields, meta }) =>
+                       <div>
+                           {
+                               fields.map((name, index) => {
+                                       return (
+                                           <Grid key={index} container spacing={1}>
+                                               <FieldArray name={`variants[${index}]features`}>
+                                                   {({fields}) =>
+                                                       selectType.map((i, number) => {
+                                                           return (
+                                                               <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
+                                                                   <CustomTextField name={`variants[${index}]features.${i.name}`} type={i.type} label={i.as} />
+                                                               </Grid>
+                                                           )
+                                                       })
+                                                   }
+                                               </FieldArray>
+                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                   <CustomTextField name={`variants[${index}].price`} type='text' label='Price' />
+                                               </Grid>
+                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                   <CustomTextField name={`variants[${index}].old_price`} type='text' label='Old Price' />
+                                               </Grid>
+                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                   <CustomTextField name={`variants[${index}].code`} type='text' label='SKU' />
+                                               </Grid>
+                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                   <CustomTextField name={`variants[${index}].quantity`} type='text' label='Quantity' />
+                                               </Grid>
+                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
                                         <span
                                             onClick={() => {
                                                 fields.remove(index)
+                                                setVarianceCount(varianceCount - 1)
                                             }}
                                             style={{ cursor: "pointer" }}
                                         >
@@ -146,11 +103,14 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                                                 <Delete />
                                             </IconButton>
                                         </span>
-                                    </Grid>
-                                </Grid>
-                            )
-                        }
-                        )
+                                               </Grid>
+                                           </Grid>
+                                       )
+                                   }
+                               )
+                           }
+                           {meta.touched && meta.error && <span style={{color: 'red'}}>{meta.error}</span>}
+                       </div>
                     }
                 </FieldArray>
             </div>

@@ -10,6 +10,7 @@ import { Field } from 'react-final-form';
 import ImageDropZone from "../../Layout/ImageDropZone";
 import CustomCheckBox from "../../Layout/CustomCheckBox";
 import {useHistory} from 'react-router-dom'
+import * as yup from "yup";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,6 +35,16 @@ interface ProductEditComponentProps {
     product?: any
 }
 
+const ProductValidationSchema = yup.object().shape({
+    title: yup.string().required('Title is required'),
+    category_id: yup.string().required('Category is required'),
+    description: yup.string().required('Description is required'),
+    short_description: yup.string().required('Category is required'),
+    product_type_id: yup.string().required('Product Type is required'),
+    variants: yup.string().required('Variants is required')
+
+})
+
 const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, product }) => {
     const classes = useStyles();
     const [productType, setProductType] = React.useState([] as any)
@@ -48,6 +59,23 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
             initialValues={
                 ...product
             }
+            validate={async values => {
+                try {
+                    await ProductValidationSchema.validate(values, {
+                        abortEarly: false,
+                    })
+                } catch (err) {
+                    const errors = err.inner.reduce(
+                        (formError, innerError) => ({
+                            ...formError,
+                            [innerError.path]: innerError.message,
+                        }),
+                        {}
+                    )
+
+                    return errors
+                }
+            }}
             render={({
                 handleSubmit,
                 form: {
@@ -76,7 +104,7 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                     <hr />
                     <br />
                     {(!!values.product_type_id || productType.length > 0)  && (
-                        <ProductVariance productType={values.product_type_id} push={push} optionType={values.options} />
+                        <ProductVariance productType={values.product_type_id} push={push} pop={pop} optionType={values.options} />
                     )}
                     <CustomCheckBox color={'primary'} checked={values.featured } name={'featured'} label={'Featured'}/>
                     <CustomCheckBox color={'secondary'} checked={values.out_of_stock} name={'out_of_stock'} label={'Out Of Stock'}/>

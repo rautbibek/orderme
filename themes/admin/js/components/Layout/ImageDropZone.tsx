@@ -96,7 +96,7 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({onChange, media, multiple}
                     </div>
                     <span style={{position: "absolute", marginLeft: 80, marginTop: -10, cursor: "pointer", zIndex: 999}} onClick={e => {
                         e.stopPropagation()
-                        removeImage(m.ref)
+                        removeImage(m)
                     }}><CancelIcon fontSize={"small"} color={"secondary"} /></span>
                 </div>
             )
@@ -110,11 +110,8 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({onChange, media, multiple}
     }, [files]);
 
     const removeImage = async(fileId) => {
-        const res = await HttpClient.get(`media/remove/${fileId}`)
-        if(res.status === 200){
-            const currentMedia = _.filter(media, f => f.ref !== fileId)
+            const currentMedia = _.filter(media, f => f !== fileId)
             onChange(currentMedia)
-        }
     }
 
     return (

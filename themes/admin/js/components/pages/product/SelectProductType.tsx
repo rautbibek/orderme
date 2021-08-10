@@ -49,6 +49,7 @@ const SelectProductType: React.FC<SelectProductTypeProps> = ({ onSelect, disable
                                     msgNoOptionsMatchFilter: `No options matches the filter`,
                                 }}
                             />
+                            {meta.touched && meta.error && <span style={{color: 'red'}}>{meta.error}</span>}
                         </Grid>
                     </Grid>
                 )

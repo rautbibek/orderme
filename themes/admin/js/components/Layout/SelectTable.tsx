@@ -4,7 +4,6 @@ import HttpClient from "../../HttpClient";
 import useSWR from "swr";
 import { Grid } from "@material-ui/core";
 import { Field } from "react-final-form";
-import _ from 'lodash'
 
 interface SelectTableProps {
     label: string;
@@ -74,6 +73,7 @@ const SelectTable: React.FC<SelectTableProps> = ({ isMultiple, label, isCreateab
                                     msgNoOptionsMatchFilter: `No options matches the filter`,
                                 }}
                             />
+                            {meta.touched && meta.error && <span style={{color: 'red'}}>{meta.error}</span>}
                         </Grid>
                     </Grid>
                 )
