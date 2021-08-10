@@ -90,7 +90,7 @@ const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, ext
                 <DataGrid rows={data.data.data} columns={columnsArray} autoHeight hideFooterPagination hideFooter disableSelectionOnClick />
             </div>
             <div style={{width: '100%', marginTop: 20, display:'flex', justifyContent: "center"}}>
-                <Pagination count={data.data.total} variant="outlined" color="secondary" onChange={handlePagination} />
+                <Pagination count={data.data.last_page} variant="outlined" color="secondary" onChange={handlePagination} />
             </div>
         </div>
     );
