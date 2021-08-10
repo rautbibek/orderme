@@ -41,7 +41,23 @@ const ProductValidationSchema = yup.object().shape({
     description: yup.string().required('Description is required'),
     short_description: yup.string().required('Category is required'),
     product_type_id: yup.string().required('Product Type is required'),
-    variants: yup.string().required('Variants is required')
+    variants: yup
+        .array()
+        .of(
+            yup.object().shape({
+                price: yup
+                    .number()
+                    .required(),
+                code: yup.string().required('Code is required'),
+                quantity: yup
+                    .string()
+                    .required(),
+                old_price: yup
+                    .number()
+                    .nullable(true),
+            })
+        )
+        .required('At least one variant is required'),
 
 })
 
@@ -65,7 +81,7 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                         abortEarly: false,
                     })
                 } catch (err) {
-                    const errors = err.inner.reduce(
+                    return err.inner.reduce(
                         (formError, innerError) => ({
                             ...formError,
                             [innerError.path]: innerError.message,
@@ -73,7 +89,6 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                         {}
                     )
 
-                    return errors
                 }
             }}
             render={({

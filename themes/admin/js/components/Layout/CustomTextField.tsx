@@ -59,7 +59,7 @@ const CustomTextField: React.FC<CustomTextFieldProps> = ({ label, type, name, ro
             {({ input, meta }) => (
                 <Grid container spacing={3}>
                     <Grid item xs={12} style={{ marginBottom: 20 }}>
-                        <CssTextField style={{borderBottomColor: 'red'}} required size={'small'} type={`${type}`} multiline={type === 'textarea'} {...input} disabled={disabled} id="standard-basic" label={`${label}`} rows={rows} fullWidth />
+                        <CssTextField style={{borderBottomColor: 'red'}} size={'small'} type={`${type}`} multiline={type === 'textarea'} {...input} disabled={disabled} id="standard-basic" label={`${label}`} rows={rows} fullWidth />
                         {meta.touched && meta.error && <span style={{color: 'red'}}>{meta.error}</span>}
                     </Grid>
                 </Grid>

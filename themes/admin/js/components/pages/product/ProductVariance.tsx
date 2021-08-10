@@ -62,36 +62,37 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                 )}
 
                 <FieldArray name={'variants'}>
-                    {({ fields, meta }) =>
-                       <div>
-                           {
-                               fields.map((name, index) => {
-                                       return (
-                                           <Grid key={index} container spacing={1}>
-                                               <FieldArray name={`variants[${index}]features`}>
-                                                   {({fields}) =>
-                                                       selectType.map((i, number) => {
-                                                           return (
-                                                               <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
-                                                                   <CustomTextField name={`variants[${index}]features.${i.name}`} type={i.type} label={i.as} />
-                                                               </Grid>
-                                                           )
-                                                       })
-                                                   }
-                                               </FieldArray>
-                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                                   <CustomTextField name={`variants[${index}].price`} type='text' label='Price' />
-                                               </Grid>
-                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                                   <CustomTextField name={`variants[${index}].old_price`} type='text' label='Old Price' />
-                                               </Grid>
-                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                                   <CustomTextField name={`variants[${index}].code`} type='text' label='SKU' />
-                                               </Grid>
-                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                                   <CustomTextField name={`variants[${index}].quantity`} type='text' label='Quantity' />
-                                               </Grid>
-                                               <Grid item xs={1} style={{ marginBottom: 20 }}>
+                    {({ fields, meta }) =>{
+                        return (
+                            <div>
+                                {
+                                    fields.map((name, index) => {
+                                            return (
+                                                <Grid key={index} container spacing={1}>
+                                                    <FieldArray name={`variants[${index}]features`}>
+                                                        {({fields}) =>
+                                                            selectType.map((i, number) => {
+                                                                return (
+                                                                    <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
+                                                                        <CustomTextField name={`variants[${index}]features.${i.name}`} type={i.type} label={i.as} />
+                                                                    </Grid>
+                                                                )
+                                                            })
+                                                        }
+                                                    </FieldArray>
+                                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                        <CustomTextField name={`variants[${index}].price`} type='text' label='Price' />
+                                                    </Grid>
+                                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                        <CustomTextField name={`variants[${index}].old_price`} type='text' label='Old Price' />
+                                                    </Grid>
+                                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                        <CustomTextField name={`variants[${index}].code`} type='text' label='SKU' />
+                                                    </Grid>
+                                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                        <CustomTextField name={`variants[${index}].quantity`} type='text' label='Quantity' />
+                                                    </Grid>
+                                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
                                         <span
                                             onClick={() => {
                                                 fields.remove(index)
@@ -103,14 +104,16 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                                                 <Delete />
                                             </IconButton>
                                         </span>
-                                               </Grid>
-                                           </Grid>
-                                       )
-                                   }
-                               )
-                           }
-                           {meta.touched && meta.error && <span style={{color: 'red'}}>{meta.error}</span>}
-                       </div>
+                                                    </Grid>
+                                                </Grid>
+                                            )
+                                        }
+                                    )
+                                }
+                            </div>
+                        )
+                    }
+
                     }
                 </FieldArray>
             </div>
