@@ -35,9 +35,10 @@ tnzerox:
             template:
               - { name: 'Slide Image', type: image, id: slide_image }
               - { name: 'Slide Caption Title', type: text, id: slide_caption_title }
-              - { name: 'Slide Caption Description', type: text, id: slide_caption_description }
-              - { name: 'Slide Url', type: url, id: slide_link }
-              - { name: 'Button text', type: url, id: slide_button }
+              - { name: 'Slide Caption Intro', type: text, id: slide_caption_intro }
+              - { name: 'Slide Price', type: text, id: slide_price }
+              - { name: 'Button text', type: url, id: slide_button_text }
+              - { name: 'Button Link', type: url, id: slide_button_link }
 
     -
       name: 'Home page'

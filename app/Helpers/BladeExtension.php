@@ -16,3 +16,14 @@ function getConfig(string $key){
     }
      return $value ;
 }
+
+function getLayout(){
+    $theme = \App\Models\Theme::where('active', true)
+        ->first();
+    if(!$theme){
+        $theme = \App\Models\Theme::where('slug', 'molla')
+            ->first();
+    }
+
+    return "themes.$theme->slug.template.layout";
+}
