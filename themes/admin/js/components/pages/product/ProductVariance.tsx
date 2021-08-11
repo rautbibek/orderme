@@ -21,7 +21,6 @@ interface productVarianceProps {
 const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionType , push, pop}) => {
     const [selectType, setSelectType] = React.useState([] as any);
     const [cartSystem, setCartSystem] = React.useState(false)
-    const [varianceCount, setVarianceCount] = React.useState(0)
 
     const fetchData = async () => {
         return await HttpClient.get('product-types')
@@ -39,27 +38,58 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
             const options = [JSON.parse(idea.field)]
             setCartSystem(idea.cart_system)
             setSelectType(options[0])
-            for (let i = 0; i <= varianceCount; i++) {
-                pop('variants')
-            }
-            setVarianceCount(0)
+
         }
     }, [productType, data])
+    if(!cartSystem){
+        return(
+            <FieldArray name={'variants'}>
+                {({ fields, meta }) =>{
+                    return (
+                        <div>
+                            <Grid container spacing={1}>
+                                <FieldArray name={`variants[${0}]features`}>
+                                    {({fields}) =>
+                                        selectType.map((i, number) => {
+                                            return (
+                                                <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
+                                                    <CustomTextField name={`variants[${0}]features.${i.name}`} type={i.type} label={i.as} />
+                                                </Grid>
+                                            )
+                                        })
+                                    }
+                                </FieldArray>
+                                <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                    <CustomTextField name={`variants[${0}].price`} type='text' label='Price' />
+                                </Grid>
+                                <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                    <CustomTextField name={`variants[${0}].old_price`} type='text' label='Old Price' />
+                                </Grid>
+                                <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                    <CustomTextField name={`variants[${0}].code`} type='text' label='SKU' />
+                                </Grid>
+                                <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                    <CustomTextField name={`variants[${0}].quantity`} type='text' label='Quantity' />
+                                </Grid>
+                                <Grid item xs={1} style={{ marginBottom: 20 }}>
+
+                                </Grid>
+                            </Grid>
+
+                        </div>
+                    )
+                }
+
+                }
+            </FieldArray>
+        )
+    }
 
         return (
             <div>
-                {cartSystem &&(
                     <Button onClick={() => {
                         push('variants', {})
-                        setVarianceCount(varianceCount + 1)
                     }} variant={"contained"} color={'secondary'} style={{marginBottom: 20}}> <AddCircleOutlineIcon fontSize={"small"}/></Button>
-                )}
-                {!cartSystem && varianceCount < 1 &&(
-                    <Button onClick={() => {
-                        push('variants', {})
-                        setVarianceCount(varianceCount + 1)
-                    }} variant={"contained"} color={'secondary'} style={{marginBottom: 20}}> <AddCircleOutlineIcon fontSize={"small"}/></Button>
-                )}
 
                 <FieldArray name={'variants'}>
                     {({ fields, meta }) =>{
@@ -96,7 +126,6 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                                         <span
                                             onClick={() => {
                                                 fields.remove(index)
-                                                setVarianceCount(varianceCount - 1)
                                             }}
                                             style={{ cursor: "pointer" }}
                                         >

@@ -43,7 +43,7 @@ const ThemeFieldEditor: React.FC<ThemeFieldEditorProps> = ({ label, type, name, 
                 {({ input, meta }) => (
                     <div style={{width: '100%'}}>
                         <InputLabel>{label}</InputLabel>
-                        <ImageDropZone onChange={images => input.onChange(images)} media={input.value} />
+                        <ImageDropZone onChange={images => input.onChange(images)} media={input.value} multiple={false} />
                     </div>
                 )}
             </Field>

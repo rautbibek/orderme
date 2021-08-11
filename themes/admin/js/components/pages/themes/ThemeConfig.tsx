@@ -10,12 +10,14 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CustomTextField from "../../Layout/CustomTextField";
 import SelectTable from "../../Layout/SelectTable";
-import {Button, Divider, Grid} from "@material-ui/core";
+import {Accordion, AccordionDetails, AccordionSummary, Button, Divider, Grid} from "@material-ui/core";
 import {Form} from "react-final-form";
 import ThemeFieldEditor from "../../Layout/ThemeFieldEditor";
 import { FieldArray } from 'react-final-form-arrays';
 import arrayMutators from 'final-form-arrays'
 import {listProduct} from "../../../createUrls";
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {Delete} from "@material-ui/icons";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -70,7 +72,12 @@ const useStyles = makeStyles((theme) => ({
         '& Button': {
             marginRight: 10
         }
-    }
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+        flex: 4
+    },
 }));
 
 
@@ -101,6 +108,7 @@ const ThemeConfig = () => {
     if(!data){
         return <div>loading...</div>
     }
+   const configData = data.data.theme.config
 
     return (
         <div className={classes.root}>
@@ -124,7 +132,15 @@ const ThemeConfig = () => {
                 mutators={{
                     ...arrayMutators
                 }}
-                render={({ handleSubmit }) => (
+                initialValues={{
+                    ...configData
+                }}
+                render={({
+                             handleSubmit,
+                             form: {
+                                 mutators: { push, pop, unshift }
+                             },
+                }) => (
                     <form onSubmit={handleSubmit} >
                         <div style={{height: '700px'}}>
 
@@ -133,7 +149,7 @@ const ThemeConfig = () => {
                                     <TabPanel key={index} value={value} index={index} >
                                         <h2 style={{textDecoration: "underline"}}>{item.name}</h2>
                                         <br/>
-                                        <div style={{overflowY:"auto", overflowX: "hidden", height: '600px'}}>
+                                        <div style={{overflowY:"auto", overflowX: "hidden", height: '600px', padding: 30}}>
                                             <Grid container spacing={3}>
                                                 {item.items.map((i: any, index: number) => {
                                                     if(i.type === 'bootstrap_collection'){
@@ -143,18 +159,51 @@ const ThemeConfig = () => {
                                                                 <Grid item xs={12}>
                                                                     <h3 style={{color: "#c35858"}}>{i.name}</h3>
                                                                 </Grid>
-                                                                <FieldArray name={i.id}>
-                                                                    {({ fields }) => (
-                                                                        i.options.template.map((ite: any, index: number) => {
+                                                                <Grid item xs={12}>
+                                                                    <FieldArray name={i.id}>
+                                                                        {({ fields }) => (
+                                                                            fields.map((fie, ind: number)=> {
                                                                                 return (
-                                                                                    <Grid key={index} item xs={12}>
-                                                                                        <ThemeFieldEditor name={`${i.id}.${ite.id}`} type={ite.type} label={ite.name} options={ite.options || null}/>
-                                                                                    </Grid>
+                                                                                    <Accordion key={ind} style={{marginBottom: 10}}>
+                                                                                        <AccordionSummary
+                                                                                            expandIcon={<ExpandMoreIcon />}
+                                                                                            aria-controls="panel1bh-content"
+                                                                                            id="panel1bh-header"
+                                                                                        >
+                                                                                            <div className={classes.heading}>
+                                                                                                <h4>{i.name}</h4>
+                                                                                            </div>
+                                                                                            <div >
+                                                                                                <Button onClick={(event) => {
+                                                                                                    event.stopPropagation();
+                                                                                                    fields.remove(ind)
+                                                                                                }} variant={"text"} color={"inherit"} size={"small"}><Delete /></Button>
+                                                                                            </div>
+                                                                                        </AccordionSummary>
+                                                                                        <AccordionDetails>
+                                                                                            <Grid container spacing={3}>
+                                                                                                {
+                                                                                                    i.options.template.map((ite: any, index: number) => {
+                                                                                                            return (
+                                                                                                                <Grid key={index} item xs={12}>
+                                                                                                                    <ThemeFieldEditor name={`${i.id}[${ind}].${ite.id}`} type={ite.type} label={ite.name} options={ite.options || null}/>
+                                                                                                                </Grid>
+                                                                                                            )
+                                                                                                        }
+                                                                                                    )
+                                                                                                }
+                                                                                            </Grid>
+                                                                                        </AccordionDetails>
+                                                                                    </Accordion>
+
                                                                                 )
-                                                                            }
-                                                                        )
-                                                                    )}
-                                                                </FieldArray>
+                                                                            })
+                                                                        )}
+                                                                    </FieldArray>
+                                                                </Grid>
+                                                               <Grid item xs={12}>
+                                                                   <Button variant={"outlined"} color={"inherit"} onClick={() => push(i.id, {})}  size={"small"} >Add</Button>
+                                                               </Grid>
                                                             </Grid>
                                                             </Grid>
                                                         )

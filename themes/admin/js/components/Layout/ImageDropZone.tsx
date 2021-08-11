@@ -74,13 +74,16 @@ const ImageDropZone: React.FC<ImageDropZoneProps> = ({onChange, media, multiple}
     const onDrop = async (acceptedFiles: any, rejectedFiles: any) => {
 
         const response = await uploadMedia(acceptedFiles)
-
-        onChange([...media, ...response])
+        if(!multiple){
+            onChange([...response])
+        }else{
+            onChange([...media, ...response])
+        }
 
     }
     const { getRootProps, getInputProps, isDragActive } = useDropzone({
         onDrop,
-        multiple,
+        multiple: multiple,
         accept: 'image/jpeg, image/png',
     })
 
