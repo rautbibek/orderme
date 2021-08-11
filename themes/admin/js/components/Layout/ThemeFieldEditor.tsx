@@ -1,8 +1,8 @@
 import * as React from 'react'
 import {Grid, InputLabel, TextField, withStyles} from "@material-ui/core";
 import { Field } from "react-final-form";
-import ImageDropZone from "./ImageDropZone";
 import SelectTable from "./SelectTable";
+import SingleImageDropZone from "./SingleImageDropZone";
 
 interface ThemeFieldEditorProps {
     label: string;
@@ -43,7 +43,7 @@ const ThemeFieldEditor: React.FC<ThemeFieldEditorProps> = ({ label, type, name, 
                 {({ input, meta }) => (
                     <div style={{width: '100%'}}>
                         <InputLabel>{label}</InputLabel>
-                        <ImageDropZone onChange={images => input.onChange(images)} media={input.value} multiple={false} />
+                        <SingleImageDropZone onChange={images => input.onChange(images)} media={input.value} multiple={false} />
                     </div>
                 )}
             </Field>

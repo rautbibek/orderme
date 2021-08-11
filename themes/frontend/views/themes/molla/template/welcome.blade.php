@@ -56,7 +56,7 @@
                                         <a href="#">USD</a>
                                         <div class="header-menu">
                                             <ul>
-                                                <li><a href="#">{{getConfig()}}</a></li>
+                                                <li><a href="#">{{getConfig('fasdfas')}}</a></li>
                                                 <li><a href="#">Usd</a></li>
                                             </ul>
                                         </div><!-- End .header-menu -->
@@ -92,7 +92,7 @@
                     </button>
 
                     <a href="index.html" class="logo">
-                        <img src="assets/images/demos/demo-4/logo.png" alt="Molla Logo" width="105" height="25">
+                        <img src="{{getConfig('logo')}}" alt="Tradekunj Logo" width="105" height="25">
                     </a>
                 </div><!-- End .header-left -->
 
