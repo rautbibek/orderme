@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use App\Models\ProductType;
 
 class ProductTypeSeeder extends Seeder
 {
@@ -14,7 +15,6 @@ class ProductTypeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('product_types')->truncate();
         $types = [
             [
                 'title' => 'food',
@@ -58,11 +58,20 @@ class ProductTypeSeeder extends Seeder
         ];
         foreach ($types as $type){
 
-            DB::table('product_types')->insert([
-                'title' => $type['title'],
-                'field' => json_encode($type['field']),
-                'cart_system' => $type['cart_system']
-            ]);
+            $productType = ProductType::where('title', $type['title'])->first();
+
+            if($productType){
+                $productType->field = json_encode($type['field']);
+                $productType->cart_system = $type['cart_system'];
+                $productType->update();
+                continue;
+            }
+
+            $productType = new ProductType();
+            $productType->title = $type['title'];
+            $productType->field = json_encode($type['field']);
+            $productType->cart_system = $type['cart_system'];
+            $productType->save();
         }
     }
 }
