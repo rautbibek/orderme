@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Tradekunj E-Commerce</title>
-    <meta name="keywords" content="HTML5 Template">
-    <meta name="description" content="Molla - Bootstrap eCommerce Template">
+    <meta name="keywords" content="tradekunj, e-commerce, shopping, buy and sell, buy, sell, nepal">
+    <meta name="description" content="Tradekunj, A complete ecommerce platform, where you can buy or sell on your own. Get logged in today.">
     <meta name="author" content="p-themes">
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{{asset('themes/frontend/assets/images/icons/apple-touch-icon.png')}}">
@@ -19,10 +19,10 @@
     <link rel="manifest" href="{{asset('themes/frontend/assets/images/icons/site.html')}}">
     <link rel="mask-icon" href="{{asset('themes/frontend/assets/images/icons/safari-pinned-tab.svg')}}" color="#666666">
     <link rel="shortcut icon" href="{{asset('themes/frontend/assets/images/icons/favicon.ico')}}">
-    <meta name="apple-mobile-web-app-title" content="Molla">
-    <meta name="application-name" content="Molla">
+    <meta name="apple-mobile-web-app-title" content="Tradekunj">
+    <meta name="application-name" content="Tradekunj">
     <meta name="msapplication-TileColor" content="#cc9966">
-    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">
+{{--    <meta name="msapplication-config" content="assets/images/icons/browserconfig.xml">--}}
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/vendor/line-awesome/line-awesome/line-awesome/css/line-awesome.min.css')}}">
     <!-- Plugins CSS File -->
@@ -1034,36 +1034,36 @@
     </div><!-- End .modal-dialog -->
 </div><!-- End .modal -->
 
-<div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">
-    <div class="row justify-content-center">
-        <div class="col-10">
-            <div class="row no-gutters bg-white newsletter-popup-content">
-                <div class="col-xl-3-5col col-lg-7 banner-content-wrap">
-                    <div class="banner-content text-center">
-                        <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">
-                        <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>
-                        <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>
-                        <form action="#">
-                            <div class="input-group input-group-round">
-                                <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>
-                                <div class="input-group-append">
-                                    <button class="btn" type="submit"><span>go</span></button>
-                                </div><!-- .End .input-group-append -->
-                            </div><!-- .End .input-group -->
-                        </form>
-                        <div class="custom-control custom-checkbox">
-                            <input type="checkbox" class="custom-control-input" id="register-policy-2" required>
-                            <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>
-                        </div><!-- End .custom-checkbox -->
-                    </div>
-                </div>
-                <div class="col-xl-2-5col col-lg-5 ">
-                    <img src="assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{--<div class="container newsletter-popup-container mfp-hide" id="newsletter-popup-form">--}}
+{{--    <div class="row justify-content-center">--}}
+{{--        <div class="col-10">--}}
+{{--            <div class="row no-gutters bg-white newsletter-popup-content">--}}
+{{--                <div class="col-xl-3-5col col-lg-7 banner-content-wrap">--}}
+{{--                    <div class="banner-content text-center">--}}
+{{--                        <img src="assets/images/popup/newsletter/logo.png" class="logo" alt="logo" width="60" height="15">--}}
+{{--                        <h2 class="banner-title">get <span>25<light>%</light></span> off</h2>--}}
+{{--                        <p>Subscribe to the Molla eCommerce newsletter to receive timely updates from your favorite products.</p>--}}
+{{--                        <form action="#">--}}
+{{--                            <div class="input-group input-group-round">--}}
+{{--                                <input type="email" class="form-control form-control-white" placeholder="Your Email Address" aria-label="Email Adress" required>--}}
+{{--                                <div class="input-group-append">--}}
+{{--                                    <button class="btn" type="submit"><span>go</span></button>--}}
+{{--                                </div><!-- .End .input-group-append -->--}}
+{{--                            </div><!-- .End .input-group -->--}}
+{{--                        </form>--}}
+{{--                        <div class="custom-control custom-checkbox">--}}
+{{--                            <input type="checkbox" class="custom-control-input" id="register-policy-2" required>--}}
+{{--                            <label class="custom-control-label" for="register-policy-2">Do not show this popup again</label>--}}
+{{--                        </div><!-- End .custom-checkbox -->--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="col-xl-2-5col col-lg-5 ">--}}
+{{--                    <img src="assets/images/popup/newsletter/img-1.jpg" class="newsletter-img" alt="newsletter">--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--</div>--}}
 <!-- Plugins JS File -->
 <script src="{{asset('themes/frontend/assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('themes/frontend/assets/js/bootstrap.bundle.min.js')}}"></script>

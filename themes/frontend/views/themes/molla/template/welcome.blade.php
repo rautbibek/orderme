@@ -13,7 +13,7 @@
                             }
                         }
                     }'>
-                @foreach (getConfig('slider') as $slider)
+                @foreach (getConfig('slider')?? [] as $slider)
                     <div class="intro-slide" style="background-image: url({{$slider['slide_image']}});">
                         <div class="container intro-content">
                             <div class="row justify-content-end">
@@ -44,84 +44,28 @@
         </div><!-- End .intro-slider-container -->
 
         <div class="container">
-            <h2 class="title text-center mb-4">Explore Popular Categories</h2><!-- End .title text-center -->
+            @foreach (getConfig('popular_collection')?? [] as $col)
+                <h2 class="title text-center mb-4">{{$col['name']}}</h2><!-- End .title text-center -->
+                <div class="cat-blocks-container">
+                        <div class="row">
+                            @foreach (getCollection($col['collection'])?? [] as $product)
+                            <div class="col-6 col-sm-4 col-lg-2">
+                                <a href="category.html" class="cat-block">
+                                    <figure>
+                                            <span>
+                                                <img src="{{productImage($product->id)}}" alt="Collection image">
+                                            </span>
+                                    </figure>
 
-            <div class="cat-blocks-container">
-                <div class="row">
-                    <div class="col-6 col-sm-4 col-lg-2">
-                        <a href="category.html" class="cat-block">
-                            <figure>
-                                    <span>
-                                        <img src="{{asset('themes/frontend/assets/images/demos/demo-4/cats/1.png')}}" alt="Collection image">
-                                    </span>
-                            </figure>
-
-                            <h3 class="cat-block-title">Computer & Laptop</h3><!-- End .cat-block-title -->
-                        </a>
-                    </div><!-- End .col-sm-4 col-lg-2 -->
-
-                    <div class="col-6 col-sm-4 col-lg-2">
-                        <a href="category.html" class="cat-block">
-                            <figure>
-                                    <span>
-                                        <img src="{{asset('themes/frontend/assets/images/demos/demo-4/cats/2.png')}}" alt="Collection image">
-                                    </span>
-                            </figure>
-
-                            <h3 class="cat-block-title">Digital Cameras</h3><!-- End .cat-block-title -->
-                        </a>
-                    </div><!-- End .col-sm-4 col-lg-2 -->
-
-                    <div class="col-6 col-sm-4 col-lg-2">
-                        <a href="category.html" class="cat-block">
-                            <figure>
-                                    <span>
-                                        <img src="{{asset('themes/frontend/assets/images/demos/demo-4/cats/3.png')}}" alt="Collection image">
-                                    </span>
-                            </figure>
-
-                            <h3 class="cat-block-title">Smart Phones</h3><!-- End .cat-block-title -->
-                        </a>
-                    </div><!-- End .col-sm-4 col-lg-2 -->
-
-                    <div class="col-6 col-sm-4 col-lg-2">
-                        <a href="category.html" class="cat-block">
-                            <figure>
-                                    <span>
-                                        <img src="{{asset('themes/frontend/assets/images/demos/demo-4/cats/4.png')}}" alt="Collection image">
-                                    </span>
-                            </figure>
-
-                            <h3 class="cat-block-title">Televisions</h3><!-- End .cat-block-title -->
-                        </a>
-                    </div><!-- End .col-sm-4 col-lg-2 -->
-
-                    <div class="col-6 col-sm-4 col-lg-2">
-                        <a href="category.html" class="cat-block">
-                            <figure>
-                                    <span>
-                                        <img src="{{asset('themes/frontend/assets/images/demos/demo-4/cats/5.png')}}" alt="Collection image">
-                                    </span>
-                            </figure>
-
-                            <h3 class="cat-block-title">Audio</h3><!-- End .cat-block-title -->
-                        </a>
-                    </div><!-- End .col-sm-4 col-lg-2 -->
-
-                    <div class="col-6 col-sm-4 col-lg-2">
-                        <a href="category.html" class="cat-block">
-                            <figure>
-                                    <span>
-                                        <img src="{{asset('themes/frontend/assets/images/demos/demo-4/cats/6.png')}}" alt="Collection image">
-                                    </span>
-                            </figure>
-
-                            <h3 class="cat-block-title">Smart Watches</h3><!-- End .cat-block-title -->
-                        </a>
-                    </div><!-- End .col-sm-4 col-lg-2 -->
-                </div><!-- End .row -->
+                                    <h3 class="cat-block-title">{{$product->title}}</h3><!-- End .cat-block-title -->
+                                    <span>Rs. {{$product->price}} &nbsp; <del> Rs. {{$product->old_price}}</del></span>
+                                </a>
+                            </div><!-- End .col-sm-4 col-lg-2 -->
+                            @endforeach
+                        </div><!-- End .row -->
             </div><!-- End .cat-blocks-container -->
         </div><!-- End .container -->
+        @endforeach
 
         <div class="mb-4"></div><!-- End .mb-4 -->
 

@@ -41,11 +41,11 @@ tnzerox:
               - { name: 'Button Link', type: url, id: slide_button_link }
 
     -
-      name: 'Home page'
+      name: 'Explore Popular Products'
       type: group
       items:
         -
-          name: 'Deals collection'
+          name: 'Popular Collection'
           type: bootstrap_collection
           options:
             allow_add: true
@@ -53,42 +53,7 @@ tnzerox:
             template:
               - { name: Name, type: text, id: name }
               - { name: Collection, type: collection_select, options: { multiple: false }, id: collection }
-          id: deal_col
-        -
-          name: 'Home Main Promotion'
-          id: 'Home Main Collection'
-          type: bootstrap_collection
-          options:
-            allow_add: true
-            allow_delete: true
-            template:
-              - {name: Name, type: text, id: name }
-              - { name: Image, type: image, id: image }
-              - { name: Link, type: text, id: link }
-        -
-          name: 'Home Bottom Promotion'
-          id: home_bottom_collection
-          type: bootstrap_collection
-          options:
-            multiple: true
-            expanded: true
-            template:
-              - {name: Name, type: text, id: name }
-              - {name: Title, type: text, id: title }
-              - {name: Description, type: text, id: description }
-              - { name: Image, type: image, id: image, options: {aspect: 2.37}}
-              - { name: Link, type: text, id: link }
-        -
-          name: 'Home Text Slider'
-          id: home_text_slider
-          type: bootstrap_collection
-          options:
-            group: "home_text_slider"
-            allow_add: true
-            allow_delete: true
-            template:
-              - { name: Slide Label, type: text, id: slide_label}
-              - { name: Slide Caption Description, type: text, id: slide_caption_description}
+          id: popular_collection
 
     -
       name: 'Home Tab Collection'
