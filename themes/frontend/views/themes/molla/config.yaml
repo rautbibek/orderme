@@ -56,26 +56,59 @@ tnzerox:
           id: popular_collection
 
     -
-      name: 'Home Tab Collection'
+      name: Offer Card
       type: group
       items:
-        -
-          name: 'Home Tab Collection'
+        - name: Offer Card
+          id: offer_cart
           type: bootstrap_collection
           options:
-            allow_add: false
+            allow_add: true
             allow_delete: true
-            template: [{ name: Name, type: text, id: name }, { name: Collections, type: collection_select, options: { multiple: true }, id: collections }]
-          id: Home_Tab_Collection
-      id: 'Home Tab Collection'
+            template:
+              - { name: 'Image', type: image, id: image }
+              - { name: 'Title', type: text, id: title }
+              - { name: 'Description', type: text, id: description }
+              - { name: 'Button text', type: url, id: button }
+              - { name: 'Button Link', type: url, id: link }
 
+    - name: 'Collection Gallery'
+      type: group
+      items:
+        - name: 'Collection Gallery'
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: Name, type: text, id: name }
+              - { name: Collection, type: collection_select, options: { multiple: true }, id: collection }
+          id: collection_gallery
 
     -
-      name: 'Inner Side Collection'
+      name: 'Banner Design'
       type: group
       items:
         -
-          name: 'Inner collection'
+          name: 'Banner Design'
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: 'Image', type: image, id: image }
+              - { name: 'Title', type: text, id: title }
+              - { name: 'Description', type: text, id: description }
+              - { name: 'Button text', type: url, id: button }
+              - { name: 'Button Link', type: url, id: link }
+          id: banner_design
+
+    -
+      name: 'Recommended Product'
+      type: group
+      items:
+        -
+          name: 'Recommended Product'
           type: bootstrap_collection
           options:
             allow_add: true
@@ -83,38 +116,37 @@ tnzerox:
             template:
               - { name: Name, type: text, id: name }
               - { name: Collection, type: collection_select, options: { multiple: false }, id: collection }
-          id: inner_col
-        -
-          name: 'Inner Collection'
+          id: recommended_product
+
+    - name: 'Trending Collection'
+      type: group
+      items:
+        - name: 'Trending Collection'
           type: bootstrap_collection
           options:
             allow_add: true
             allow_delete: true
             template:
               - { name: Name, type: text, id: name }
-              - { name: Image, type: image, id: image }
-              - { name: Link, type: url, id: link }
-          id: inner_promo
-      id: Inner_side_collection
+              - { name: 'Image', type: image, id: image }
+              - { name: Collection, type: collection_select, options: { multiple: true }, id: collection }
+          id: trending_collection
+
 
     -
-      name: 'Home Information'
+      name: 'Bottom Collection'
       type: group
       items:
         -
-          name: 'Home Information'
+          name: 'Bottom Collection'
           type: bootstrap_collection
           options:
+            allow_add: true
+            allow_delete: true
             template:
-              - { id: name, type: text, name: 'Name'}
-              - { id: info, type: text, name: 'Information'}
-              - { name: 'Icon', type: text, id: icon }
-            multiple: true
-            expanded: true
-          id: home_info
-      id: home_info
-
-
+              - { name: Name, type: text, id: name }
+              - { name: Collection, type: collection_select, options: { multiple: false }, id: collection }
+          id: bottom_collection
 
     -
       name: Social

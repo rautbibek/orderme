@@ -49,3 +49,7 @@ function productImage(int $key){
     $product = \App\Models\Product::where('id', $key)->first();
     return $product->image[0] ?? "";
 }
+
+function getCollectionName(int $key){
+    return \App\Models\Collection::where('id', $key)->first()->name ?? '';
+}
