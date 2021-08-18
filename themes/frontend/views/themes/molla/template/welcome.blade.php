@@ -294,6 +294,28 @@
         </div><!-- End .bg-light pt-5 pb-6 -->
         @endforeach
         <div class="mb-5"></div><!-- End .mb-5 -->
+
+        <div class="container">
+            <div class="row justify-content-center">
+                @foreach(getConfig('bottom_card') ?? [] as $card)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="banner banner-overlay banner-overlay-light">
+                            <a href="#">
+                                <img src="{{$card['image']}}" alt="Banner">
+                            </a>
+
+                            <div class="banner-content">
+                                <h4 class="banner-subtitle"><a href="#">{{$card['title']}}</a></h4><!-- End .banner-subtitle -->
+                                <h3 class="banner-title"><a href="{{$card['link']}}">{{$card['description']}}</a></h3><!-- End .banner-title -->
+                                <a href="{{$card['link']}}" class="banner-link">{{$card['button']}}<i class="icon-long-arrow-right"></i></a>
+                            </div><!-- End .banner-content -->
+                        </div><!-- End .banner -->
+                    </div><!-- End .col-md-4 -->
+                @endforeach
+
+            </div><!-- End .row -->
+        </div><!-- End .container -->
+        <div class="mb-5"></div><!-- End .mb-5 -->
         @foreach(getConfig('bottom_collection') ?? [] as $col)
         <div class="container for-you">
             <div class="heading heading-flex mb-3">

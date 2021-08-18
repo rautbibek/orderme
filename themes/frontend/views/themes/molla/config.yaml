@@ -131,7 +131,22 @@ tnzerox:
               - { name: 'Image', type: image, id: image }
               - { name: Collection, type: collection_select, options: { multiple: true }, id: collection }
           id: trending_collection
-
+    -
+      name: Bottom Card
+      type: group
+      items:
+        - name: Bottom Card
+          id: bottom_card
+          type: bootstrap_collection
+          options:
+            allow_add: true
+            allow_delete: true
+            template:
+              - { name: 'Image', type: image, id: image }
+              - { name: 'Title', type: text, id: title }
+              - { name: 'Description', type: text, id: description }
+              - { name: 'Button text', type: url, id: button }
+              - { name: 'Button Link', type: url, id: link }
 
     -
       name: 'Bottom Collection'
