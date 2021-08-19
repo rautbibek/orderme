@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Tradekunj E-Commerce</title>
+    <title>@yield('title')</title>
     <meta name="keywords" content="tradekunj, e-commerce, shopping, buy and sell, buy, sell, nepal">
     <meta name="description" content="Tradekunj, A complete ecommerce platform, where you can buy or sell on your own. Get logged in today.">
     <meta name="author" content="p-themes">
@@ -42,7 +42,7 @@
         <div class="header-top">
             <div class="container">
                 <div class="header-left">
-                    <a href="tel:#"><i class="icon-phone"></i>Call: +0123 456 789</a>
+                    <a href="tel:#"><i class="icon-phone"></i>Call: +977</a>
                 </div><!-- End .header-left -->
 
                 <div class="header-right">
@@ -51,30 +51,7 @@
                         <li>
                             <a href="#">Links</a>
                             <ul>
-                                <li>
-                                    <div class="header-dropdown">
-                                        <a href="#">USD</a>
-                                        <div class="header-menu">
-                                            <ul>
-                                                <li><a href="#">{{getConfig('fasdfas')}}</a></li>
-                                                <li><a href="#">Usd</a></li>
-                                            </ul>
-                                        </div><!-- End .header-menu -->
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header-dropdown">
-                                        <a href="#">English</a>
-                                        <div class="header-menu">
-                                            <ul>
-                                                <li><a href="#">English</a></li>
-                                                <li><a href="#">French</a></li>
-                                                <li><a href="#">Spanish</a></li>
-                                            </ul>
-                                        </div><!-- End .header-menu -->
-                                    </div>
-                                </li>
-                                <li><a href="#signin-modal" data-toggle="modal">Sign in / Sign up</a></li>
+                                <li><a href="/login" data-toggle="modal">Sign in / Sign up</a></li>
                             </ul>
                         </li>
                     </ul><!-- End .top-menu -->
@@ -91,7 +68,7 @@
                         <i class="icon-bars"></i>
                     </button>
 
-                    <a href="index.html" class="logo">
+                    <a href="/" class="logo">
                         <img src="{{getConfig('logo')}}" alt="Tradekunj Logo" width="105" height="25">
                     </a>
                 </div><!-- End .header-left -->
@@ -628,7 +605,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget widget-about">
-                            <img src="assets/images/demos/demo-4/logo-footer.png" class="footer-logo" alt="Footer Logo" width="105" height="25">
+                            <img src="{{getConfig('footer_logo')}}" class="footer-logo" alt="Footer Logo" width="105" height="25">
                             <p>Praesent dapibus, neque id cursus ucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. </p>
 
                             <div class="widget-call">
@@ -687,7 +664,7 @@
 
         <div class="footer-bottom">
             <div class="container">
-                <p class="footer-copyright">Copyright © 2019 Molla Store. All Rights Reserved.</p><!-- End .footer-copyright -->
+                <p class="footer-copyright">Copyright © {{date('Y')}}</p><!-- End .footer-copyright -->
                 <figure class="footer-payments">
                     <img src="assets/images/payments.png" alt="Payment methods" width="272" height="20">
                 </figure><!-- End .footer-payments -->

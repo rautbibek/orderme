@@ -19,4 +19,6 @@ Route::get('/home', function () {
     return view('home');
 })->middleware(['auth'])->name('home');
 
+Route::get('/product/{id}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'productDetail'])->name('product.detail');
+
 
