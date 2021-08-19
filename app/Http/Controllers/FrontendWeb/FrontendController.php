@@ -30,7 +30,11 @@ class FrontendController extends Controller
                     ->where('variants.quantity', '=', \Illuminate\Support\Facades\DB::raw("(SELECT MAX(quantity) FROM bt_variants WHERE product_id = bt_products.id)"));
             })
             ->where('products.category_id', $product->category_id)
-            ->select('products.*', 'variants.price', 'variants.old_price')->get()->random(8);
+            ->select('products.*', 'variants.price', 'variants.old_price')->get();
+
+        if(count($productLike) > 8){
+            $productLike = $productLike->random(8);
+        }
 
         return view("themes.$theme->slug.template.productDetail", compact('product', 'productLike'));
     }

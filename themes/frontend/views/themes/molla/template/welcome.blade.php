@@ -92,7 +92,7 @@
         </div><!-- End .container -->
 
         <div class="mb-3"></div><!-- End .mb-5 -->
-        @foreach(getConfig('collection_gallery') as $collection)
+        @foreach(getConfig('collection_gallery') ?? [] as $collection)
         <div class="container new-arrivals">
             <div class="heading heading-flex mb-3">
                 <div class="heading-left">
