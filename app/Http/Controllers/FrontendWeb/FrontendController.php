@@ -4,6 +4,8 @@ namespace App\Http\Controllers\FrontendWeb;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Theme;
+use App\Models\ProductType;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -34,8 +36,30 @@ class FrontendController extends Controller
 
         if(count($productLike) > 8){
             $productLike = $productLike->random(8);
+        }     
+
+        $productOptions = DB::table('variants')
+                            ->where('variants.product_id', $product->id)
+                            ->select('variants.features', 'variants.id')
+                            ->get()
+            ;
+
+        $pov = [];
+        
+
+        foreach($productOptions as $key => $option){
+            $features = json_decode($option->features, true);
+
+            $pov[$key]['id'] = $option->id;
+            $op = '';
+            $opArray = [];
+            foreach(array_keys($features) as $featureKey){
+                $string = $op.ucfirst($featureKey)." : ". strtoupper($features[$featureKey]);
+                array_push($opArray, $string);
+            } 
+            $pov[$key]['options'] = implode(' , ', $opArray);
         }
 
-        return view("themes.$theme->slug.template.productDetail", compact('product', 'productLike'));
+        return view("themes.$theme->slug.template.productDetail", compact('product', 'productLike', 'pov'));
     }
 }

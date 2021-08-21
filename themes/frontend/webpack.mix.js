@@ -10,9 +10,12 @@ const mix = require("laravel-mix");
  | file for the application as well as bundling up all the JS files.
  |
  */
- 
- 
+
+
 mix.setPublicPath("public/themes/frontend")
     .js(`${__dirname}/js/app.js`, "js")
     .react()
     .sass(`${__dirname}/sass/app.scss`, "css");
+
+mix.setPublicPath("public/themes/frontend")
+    .js(`${__dirname}/js/hiFive.js`, "js")

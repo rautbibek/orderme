@@ -38,22 +38,21 @@
                                 <div class="product-content">
                                     <p>{{$product->short_description}}</p>
                                 </div><!-- End .product-content -->
-
+                                
                                 <div class="details-filter-row details-row-size">
-                                    <label for="size">Size:</label>
+                                    <label for="size">Variants:</label>
                                     <div class="select-custom">
-                                        <select name="size" id="size" class="form-control">
-                                            <option value="#" selected="selected">Select a size</option>
-                                            <option value="s">Small</option>
-                                            <option value="m">Medium</option>
-                                            <option value="l">Large</option>
-                                            <option value="xl">Extra Large</option>
+                                        <select name="variant" id="size" class="form-control">
+                                            <option value="#" selected="selected">Select a variant</option>
+                                            @foreach($pov as $variant)
+                                            <option value="{{$variant['id']}}">{{$variant['options']}}</option>
+                                            @endforeach
+                                            
                                         </select>
                                     </div><!-- End .select-custom -->
 
-                                    <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a>
+                                    {{-- <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a> --}}
                                 </div><!-- End .details-filter-row -->
-
                                 <div class="details-filter-row details-row-size">
                                     <label for="qty">Qty:</label>
                                     <div class="product-details-quantity">

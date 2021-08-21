@@ -34,6 +34,8 @@
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/skins/skin-demo-4.css')}}">
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/demos/demo-4.css')}}">
+    {{-- <script src="{{ asset('themes/frontend/js/hiFive.js') }}" ></script> --}}
+
 </head>
 
 <body>
@@ -1034,6 +1036,8 @@
 <!-- Main JS File -->
 <script src="{{asset('themes/frontend/assets/js/main.js')}}"></script>
 <script src="{{asset('themes/frontend/assets/js/demos/demo-4.js')}}"></script>
+{{-- <script src="{{ asset('themes/frontend/js/app.js') }}" ></script> --}}
+
 </body>
 
 
