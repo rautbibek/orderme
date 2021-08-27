@@ -11,6 +11,7 @@ import ImageDropZone from "../../Layout/ImageDropZone";
 import CustomCheckBox from "../../Layout/CustomCheckBox";
 import {useHistory} from 'react-router-dom'
 import * as yup from "yup";
+import CkTextfield from "../../Layout/CkTextfield";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -103,7 +104,7 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                     <SelectTable name={'category_id'} label={'Select Category'} table={'categories'} />
                     <SelectTable name={'collections'} label={'Select Collection'} table={'collections'} isMultiple={true}/>
                     <CustomTextField name="short_description" type={'textarea'} rows={3} label={'Short Description'} />
-                    <CustomTextField name="description" type={'textarea'} label={'Description'} rows={5} />
+                    <CkTextfield name="description" label="Description"/>
                     <Field name={'image'}>
                         {({ input, meta }) => (
                             <div>

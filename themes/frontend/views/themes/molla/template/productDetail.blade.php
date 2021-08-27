@@ -38,7 +38,7 @@
                                 <div class="product-content">
                                     <p>{{$product->short_description}}</p>
                                 </div><!-- End .product-content -->
-                                
+
                                 <div class="details-filter-row details-row-size">
                                     <label for="size">Variants:</label>
                                     <div class="select-custom">
@@ -47,7 +47,7 @@
                                             @foreach($pov as $variant)
                                             <option value="{{$variant['id']}}">{{$variant['options']}}</option>
                                             @endforeach
-                                            
+
                                         </select>
                                     </div><!-- End .select-custom -->
 
@@ -81,7 +81,7 @@
                                         <div id="product-accordion-info" class="collapse show" aria-labelledby="product-info-heading" data-parent="#product-accordion">
                                             <div class="card-body">
                                                 <div class="product-desc-content">
-                                                    {{$product->description}}
+                                                    {!! $product->description !!}
                                                 </div><!-- End .product-desc-content -->
                                             </div><!-- End .card-body -->
                                         </div><!-- End .collapse -->
