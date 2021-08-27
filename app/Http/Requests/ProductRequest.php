@@ -30,7 +30,6 @@ class ProductRequest extends FormRequest
             'description'=>'required| max:4000',
             'short_description'=> 'required| max:8000',
             'variants'=>'required',
-
             'variants.*.price' => 'required',
             'variants.*.quantity' =>'required',
 

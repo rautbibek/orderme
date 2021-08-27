@@ -29,9 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, extraAction, extraRouteButton}) => {
     const history = useHistory()
-    const search = useLocation().search;
-    const page = new URLSearchParams(search).get('page');
-    const [currentPage , setCurrentPage] = React.useState(page || 1)
+    const [currentPage , setCurrentPage] = React.useState(1)
 
     const renderActionsButton = (row) => {
         const classes = useStyles()
@@ -70,16 +68,11 @@ const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, ext
        return await HttpClient.get(`${url}?page=${currentPage}`)
     }
 
-    const { data: data, error } = useSWR(`${url}?page=${currentPage}`, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false} )
+    const { data, mutate } = useSWR(`${url}?page=${currentPage}`, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false} )
 
-    if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
-
-    const handlePagination = (event, value) => {
-        setCurrentPage(value)
-        if(currentPage != value){
-            history.push(`${url}?page=${value}`)
-        }
+    const handlePagination = async(event, value) => {
+        await setCurrentPage(value)
     }
     return (
         <div style={{ width: '100%' }}>
@@ -90,7 +83,7 @@ const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, ext
                 <DataGrid rows={data.data.data} columns={columnsArray} autoHeight hideFooterPagination hideFooter disableSelectionOnClick />
             </div>
             <div style={{width: '100%', marginTop: 20, display:'flex', justifyContent: "center"}}>
-                <Pagination count={data.data.last_page} variant="outlined" color="secondary" onChange={handlePagination} />
+                <Pagination count={data.data.last_page} variant="outlined" color="secondary" page={data.data.current_page} defaultPage={1} onChange={handlePagination} />
             </div>
         </div>
     );
