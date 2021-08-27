@@ -72,6 +72,7 @@ const CkTextfield: React.FC<CkTextFieldProps> = ({name, label}) => {
                                 }}
 
                             />
+                            {meta.touched && meta.error && <span style={{color: 'red'}}>{meta.error}</span>}
                         </Grid>
                     </Grid>
                 )
