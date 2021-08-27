@@ -16,6 +16,9 @@ import ThemeConfig from "./components/pages/themes/ThemeConfig";
 import Collection from "./components/pages/collection/Collection";
 import AddCollection from "./components/pages/collection/AddCollection";
 import EditCollection from "./components/pages/collection/EditCollection";
+import Page from "./components/pages/pages/Page";
+import AddPages from "./components/pages/pages/AddPages";
+import EditPages from "./components/pages/pages/EditPages";
 
 const App = () => {
     return (
@@ -37,6 +40,10 @@ const App = () => {
                         <PrivateRoute exact path="/collections" component={Collection} />
                         <PrivateRoute exact path="/collections/new" component={AddCollection} />
                         <PrivateRoute exact path="/collections/edit/:id" component={EditCollection} />
+                        <PrivateRoute exact path="/pages" component={Page} />
+                        <PrivateRoute exact path="/pages/new" component={AddPages} />
+                        <PrivateRoute exact path="/pages/edit/:id" component={EditPages} />
+
                     </Switch>
                 </Layout>
             </HashRouter>

@@ -38,6 +38,7 @@ Route::middleware(['auth:admin'])->group(function(){
 
     Route::resource('/themes', \App\Http\Controllers\Admin\ThemeController::class);
     Route::match(array('GET','PUT'),'themes/{id}/config', [\App\Http\Controllers\Admin\ThemeController::class, 'configSetting']);
+    Route::resource('/pages', \App\Http\Controllers\Admin\PageController::class);
 
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');
