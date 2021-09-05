@@ -9,7 +9,7 @@ const EditMenu = () => {
     const history = useHistory()
 
     const match = useRouteMatch()
-    const url = `collections/${match.params.id}/edit`
+    const url = `menus/${match.params.id}/edit`
 
     const fetchData = async () => {
         return await HttpClient.get(url)
@@ -21,14 +21,14 @@ const EditMenu = () => {
     if (!data) return <div>loading...</div>
 
     const handleSubmit = async (values: any) => {
-        const res = await HttpClient.put(`collections/${match.params.id}`, values)
+        const res = await HttpClient.put(`menus/${match.params.id}`, values)
         if (res.status === 200) {
-            await mutate('collections')
-            history.push('/collections')
+            await mutate('menus')
+            history.push('/menus')
         }
     }
     return (
-        <MenuEditComponent onSubmit={handleSubmit} category={{ name: data.data.name, parentId: data.data.parent_id }} />
+        <MenuEditComponent onSubmit={handleSubmit} menu={{ name: data.data.name, design: data.data.design }} />
     )
 }
 

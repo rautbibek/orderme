@@ -25,13 +25,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-interface CategoryEditComponentProps {
+interface PagesEditComponentProps {
     onSubmit: any,
     page?: any,
 }
 
 
-const PagesEditComponent: React.FC<CategoryEditComponentProps> = ({onSubmit, page}) => {
+const PagesEditComponent: React.FC<PagesEditComponentProps> = ({onSubmit, page}) => {
     const classes = useStyles();
     const history = useHistory()
 

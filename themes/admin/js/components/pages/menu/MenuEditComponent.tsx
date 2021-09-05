@@ -2,8 +2,9 @@ import { TextField, makeStyles, Grid, Button } from '@material-ui/core'
 import * as React from 'react'
 import { Form, Field } from 'react-final-form'
 import CustomTextField from "../../Layout/CustomTextField";
-import {useHistory} from 'react-router-dom'
+import {useHistory, useRouteMatch} from 'react-router-dom'
 import SelectTable from "../../Layout/SelectTable";
+import EditMenuComponent from './EditMenuComponent';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -23,28 +24,30 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-interface CategoryEditComponentProps {
+interface MenuEditComponentProp {
     onSubmit: any,
-    category?: any
+    menu?: any
 }
 
 
-const MenuEditComponent: React.FC<CategoryEditComponentProps> = ({onSubmit, category}) => {
+const MenuEditComponent: React.FC<MenuEditComponentProp> = ({onSubmit, menu}) => {
     const classes = useStyles();
     const history = useHistory()
+    const match = useRouteMatch()
 
     return (
         <Form
             onSubmit={onSubmit}
             initialValues={
-                ...category
+                ...menu
             }
-            render={({ handleSubmit }) => (
+            render={({ handleSubmit, values }) => (
                 <form onSubmit={handleSubmit} className={classes.form}>
                     <CustomTextField name="name" type={'text'} label={'Name'}/>
+                    {!!match.params.id && (<EditMenuComponent design={values.design}/>)}
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"}  color="primary" type="submit">Submit</Button>
-                        <Button variant={"contained"}  color="secondary" onClick={() => history.push('/collections')}>Back</Button>
+                        <Button variant={"contained"}  color="secondary" onClick={() => history.push('/menus')}>Back</Button>
                     </div>
                 </form>
             )}
