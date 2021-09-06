@@ -78,7 +78,13 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $menu->name = $request->name;
+        $menu->slug = Str::slug($request->name);
+        $menu->design = json_encode($request->design);
+        $menu->update();
+
+        return response()->json($menu);
     }
 
     /**

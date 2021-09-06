@@ -26,7 +26,7 @@ const SelectTable: React.FC<SelectTableProps> = ({ isMultiple, label, isCreateab
 
     const options = data?.data.map((item) => ({
         value: item.id,
-        label: item.name
+        label: item.name ?? item.title
     }))
 
     if (!!isMultiple) {

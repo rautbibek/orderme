@@ -34,17 +34,21 @@ const MenuEditComponent: React.FC<MenuEditComponentProp> = ({onSubmit, menu}) =>
     const classes = useStyles();
     const history = useHistory()
     const match = useRouteMatch()
+    const [internalMenu, setInternalMenu] = React.useState({...menu})
 
     return (
         <Form
             onSubmit={onSubmit}
             initialValues={
-                ...menu
+                ...internalMenu
             }
             render={({ handleSubmit, values }) => (
                 <form onSubmit={handleSubmit} className={classes.form}>
                     <CustomTextField name="name" type={'text'} label={'Name'}/>
-                    {!!match.params.id && (<EditMenuComponent design={values.design}/>)}
+                    {!!match.params.id && (<EditMenuComponent design={values.design} onSpecificChange={(value) => {
+                        const newMenu = { ...internalMenu }
+                        newMenu.design.push(value)
+                    }}/>)}
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"}  color="primary" type="submit">Submit</Button>
                         <Button variant={"contained"}  color="secondary" onClick={() => history.push('/menus')}>Back</Button>

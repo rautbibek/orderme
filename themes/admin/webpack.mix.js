@@ -12,8 +12,11 @@ const mix = require("laravel-mix");
  */
 
 
+
+
 mix.setPublicPath("public/themes/admin")
     .ts(`${__dirname}/js/index.tsx`, "js/app.js")
     .react()
+    .webpackConfig(require('./webpack.config'));
 
 // mix.browserSync('orderme.test');

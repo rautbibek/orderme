@@ -28,7 +28,7 @@ const EditMenu = () => {
         }
     }
     return (
-        <MenuEditComponent onSubmit={handleSubmit} menu={{ name: data.data.name, design: data.data.design }} />
+        <MenuEditComponent onSubmit={handleSubmit} menu={{ name: data.data.name, design: data.data.design ?? [] }} />
     )
 }
 
