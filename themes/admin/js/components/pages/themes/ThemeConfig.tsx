@@ -208,6 +208,13 @@ const ThemeConfig = () => {
                                                             </Grid>
                                                         )
                                                     }
+                                                    if(i.type === 'menu_select'){
+                                                        return (
+                                                            <Grid key={index} item xs={12}>
+                                                                <SelectTable name={i.id} label={i.name} table={'menus'} />
+                                                            </Grid>
+                                                        )
+                                                    }
                                                     return (
                                                         <Grid key={index} item xs={12}>
                                                             <ThemeFieldEditor name={i.id} type={i.type} label={i.name}/>

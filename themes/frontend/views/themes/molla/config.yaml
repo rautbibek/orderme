@@ -221,26 +221,31 @@ tnzerox:
           name: 'Copyright Text'
           type: text
           id: copyright_text
-#    -
-#      name: Menu
-#      type: group
-#      items:
-#        -
-#          name: 'Main Menu'
-#          type: menu_select
-#          options: {  }
-#          id: main_menu
-#        -
-#          name: 'Mobile Menu'
-#          type: menu_select
-#          options: {  }
-#          id: mobile_menu
-#
-#        -
-#          name: 'Pages Menu'
-#          type: menu_select
-#          options: {  }
-#          id: pages_menu
+    -
+      name: Menu
+      type: group
+      items:
+        -
+          name: 'Main Menu'
+          type: menu_select
+          options: {  }
+          id: main_menu
+        -
+          name: 'Footer Menu 1'
+          type: menu_select
+          options: {  }
+          id: footer_menu_1
+
+        - name: 'Footer Menu 2'
+          type: menu_select
+          options: { }
+          id: footer_menu_2
+
+        -
+          name: 'Pages Menu'
+          type: menu_select
+          options: {  }
+          id: pages_menu
     -
       name: 'Payment icons'
       type: group
