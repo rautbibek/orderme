@@ -17,12 +17,16 @@ import {SingleSelect} from "react-select-material-ui";
 import {Modal, ModalBody, ModalFooter, ModalHeader} from "reactstrap";
 import SelectTable from "../../Layout/SelectTable";
 import { nanoid } from 'nanoid'
-
+import * as _ from "lodash";
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import * as yup from "yup";
 
 
 interface EditMenuComponentProps {
-    design?: any
+    internalMenu?: any
     onSpecificChange?: any
+    setInternalMenu: any
 }
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -41,17 +45,17 @@ const useStyles = makeStyles((theme) => ({
         }
     }
 }));
-const EditMenuComponent: React.FC<EditMenuComponentProps> = ({design, onSpecificChange}) => {
-    const [modal, setModal] = React.useState(false)
-    const classes = useStyles();
-    const [items, setItems] = React.useState(design ? [design] : [])
 
-    const handleMenu = (value) => {
-        let design1 = items
-        design1.push(value)
-        setItems(design1)
-        setModal(false)
-    }
+const MenuValidationSchema = yup.object().shape({
+    name: yup.string().required('Name is required'),
+    reference: yup.string().required('Reference is required'),
+    value: yup.string().required('Value is required'),
+})
+
+const EditMenuComponent: React.FC<EditMenuComponentProps> = ({internalMenu, onSpecificChange, setInternalMenu}) => {
+    const [modal, setModal] = React.useState(false)
+    const [editmenu, setEditmenu] = React.useState(null)
+    const classes = useStyles();
 
     interface MenuModalProps {
         onSubmit: any,
@@ -61,13 +65,30 @@ const EditMenuComponent: React.FC<EditMenuComponentProps> = ({design, onSpecific
     const MenuModal: React.FC<MenuModalProps> = ({onSubmit, menuprop}) => {
         return (
             <div >
-                <Modal isOpen={true} style={{marginTop: 200}}>
-                    <ModalHeader >Modal title</ModalHeader>
+                <Modal isOpen={true} style={{marginTop: 100}}>
+                    <ModalHeader >{!!menuprop.name ? 'Edit' : 'Add'} Menu Item</ModalHeader>
                     <ModalBody>
                             <Form
                                 onSubmit={onSubmit}
                                 initialValues={{
                                     ...menuprop
+                                }}
+                                validate={async values => {
+                                    try {
+                                        await MenuValidationSchema.validate(values, {
+                                            abortEarly: false,
+                                        })
+                                    } catch (err) {
+                                        const errors = err.inner.reduce(
+                                            (formError, innerError) => ({
+                                                ...formError,
+                                                [innerError.path]: innerError.message,
+                                            }),
+                                            {}
+                                        )
+
+                                        return errors
+                                    }
                                 }}
                                 render={({ handleSubmit, values }) => (
                                     <form onSubmit={handleSubmit} className={classes.form}>
@@ -96,8 +117,11 @@ const EditMenuComponent: React.FC<EditMenuComponentProps> = ({design, onSpecific
                                             }}
                                         </Field>
                                         {!!values.reference && <SelectReference type={values.reference}/>}
-                                        <Button variant={"outlined"} color={"primary"} type={"submit"}>Save</Button>
-                                        <Button variant={"outlined"} color={"secondary"} onClick={() => setModal(false)}>Cancel</Button>
+                                        <Button className="mr-2" variant={"contained"} color={"primary"} type={"submit"}>Save</Button>
+                                        <Button variant={"contained"} color={"secondary"} onClick={() => {
+                                            setModal(false)
+                                            setEditmenu(null)
+                                        }}>Cancel</Button>
 
                                     </form>
                                 )}
@@ -109,39 +133,73 @@ const EditMenuComponent: React.FC<EditMenuComponentProps> = ({design, onSpecific
             </div>
         )
     }
+
+    const replaceMenuItem = (rootMenu: any, item) => {
+        let _items = rootMenu.children || []
+
+        // Remove item in root
+        _items = _items.map((b: any) => (b.id === item.id ? item : b))
+
+        // Recurse
+        _items = _items.map((b: any) => replaceMenuItem(b, item))
+        return _.extend({}, rootMenu, { children: _items })
+    }
+
+    const removeMenuItem = (rootMenu: any, item) => {
+        let _items = rootMenu.children || []
+
+        // Remove item in root
+        _items = _items.filter((b: any) => b.id !== item.id)
+
+        // Recurse
+        _items = _items.map((b: any) => removeMenuItem(b, item))
+        return _.extend({}, rootMenu, { children: _items })
+    }
+
     const renderItem = ({ item, collapseIcon }) => {
         return (
             <div style={{
                 display: 'flex',
                 position: "relative",
-                padding: "10px 15px",
-                fontSize: "20px",
+                padding: 4,
+                fontSize: "18px",
                 border: "1px solid #526b6b",
                 borderRadius: 5,
                 background: "#e7ecec",
-                cursor: "pointer"
+                cursor: "pointer",
+                justifyContent: "space-between"
             }}>
-                {collapseIcon}
-                {item.name}
+                <div style={{display:"flex"}}>
+                    <span style={{display: 'flex', paddingLeft: 10, marginTop: 3}}>{collapseIcon} {item.name}</span>
+                </div>
+                <div>
+                    <Button variant={"text"} color={"inherit"} onClick={() => {setEditmenu(item)}} size={"medium"}><EditIcon fontSize={"medium"} /></Button>
+                    <Button variant={"text"} size={"medium"} color={"secondary"} onClick={() => {
+                        const newMenu = removeMenuItem({children: internalMenu.design}, item )
+                        setInternalMenu({...internalMenu, design: newMenu.children})
+                        setModal(false)
+                        setEditmenu(null)
+                    }}><DeleteForeverIcon fontSize={"medium"}/></Button>
+                </div>
             </div>
         )
     };
 
     const Collapser = ({ isCollapsed }) => {
         return (
-            <div style={{display: 'flex', alignItems: "center", justifyContent: "center"}}>
-                {isCollapsed ? <ArrowRightIcon /> : <ArrowDropDownIcon />}
+            <div style={{display: 'flex', alignItems: "center", padding:4, justifyContent: "center"}}>
+                {isCollapsed ? <ArrowRightIcon fontSize={"small"} /> : <ArrowDropDownIcon fontSize={"small"} />}
             </div>
         );
     };
-    console.log(design)
+
     return (
        <div>
            <Field name={'design'}>
                {({ input, meta }) => (
                    <div>
-                       <div style={{display: 'flex', justifyContent: "right" , marginBottom: 10}}>
-                           <Button onClick={() => setModal(!modal)}>Add item</Button>
+                       <div style={{display: 'flex', justifyContent: "right" , marginBottom: 30}}>
+                           <Button variant={"contained"} onClick={() => setModal(!modal)}>Add item</Button>
                            {modal && <MenuModal onSubmit={(value) => {
                                onSpecificChange(value)
                                setModal(false)
@@ -160,6 +218,12 @@ const EditMenuComponent: React.FC<EditMenuComponentProps> = ({design, onSpecific
                )}
 
            </Field>
+           {!!editmenu && <MenuModal onSubmit={(item) => {
+              const newMenu = replaceMenuItem({children: internalMenu.design}, item )
+               setInternalMenu({...internalMenu, design: newMenu.children})
+               setModal(false)
+               setEditmenu(null)
+           }} menuprop={{...editmenu}}/>}
        </div>
     )
 }
