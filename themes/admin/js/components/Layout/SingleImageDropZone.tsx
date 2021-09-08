@@ -1,8 +1,5 @@
 import * as React  from 'react';
 import {useDropzone} from 'react-dropzone';
-import HttpClient from "../../HttpClient";
-import {uploadMediaFiles} from "../../createUrls";
-import CancelIcon from '@material-ui/icons/Cancel';
 import * as _ from "lodash";
 import {projectStorage} from "../../utils/firebaseConfig";
 import { v4 as uuidv4 } from 'uuid';
