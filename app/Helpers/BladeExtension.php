@@ -53,3 +53,45 @@ function productImage(int $key){
 function getCollectionName(int $key){
     return \App\Models\Collection::where('id', $key)->first()->name ?? '';
 }
+
+function allCategory(){
+    $categories = \App\Models\Category::all();
+    return $categories;
+}
+
+function getMenu($key){
+    $theme = \App\Models\Theme::where('active', true)
+        ->first();
+    if(!$theme){
+        $theme = \App\Models\Theme::where('slug', 'molla')
+            ->first();
+    }
+    $config = $theme->config;
+    try{
+        $value = $config[$key] ;
+
+    }catch(\Exception $e){
+        $value = null;
+    }
+    $menu = \App\Models\Menu::where('id', $value)->first();
+
+
+    return $menu->design ?? [];
+}
+
+function menuUrl($key){
+    switch ($key['reference']) {
+        case "Category":
+            $category = \App\Models\Category::where('id', $key['value'])->first();
+            return route('category', ['slug' => $category->slug]);
+        case "Collection":
+            $collection = \App\Models\Collection::where('id', $key['value'])->first();
+            return route('collection', ['slug' => $collection->slug]);
+        case "Page":
+            $page = \App\Models\Page::where('id', $key['value'])->first();
+            return route('page', ['slug' => $page->slug]);
+        default:
+            return $key['value'];
+    }
+}
+

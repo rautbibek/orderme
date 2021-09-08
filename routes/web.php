@@ -21,4 +21,8 @@ Route::get('/home', function () {
 
 Route::get('/product/{id}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'productDetail'])->name('product.detail');
 
+Route::get('/category/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'categoryPage'])->name('category');
 
+Route::get('/collection/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'collectionPage'])->name('collection');
+
+Route::get('/page/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'pageView'])->name('page');
