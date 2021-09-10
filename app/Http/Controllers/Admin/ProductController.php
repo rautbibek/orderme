@@ -73,7 +73,7 @@ class ProductController extends Controller
                     'quantity' => $variant['quantity'],
                     'code' => $variant['code'],
                     'price' => $variant['price'],
-                    'old_price' => $variant['old_price'],
+                    'old_price' => $variant['old_price'] ?? null,
                 ]);
                 $variance->features = $variant['features'];
                 $batch_variant[] = $variance;
@@ -177,7 +177,7 @@ class ProductController extends Controller
                         'quantity' => $variant['quantity'],
                         'code' => $variant['code'],
                         'price' => $variant['price'],
-                        'old_price' => $variant['old_price'],
+                        'old_price' => $variant['old_price'] ?? null,
                     ]);
 
                 }else{

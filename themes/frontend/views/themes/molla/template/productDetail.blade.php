@@ -32,7 +32,7 @@
                                 <h1 class="product-title">{{$product->title}}</h1><!-- End .product-title -->
                                 <div class="product-price">
                                     <span class="new-price">{{'Rs. '. $product->variants[0]->price}}</span>
-                                    <span class="old-price">{{'Rs. '. $product->variants[0]->old_price}}</span>
+                                    <span class="old-price">{{$product->variants[0]->old_price ?'Rs. '. $product->variants[0]->old_price : ''}}</span>
                                 </div><!-- End .product-price -->
 
                                 <div class="product-content">

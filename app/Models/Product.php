@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -13,6 +14,31 @@ class Product extends Model
 
     public function variants(){
         return $this->hasMany('App\Models\Variant');
+    }
+
+    public function setTitleAttribute($value) {
+
+        if (static::whereSlug($slug = Str::slug($value))->exists()) {
+
+            $slug = $this->incrementSlug($slug);
+        }
+        $this->attributes['title'] = $value;
+        $this->attributes['slug'] = $slug;
+    }
+
+    public function incrementSlug($slug) {
+
+        $original = $slug;
+
+        $count = 2;
+
+        while (static::whereSlug($slug)->exists()) {
+
+            $slug = "{$original}-" . $count++;
+        }
+
+        return $slug;
+
     }
 
      public function getOptionsAttribute($value)

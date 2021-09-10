@@ -7,8 +7,8 @@ function getConfig(string $key){
         $theme = \App\Models\Theme::where('slug', 'molla')
             ->first();
     }
-    $config = $theme->config;
     try{
+        $config = $theme->config;
         $value = $config[$key] ;
 
     }catch(\Exception $e){

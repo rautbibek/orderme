@@ -1,6 +1,6 @@
 <div class="product product-2">
     <figure class="product-media">
-        <a href="{{route('product.detail', $product->id)}}">
+        <a href="{{route('product.detail', $product->slug)}}">
             <img src="{{productImage($product->id)}}" alt="Product image" class="product-image">
         </a>
 
@@ -17,7 +17,7 @@
     <div class="product-body">
         <h3 class="product-title"><a href="product.html">{{$product->title}}</a></h3><!-- End .product-title -->
         <div class="product-price">
-            Rs. {{$product->price}} &nbsp; <del style="color: grey">{{'Rs. '.$product->old_price}}</del>
+            Rs. {{$product->price}} &nbsp; <del style="color: grey">{{$product->old_price ? 'Rs. '.$product->old_price : ''}}</del>
         </div><!-- End .product-price -->
         {{--                                            <div class="ratings-container">--}}
         {{--                                                <div class="ratings">--}}

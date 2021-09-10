@@ -25,9 +25,9 @@ class FrontendController extends Controller
         return view("themes.$theme->slug.template.welcome");
     }
 
-    public function productDetail($id){
+    public function productDetail($slug){
         $theme = Theme::find(['active' => true])->first();
-        $product = Product::where('id', $id)->with('variants')->first();
+        $product = Product::where('slug', $slug)->with('variants')->first();
         $productLike = DB::table('products')
             ->rightJoin('variants', function ($rightJoin) {
                 $rightJoin->on('variants.product_id', '=', 'products.id')

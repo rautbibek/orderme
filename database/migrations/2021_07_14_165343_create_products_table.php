@@ -16,6 +16,7 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->string('slug');
             $table->integer('admin_id')->unsigned();
             $table->foreign('admin_id')->references('id')->on('admins');
             $table->bigInteger('category_id')->unsigned()->nullable();
@@ -26,6 +27,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->boolean('cart_system');
             $table->boolean('inventory_track')->default(false);
+            $table->foreignId('brand_id')->nullable('brands')->constrained();
             $table->jsonb('config')->nullable();
             $table->jsonb('options')->nullable();
             $table->jsonb('image')->nullable();
