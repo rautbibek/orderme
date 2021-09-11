@@ -57,7 +57,7 @@ class ProductController extends Controller
             $product->admin_id = Auth::id();
 //        $product->options = json_encode($request->options);
             $product->out_of_stock = $request->out_of_stock;
-            $product->featured = $request->featured;
+            $product->active = $request->active;
             $product->meta_tag_title = $request->meta_tag_title;
             $product->meta_tag_description = $request->meta_tag_description;
             $product->meta_tag_keyword = $request->meta_tag_keyword;
@@ -146,7 +146,7 @@ class ProductController extends Controller
 //        $product->options = json_encode($request->options);
             $product->image = json_encode($request->image);
             $product->out_of_stock = $request->out_of_stock;
-            $product->featured = $request->featured;
+            $product->active = $request->active;
             $product->meta_tag_title = $request->meta_tag_title;
             $product->meta_tag_description = $request->meta_tag_description;
             $product->meta_tag_keyword = $request->meta_tag_keyword;

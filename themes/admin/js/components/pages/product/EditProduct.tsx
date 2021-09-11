@@ -15,7 +15,7 @@ const EditProduct = () => {
         return await HttpClient.get(url)
     }
 
-    const { data: data, error } = useSWR(url, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false})
+    const { data: data, error } = useSWR(url, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: true})
 
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>

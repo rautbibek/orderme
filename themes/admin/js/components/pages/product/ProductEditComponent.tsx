@@ -122,7 +122,7 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                     {(!!values.product_type_id || productType.length > 0)  && (
                         <ProductVariance productType={values.product_type_id} push={push} pop={pop} optionType={values.options} />
                     )}
-                    <CustomCheckBox color={'primary'} checked={values.featured } name={'featured'} label={'Featured'}/>
+                    <CustomCheckBox color={'primary'} checked={values.active } name={'active'} label={'Active'}/>
                     <CustomCheckBox color={'secondary'} checked={values.out_of_stock} name={'out_of_stock'} label={'Out Of Stock'}/>
                     <CustomTextField name="meta_tag_title" type={'text'} rows={3} label={'Meta Tag Title'} />
                     <CustomTextField name="meta_tag_description" type={'textarea'} rows={3} label={'Meta Tag Description'} />
