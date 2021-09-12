@@ -56,7 +56,7 @@ function getCollectionName(int $key){
 
 function allCategory(){
     $categories = \App\Models\Category::all();
-    return $categories;
+    return $categories->take(10);
 }
 
 function getMenu($key){
