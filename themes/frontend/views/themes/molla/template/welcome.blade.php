@@ -98,7 +98,7 @@
         </div><!-- End .container -->
 
         <div class="mb-3"></div><!-- End .mb-5 -->
-        @foreach(getConfig('collection_gallery') ?? [] as $collection)
+        @foreach(getConfig('collection_gallery') ?? [] as $colKey => $collection)
             @if(count($collection) > 0)
         <div class="container new-arrivals">
             <div class="heading heading-flex mb-3">
@@ -110,7 +110,7 @@
                     <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
                         @foreach($collection['collection'] ?? [] as $key=> $col)
                             <li class="nav-item">
-                                <a class="nav-link {{$key == 0 ? 'active' : ''}}" id="new-tv-link" data-toggle="tab" href="#new-{{$key}}" role="tab" aria-controls="new-tv-tab" aria-selected="false">{{getCollectionName($col)}}</a>
+                                <a class="nav-link {{$key == 0 ? 'active' : ''}}" id="new-tv-link" data-toggle="tab" href="#new-{{$key}}-{{$colKey}}" role="tab" aria-controls="new-tv-tab" aria-selected="false">{{getCollectionName($col)}}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -119,7 +119,7 @@
 
             <div class="tab-content tab-content-carousel just-action-icons-sm">
                 @foreach($collection['collection'] ?? [] as $key=> $col)
-                <div class="tab-pane p-0 fade show {{$key== 0? 'active': ''}}" id="new-{{$key}}" role="tabpanel" aria-labelledby="new-all-link">
+                <div class="tab-pane p-0 fade show {{$key== 0? 'active': ''}}" id="new-{{$key}}-{{$colKey}}" role="tabpanel" aria-labelledby="new-all-link">
                     <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
                          data-owl-options='{
                                 "nav": true,
@@ -175,7 +175,7 @@
         </div><!-- End .container -->
 @endif
         @endforeach
-        @foreach(getConfig('trending_collection') ?? [] as $collection)
+        @foreach(getConfig('trending_collection') ?? [] as $colKey => $collection)
             @if(count($collection) > 0)
         <div class="bg-light pt-5 pb-6">
             <div class="container trending-products">
@@ -188,7 +188,7 @@
                         <ul class="nav nav-pills nav-border-anim justify-content-center" role="tablist">
                             @foreach($collection['collection'] ?? [] as $key => $col)
                             <li class="nav-item">
-                                <a class="nav-link {{$key == 0 ? 'active' : ''}}" id="trending-best-link" data-toggle="tab" href="#trending-{{$key}}" role="tab" aria-controls="trending-best-link" aria-selected="false">{{getCollectionName($col)}}</a>
+                                <a class="nav-link {{$key == 0 ? 'active' : ''}}" id="trending-best-link" data-toggle="tab" href="#trending-{{$key}}-{{$colKey}}" role="tab" aria-controls="trending-best-link" aria-selected="false">{{getCollectionName($col)}}</a>
                             </li>
                             @endforeach
                         </ul>
@@ -205,7 +205,7 @@
                     <div class="col-xl-4-5col">
                         <div class="tab-content tab-content-carousel just-action-icons-sm">
                             @foreach($collection['collection'] ?? [] as $key => $col)
-                            <div class="tab-pane p-0 fade show {{$key == 0 ? 'active': ''}}" id="trending-{{$key}}" role="tabpanel" aria-labelledby="trending-best-link">
+                            <div class="tab-pane p-0 fade show {{$key == 0 ? 'active': ''}}" id="trending-{{$key}}-{{$colKey}}" role="tabpanel" aria-labelledby="trending-best-link">
                                 <div class="owl-carousel owl-full carousel-equal-height carousel-with-shadow" data-toggle="owl"
                                      data-owl-options='{
                                             "nav": true,
