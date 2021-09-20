@@ -19,15 +19,14 @@ class CreateProductsTable extends Migration
             $table->string('slug');
             $table->integer('admin_id')->unsigned();
             $table->foreign('admin_id')->references('id')->on('admins');
-            $table->bigInteger('category_id')->unsigned()->nullable();
-            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreignId('category_id')->nullable()->constrained("categories")->cascadeOnUpdate()->nullOnDelete();
             $table->integer('product_type_id')->unsigned()->nullable();
             $table->foreign('product_type_id')->references('id')->on('product_types');
             $table->text('short_description');
             $table->text('description');
             $table->boolean('cart_system');
             $table->boolean('inventory_track')->default(false);
-            $table->foreignId('brand_id')->nullable('brands')->constrained();
+            $table->foreignId('brand_id')->nullable()->constrained("brands")->cascadeOnUpdate()->nullOnDelete();
             $table->jsonb('config')->nullable();
             $table->jsonb('options')->nullable();
             $table->jsonb('image')->nullable();
