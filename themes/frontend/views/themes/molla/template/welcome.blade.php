@@ -57,7 +57,7 @@
                                     <a href="{{route('product.detail', $product->slug)}}" class="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="{{productImage($product->id)}}" alt="Collection image">
+                                                <img src="{{productImage($product->id)}}" style="object-fit:contain; height: 300px; background-color: white"  alt="Collection image">
                                             </span>
                                         </figure>
 
