@@ -76,7 +76,7 @@ function getMenu($key){
     $menu = \App\Models\Menu::where('id', $value)->first();
 
 
-    return $menu->design ?? [];
+    return ['name' => $menu->name , 'design' => $menu->design] ?? [];
 }
 
 function menuUrl($key){

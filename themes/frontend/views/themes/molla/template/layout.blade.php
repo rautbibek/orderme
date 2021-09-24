@@ -210,7 +210,7 @@
                 <div class="header-center">
                     <nav class="main-nav">
                         <ul class="menu sf-arrows">
-                            @foreach(getMenu('main_menu') ??  [] as $menu)
+                            @foreach(getMenu('main_menu')['design'] ??  [] as $menu)
                             <li>
                                 <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{$menu['name']}}</a>
                                 @if(count($menu['children'] ?? []) > 0)
@@ -260,9 +260,9 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">{{getMenu('footer_menu_1')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
+                            <h4 class="widget-title">{{getMenu('footer_menu_1')['name'] ?? ''}}</h4><!-- End .widget-title -->
                             <ul class="widget-list">
-                                @foreach(getMenu('footer_menu_1') ?? [] as $menu)
+                                @foreach(getMenu('footer_menu_1')['design'] ?? [] as $menu)
                                     <li><a href="{{menuUrl($menu)}}">{{$menu['name']}}</a></li>
                                 @endforeach
                             </ul><!-- End .widget-list -->
@@ -271,10 +271,10 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">{{getMenu('footer_menu_2')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
+                            <h4 class="widget-title">{{getMenu('footer_menu_2')['name'] ?? ''}}</h4><!-- End .widget-title -->
 
                             <ul class="widget-list">
-                                @foreach(getMenu('footer_menu_2') ?? [] as $menu)
+                                @foreach(getMenu('footer_menu_2')['design'] ?? [] as $menu)
                                     <li><a href="{{menuUrl($menu)}}">{{$menu['name']}}</a></li>
                                 @endforeach
                             </ul><!-- End .widget-list -->
@@ -283,10 +283,10 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">{{getMenu('pages_menu')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
+                            <h4 class="widget-title">{{getMenu('pages_menu')['name'] ?? ''}}</h4><!-- End .widget-title -->
 
                             <ul class="widget-list">
-                                @foreach(getMenu('pages_menu') ?? [] as $menu)
+                                @foreach(getMenu('pages_menu')['design'] ?? [] as $menu)
                                     <li><a href="{{menuUrl($menu)}}">{{$menu['name']}}</a></li>
                                 @endforeach
                             </ul><!-- End .widget-list -->
@@ -335,7 +335,7 @@
                 <nav class="mobile-nav">
                     <ul class="mobile-menu">
 
-                    @foreach(getMenu('main_menu') ??  [] as $menu)
+                    @foreach(getMenu('main_menu')['design'] ??  [] as $menu)
                             <li>
                                 <a href="{{menuUrl($menu)}}" >{{$menu['name']}}</a>
                                 @if(count($menu['children'] ?? []) > 0)
