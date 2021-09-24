@@ -271,7 +271,7 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">{{getMenu('footer_menu_1')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
+                            <h4 class="widget-title">{{getMenu('footer_menu_2')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
 
                             <ul class="widget-list">
                                 @foreach(getMenu('footer_menu_2') ?? [] as $menu)
@@ -283,7 +283,7 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">{{getMenu('footer_menu_1')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
+                            <h4 class="widget-title">{{getMenu('pages_menu')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
 
                             <ul class="widget-list">
                                 @foreach(getMenu('pages_menu') ?? [] as $menu)
