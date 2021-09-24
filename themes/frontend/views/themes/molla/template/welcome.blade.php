@@ -194,8 +194,7 @@
                         </ul>
                     </div><!-- End .heading-right -->
                 </div><!-- End .heading -->
-                <div class="row">
-                    <div class="col-xl-4-5col">
+
                         <div class="tab-content tab-content-carousel just-action-icons-sm">
                             @foreach($collection['collection'] ?? [] as $key => $col)
                             <div class="tab-pane p-0 fade show {{$key == 0 ? 'active': ''}}" id="trending-{{$key}}-{{$colKey}}" role="tabpanel" aria-labelledby="trending-best-link">
@@ -216,7 +215,7 @@
                                                     "items":3
                                                 },
                                                 "992": {
-                                                    "items":4
+                                                    "items":5
                                                 }
                                             }
                                         }'>
@@ -227,8 +226,7 @@
                             </div><!-- .End .tab-pane -->
                             @endforeach
                         </div><!-- End .tab-content -->
-                    </div><!-- End .col-xl-4-5col -->
-                </div><!-- End .row -->
+
             </div><!-- End .container -->
         </div><!-- End .bg-light pt-5 pb-6 -->
             @endif
