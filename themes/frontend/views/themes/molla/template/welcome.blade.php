@@ -159,7 +159,7 @@
         @foreach(getConfig('banner_design') ?? [] as $banner)
             @if(count($banner) > 0)
         <div class="container">
-            <div class="cta cta-border mb-5" style="background-image: url({{asset('themes/frontend/assets/images/demos/demo-4/bg-1.jpg')}});">
+            <div class="cta cta-border mb-5" style="background-image: url('{{$banner['backgroundImage'] ?? asset('themes/frontend/assets/images/demos/demo-4/bg-1.jpg')}}');">
                 <img src="{{$banner['image'] ?? ''}}" alt="camera" class="cta-img" style="max-height: 150px">
                 <div class="row justify-content-center">
                     <div class="col-md-12">

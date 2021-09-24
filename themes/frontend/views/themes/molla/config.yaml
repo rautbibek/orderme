@@ -97,6 +97,7 @@ tnzerox:
             allow_delete: true
             template:
               - { name: 'Image', type: image, id: image }
+              - { name: 'Background Image', type: image, id: backgroundImage }
               - { name: 'Title', type: text, id: title }
               - { name: 'Description', type: text, id: description }
               - { name: 'Button text', type: url, id: button }

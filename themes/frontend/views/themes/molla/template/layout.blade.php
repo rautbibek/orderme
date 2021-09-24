@@ -217,7 +217,7 @@
                                     <ul>
                                         @foreach($menu['children'] ?? [] as $item )
                                         <li>
-                                            <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{$item['name']}}</a>
+                                            <a href="{{menuUrl($item)}}" class="sf-with-ul">{{$item['name']}}</a>
                                             @if(count($item['children'] ?? []) > 0)
                                             <ul>
 
