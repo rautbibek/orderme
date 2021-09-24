@@ -292,8 +292,8 @@
                                     <i class="icon-rocket"></i>
                                 </span>
                             <div class="icon-box-content">
-                                <h3 class="icon-box-title">Free Shipping</h3><!-- End .icon-box-title -->
-                                <p class="text-white">Orders $50 or more</p>
+                                <h3 class="icon-box-title">Delivery</h3><!-- End .icon-box-title -->
+                                <p class="text-white">We provide quick delivery</p>
                             </div><!-- End .icon-box-content -->
                         </div><!-- End .icon-box -->
                     </div><!-- End .col-sm-6 col-lg-3 -->
@@ -305,8 +305,8 @@
                                 </span>
 
                             <div class="icon-box-content">
-                                <h3 class="icon-box-title">Free Returns</h3><!-- End .icon-box-title -->
-                                <p>Within 30 days</p>
+                                <h3 class="icon-box-title">Genuine Product</h3><!-- End .icon-box-title -->
+                                <p> We assure all the genuine Product</p>
                             </div><!-- End .icon-box-content -->
                         </div><!-- End .icon-box -->
                     </div><!-- End .col-sm-6 col-lg-3 -->
@@ -318,8 +318,8 @@
                                 </span>
 
                             <div class="icon-box-content">
-                                <h3 class="icon-box-title">Get 20% Off 1 Item</h3><!-- End .icon-box-title -->
-                                <p>when you sign up</p>
+                                <h3 class="icon-box-title">Best Pricing</h3><!-- End .icon-box-title -->
+                                <p>All the products we list has best pricing.</p>
                             </div><!-- End .icon-box-content -->
                         </div><!-- End .icon-box -->
                     </div><!-- End .col-sm-6 col-lg-3 -->

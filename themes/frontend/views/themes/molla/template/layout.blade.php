@@ -362,6 +362,15 @@
                     </ul>
                 </nav><!-- End .mobile-nav -->
             </div><!-- .End .tab-pane -->
+            <div class="tab-pane fade" id="mobile-cats-tab" role="tabpanel" aria-labelledby="mobile-cats-link">
+                <nav class="mobile-cats-nav">
+                    <ul class="mobile-cats-menu">
+                        @foreach(allCategory() as $category)
+                            <li class="item-lead"><a href="{{route('category', $category->slug)}}">{{$category->name}}</a></li>
+                        @endforeach
+                    </ul><!-- End .mobile-cats-menu -->
+                </nav><!-- End .mobile-cats-nav -->
+            </div><!-- .End .tab-pane -->
         </div><!-- End .tab-content -->
 
         <div class="social-icons">
