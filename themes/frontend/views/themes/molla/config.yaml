@@ -128,7 +128,6 @@ tnzerox:
             allow_delete: true
             template:
               - { name: Name, type: text, id: name }
-              - { name: 'Image', type: image, id: image }
               - { name: Collection, type: collection_select, options: { multiple: true }, id: collection }
           id: trending_collection
     -

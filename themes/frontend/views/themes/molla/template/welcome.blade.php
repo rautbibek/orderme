@@ -195,13 +195,6 @@
                     </div><!-- End .heading-right -->
                 </div><!-- End .heading -->
                 <div class="row">
-                    <div class="col-xl-5col d-none d-xl-block">
-                        <div class="banner">
-                            <a href="#">
-                                <img src="{{$collection['image'] ?? ''}}" alt="banner">
-                            </a>
-                        </div><!-- End .banner -->
-                    </div><!-- End .col-xl-5col -->
                     <div class="col-xl-4-5col">
                         <div class="tab-content tab-content-carousel just-action-icons-sm">
                             @foreach($collection['collection'] ?? [] as $key => $col)
