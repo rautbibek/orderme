@@ -260,8 +260,7 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">Also Visit</h4><!-- End .widget-title -->
-
+                            <h4 class="widget-title">{{getMenu('footer_menu_1')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
                             <ul class="widget-list">
                                 @foreach(getMenu('footer_menu_1') ?? [] as $menu)
                                     <li><a href="{{menuUrl($menu)}}">{{$menu['name']}}</a></li>
@@ -272,7 +271,7 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">Quick Links</h4><!-- End .widget-title -->
+                            <h4 class="widget-title">{{getMenu('footer_menu_1')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
 
                             <ul class="widget-list">
                                 @foreach(getMenu('footer_menu_2') ?? [] as $menu)
@@ -284,7 +283,7 @@
 
                     <div class="col-sm-6 col-lg-3">
                         <div class="widget">
-                            <h4 class="widget-title">Pages</h4><!-- End .widget-title -->
+                            <h4 class="widget-title">{{getMenu('footer_menu_1')[0]['name'] ?? ''}}</h4><!-- End .widget-title -->
 
                             <ul class="widget-list">
                                 @foreach(getMenu('pages_menu') ?? [] as $menu)
@@ -343,7 +342,7 @@
                                     <ul>
                                         @foreach($menu['children'] ?? [] as $item )
                                             <li>
-                                                <a href="{{menuUrl($menu)}}" >{{$item['name']}}</a>
+                                                <a href="{{menuUrl($item)}}" >{{$item['name']}}</a>
                                                 @if(count($item['children'] ?? []) > 0)
                                                     <ul>
 
