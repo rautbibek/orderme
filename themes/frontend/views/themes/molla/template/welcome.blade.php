@@ -277,7 +277,7 @@
             <div class="products">
                 <div class="row justify-content-center">
                     @foreach(getCollection($col['collection'] ?? [])->take(8) ?? [] as $product)
-                    <div class="col-6 col-md-4 col-lg-3">
+                    <div class="col-6 col-md-4 col-lg-2">
                         @include('themes.molla.template.productSingle')
                     </div><!-- End .col-sm-6 col-md-4 col-lg-3 -->
                     @endforeach

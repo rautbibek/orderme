@@ -1,7 +1,7 @@
 <div class="product product-2">
     <figure class="product-media">
         <a href="{{route('product.detail', $product->slug)}}">
-            <img src="{{productImage($product->id)}}" alt="Product image" class="product-image">
+            <img src="{{productImage($product->id)}}" style="object-fit:contain; height: 300px; background-color: white" alt="Product image" class="product-image">
         </a>
 
         {{--                                            <div class="product-action-vertical">--}}
