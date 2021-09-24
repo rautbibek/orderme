@@ -16,7 +16,7 @@
                     }'>
                 @foreach (getConfig('slider')?? [] as $slider)
                     @if(count($slider) > 0)
-                        <div class="intro-slide" style="background-image: url({{$slider['slide_image']}});">
+                        <div class="intro-slide" style="background-image: url('{{$slider['slide_image']}}');">
                             <div class="container intro-content">
                                 <div class="row justify-content-end">
                                     <div class="col-auto col-sm-7 col-md-6 col-lg-5">
