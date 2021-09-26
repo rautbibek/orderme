@@ -9,12 +9,12 @@ use App\Models\ProductType;
 class HomeController extends Controller
 {
     public function index(){
-        
+
         return view('home');
     }
 
     public function productTypeList(){
-        
+
         $productType = ProductType::all();
         // $productType = ProductType::where("field->type", 5)->get();
 

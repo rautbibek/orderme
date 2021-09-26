@@ -16,7 +16,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menu = Menu::all();
+        $menu = Menu::orderBy('id','desc')->paginate(10);
         return response()->json($menu);
     }
 

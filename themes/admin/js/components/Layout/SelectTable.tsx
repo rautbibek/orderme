@@ -19,7 +19,7 @@ interface SelectTableProps {
 const SelectTable: React.FC<SelectTableProps> = ({ isMultiple, label, isCreateable, helperText, name, table }) => {
 
     const fetchData = async () => {
-        return await HttpClient.get(table)
+        return await HttpClient.get(`select-table/${table}`)
     }
 
     const { data: data, error } = useSWR(`${table}`, fetchData, { revalidateOnFocus: false, revalidateOnReconnect: false })
