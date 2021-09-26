@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\OptionValue;
 use Illuminate\Http\Request;
 use App\Models\Variant;
 use App\Models\Product;
@@ -68,7 +69,19 @@ class ProductController extends Controller
             $product->collections()->attach($request->collections);
 
             foreach($request->variants as $variant){
-
+                foreach($variant['features'] as $key => $feat){
+                    $optioval = strtolower($feat);
+                    $optionValue = OptionValue::where('product_type_id', $request->product_type_id)
+                        ->where('option', $key)
+                        ->where('option_value', $optioval)->first();
+                    if(!$optionValue){
+                        $opt = new OptionValue();
+                        $opt->product_type_id = $request->product_type_id;
+                        $opt->option = $key;
+                        $opt->option_value = $optioval;
+                        $opt->save();
+                    }
+                }
                 $variance = new Variant([
                     'quantity' => $variant['quantity'],
                     'code' => $variant['code'],
@@ -165,7 +178,19 @@ class ProductController extends Controller
             }
 
             foreach($request->variants as $variant){
-
+                foreach($variant['features'] as $key => $feat){
+                    $optioval = strtolower($feat);
+                    $optionValue = OptionValue::where('product_type_id', $request->product_type_id)
+                        ->where('option', $key)
+                        ->where('option_value', $optioval)->first();
+                    if(!$optionValue){
+                        $opt = new OptionValue();
+                        $opt->product_type_id = $request->product_type_id;
+                        $opt->option = $key;
+                        $opt->option_value = $optioval;
+                        $opt->save();
+                    }
+                }
                 if(!isset($variant['quantity']) && !isset($variant['price']) ){
                     continue ;
                 }
@@ -193,6 +218,7 @@ class ProductController extends Controller
 
                 }
             }
+
             DB::commit();
             return response()->json([
                 'message'=>'Product Added successfully',
@@ -200,9 +226,9 @@ class ProductController extends Controller
             ], 200);
 
         }catch(\Exception $e){
-            Log::error($exception);
+            Log::error($e);
             DB::rollBack();
-            return $exception;
+            return $e;
         }
 
 
