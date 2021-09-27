@@ -41,6 +41,8 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::resource('/pages', \App\Http\Controllers\Admin\PageController::class);
     Route::resource('/menus', \App\Http\Controllers\Admin\MenuController::class);
 
+    Route::get('/select-table/{type}', [\App\Http\Controllers\Admin\SelectTableController::class, 'selectTable'])->name('selectTable');
+
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');
 

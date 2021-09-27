@@ -1,6 +1,6 @@
 import * as React from 'react'
-import Datatables from "../../Layout/Datatables";
 import {listCategory} from "../../../createUrls";
+import DataTablesPaginate from "../../Layout/DatatablesPaginate";
 
 const columns = [
     { field: 'name', headerName: 'Name', flex: 1 },
@@ -8,7 +8,7 @@ const columns = [
 
 const Category = () => {
     return (
-        <Datatables url={listCategory} columns={columns} title={'categories'}/>
+        <DataTablesPaginate url={listCategory} columns={columns} title={'categories'}/>
     )
 }
 

@@ -5,54 +5,28 @@ import useSWR from "swr";
 import { Grid } from "@material-ui/core";
 import { Field } from "react-final-form";
 
-interface SelectTableProps {
+interface SelectOptionsProps {
     label: string;
     name: string;
-    isMultiple?: boolean,
     isCreateable?: boolean,
     helperText?: string,
     table?: string,
+    optionValue?:any
 }
 
 
 
-const SelectTable: React.FC<SelectTableProps> = ({ isMultiple, label, isCreateable, helperText, name, table }) => {
+const SelectOptions: React.FC<SelectOptionsProps> = ({ label, isCreateable, helperText, name, optionValue }) => {
 
-    const fetchData = async () => {
-        return await HttpClient.get(`select-table/${table}`)
-    }
-
-    const { data: data, error } = useSWR(`${table}`, fetchData, { revalidateOnFocus: false, revalidateOnReconnect: false })
-
-    const options = data?.data.map((item) => ({
+    const options = optionValue.map((item) => ({
         value: item.id,
         label: item.name ?? item.title
     }))
 
-    if (!!isMultiple) {
-        return (
-            <Field name={`${name}`}  >
-                {({ input, meta }) => (
-                    <Grid container spacing={3}>
-                        <Grid item xs={12} style={{ marginBottom: 20 }}>
-                            <MultipleSelect
-                                label={label}
-                                options={options}
-                                values={input.value}
-                                helperText={helperText ?? ''}
-                                onChange={(item) => input.onChange(item)}
-                                SelectProps={{
-                                    isCreatable: !!isCreateable,
-                                    msgNoOptionsAvailable: `All options  are selected`,
-                                    msgNoOptionsMatchFilter: `No option matches the filter`,
-                                }}
-                            />
-                        </Grid>
-                    </Grid>
-                )}
-            </Field>
-        )
+    const createOption = (val) => {
+
     }
+
     return (
 
         <Field name={`${name}`}  >
@@ -67,8 +41,12 @@ const SelectTable: React.FC<SelectTableProps> = ({ isMultiple, label, isCreateab
                                 helperText={helperText ?? ''}
                                 onChange={(item) => {
                                     input.onChange(item)
+                                    createOption(item)
                                 }}
+
+
                                 SelectProps={{
+                                    isCreatable: true,
                                     msgNoOptionsAvailable: `No options available`,
                                     msgNoOptionsMatchFilter: `No options matches the filter`,
                                 }}
@@ -83,4 +61,4 @@ const SelectTable: React.FC<SelectTableProps> = ({ isMultiple, label, isCreateab
     )
 }
 
-export default SelectTable
+export default SelectOptions

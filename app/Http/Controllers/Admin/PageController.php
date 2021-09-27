@@ -16,7 +16,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $page = Page::all();
+        $page = Page::orderBy('id','desc')->paginate(10);
         return response()->json($page);
 
     }

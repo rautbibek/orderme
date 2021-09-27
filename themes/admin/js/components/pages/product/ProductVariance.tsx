@@ -62,18 +62,16 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                                 <Grid item xs={1} style={{ marginBottom: 20 }}>
                                     <CustomTextField name={`variants[${0}].price`} type='text' label='Price' />
                                 </Grid>
-                                <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                <Grid item xs={2} style={{ marginBottom: 20 }}>
                                     <CustomTextField name={`variants[${0}].old_price`} type='text' label='Old Price' />
                                 </Grid>
                                 <Grid item xs={1} style={{ marginBottom: 20 }}>
                                     <CustomTextField name={`variants[${0}].code`} type='text' label='SKU' />
                                 </Grid>
                                 <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                    <CustomTextField name={`variants[${0}].quantity`} type='text' label='Quantity' />
+                                    <CustomTextField name={`variants[${0}].quantity`} type='text' label='Qty' />
                                 </Grid>
-                                <Grid item xs={1} style={{ marginBottom: 20 }}>
 
-                                </Grid>
                             </Grid>
 
                         </div>
@@ -98,12 +96,12 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                                 {
                                     fields.map((name, index) => {
                                             return (
-                                                <Grid key={index} container spacing={1}>
+                                                <Grid container key={index} spacing={1}>
                                                     <FieldArray name={`variants[${index}]features`}>
                                                         {({fields}) =>
                                                             selectType.map((i, number) => {
                                                                 return (
-                                                                    <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
+                                                                    <Grid key={number} item xs={2} style={{ marginBottom: 20 }}>
                                                                         <CustomTextField name={`variants[${index}]features.${i.name}`} type={i.type} label={i.as} />
                                                                     </Grid>
                                                                 )
@@ -113,14 +111,14 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                                                     <Grid item xs={1} style={{ marginBottom: 20 }}>
                                                         <CustomTextField name={`variants[${index}].price`} type='text' label='Price' />
                                                     </Grid>
-                                                    <Grid item xs={1} style={{ marginBottom: 20 }}>
+                                                    <Grid item xs={2} style={{ marginBottom: 20 }}>
                                                         <CustomTextField name={`variants[${index}].old_price`} type='text' label='Old Price' />
                                                     </Grid>
                                                     <Grid item xs={1} style={{ marginBottom: 20 }}>
                                                         <CustomTextField name={`variants[${index}].code`} type='text' label='SKU' />
                                                     </Grid>
                                                     <Grid item xs={1} style={{ marginBottom: 20 }}>
-                                                        <CustomTextField name={`variants[${index}].quantity`} type='text' label='Quantity' />
+                                                        <CustomTextField name={`variants[${index}].quantity`} type='text' label='Qty' />
                                                     </Grid>
                                                     <Grid item xs={1} style={{ marginBottom: 20 }}>
                                         <span

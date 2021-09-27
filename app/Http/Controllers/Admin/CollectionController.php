@@ -16,7 +16,7 @@ class CollectionController extends Controller
      */
     public function index()
     {
-        $collections = Collection::all();
+        $collections = Collection::orderBy('id','desc')->paginate(10);
         return response()->json($collections);
     }
 

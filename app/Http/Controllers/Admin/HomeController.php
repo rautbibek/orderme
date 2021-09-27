@@ -14,7 +14,7 @@ class HomeController extends Controller
     }
 
     public function productTypeList(){
-        
+
         $productType = ProductType::all();
         // $productType = ProductType::where("field->type", 5)->get();
 
