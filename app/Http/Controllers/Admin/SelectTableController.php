@@ -24,7 +24,7 @@ class SelectTableController extends Controller
                 $list = Page::all();
                 break;
             case 'menus':
-                $List = Menu::all();
+                $list = Menu::all();
                 break;
             default:
                 return $list = [];
