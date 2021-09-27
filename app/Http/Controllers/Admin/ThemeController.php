@@ -19,13 +19,13 @@ class ThemeController extends Controller
     public function store(Request $request){
 
         $theme = new Theme();
-        $theme->name = $request->name;
-        $theme->active = $request->active;
-        $theme->slug = Str::slug($request->name);
-        if(!file_exists(base_path()."/themes/frontend/views/themes/$theme->slug/config.yaml")){
-            return response()->json(['message' => 'No theme found of this name'], 400);
-        }
-        $theme->save();
+//        $theme->name = $request->name;
+//        $theme->active = $request->active;
+//        $theme->slug = Str::slug($request->name);
+//        if(!file_exists(base_path()."/themes/frontend/views/themes/$theme->slug/config.yaml")){
+//            return response()->json(['message' => 'No theme found of this name'], 400);
+//        }
+//        $theme->save();
 
         return response()->json($theme, 201);
     }
@@ -37,13 +37,13 @@ class ThemeController extends Controller
 
     public function update(Request $request, $id){
         $theme = Theme::findOrFail($id);
-        $theme->name = $request->name;
-        $theme->active = $request->active;
-        $theme->slug = Str::slug($request->name);
-        if(!file_exists(base_path()."/themes/frontend/views/themes/$theme->slug/config.yaml")){
-            return response()->json(['message' => 'No theme found of this name'], 400);
-        }
-        $theme->update();
+//        $theme->name = $request->name;
+//        $theme->active = $request->active;
+//        $theme->slug = Str::slug($request->name);
+//        if(!file_exists(base_path()."/themes/frontend/views/themes/$theme->slug/config.yaml")){
+//            return response()->json(['message' => 'No theme found of this name'], 400);
+//        }
+//        $theme->update();
         return response()->json($theme, 200);
     }
 
