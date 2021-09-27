@@ -27,7 +27,7 @@ class FrontendController extends Controller
 
     public function productDetail($slug){
         $theme = Theme::find(['active' => true])->first();
-        $product = Product::where('slug', $slug)->with('variants')->first();
+        $product = Product::where('slug', $slug)->with('variants')->firstOrFail();
         $productLike = DB::table('products')
             ->rightJoin('variants', function ($rightJoin) {
                 $rightJoin->on('variants.product_id', '=', 'products.id')
@@ -68,7 +68,7 @@ class FrontendController extends Controller
     function categoryPage($slug){
         $theme = Theme::find(['active' => true])->first();
 
-        $category = Category::where('slug', $slug)->first();
+        $category = Category::where('slug', $slug)->firstOrFail();
 
         $products = \Illuminate\Support\Facades\DB::table('products')
             ->join('categories', 'categories.id', '=', 'products.category_id')
@@ -86,7 +86,7 @@ class FrontendController extends Controller
     }
 
     function collectionPage($slug){
-        $theme = Theme::find(['active' => true])->first();
+        $theme = Theme::find(['active' => true])->firstOrFail();
 
         $collection = Collection::where('slug', $slug)->first();
 
@@ -108,7 +108,7 @@ class FrontendController extends Controller
     function pageView($slug){
         $theme = Theme::find(['active' => true])->first();
 
-        $page = Page::where('slug', $slug)->first();
+        $page = Page::where('slug', $slug)->firstOrFail();
 
         return view("themes.$theme->slug.template.page", compact('page'));
 
