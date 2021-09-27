@@ -15,7 +15,7 @@ const EditPages = () => {
         return await HttpClient.get(url)
     }
 
-    const { data: data, error } = useSWR(`${url}`, fetchData, { revalidateOnFocus: false, revalidateOnReconnect: true })
+    const { data: data, error } = useSWR(`${url}`, fetchData, { revalidateOnFocus: true, revalidateOnReconnect: true })
 
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>

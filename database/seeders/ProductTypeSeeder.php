@@ -17,7 +17,7 @@ class ProductTypeSeeder extends Seeder
     {
         $types = [
             [
-                'title' => 'food',
+                'title' => 'daily-needs',
                 'field' => [
                     [
                         'name' => 'weight',
@@ -42,18 +42,8 @@ class ProductTypeSeeder extends Seeder
                     ]
                 ],
                 'cart_system' => true
-            ],
-            [
-                'title' => 'land',
-                'field' => [
-                    [
-                        'name' => 'area',
-                        'type' => 'number',
-                        'as' => 'Area'
-                    ]
-                ],
-                'cart_system' => false
             ]
+
 
         ];
         foreach ($types as $type){
