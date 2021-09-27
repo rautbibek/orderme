@@ -23,7 +23,7 @@ const EditProduct = () => {
     const handleSubmit = async (values: any) => {
         const res = await HttpClient.put(`products/${match.params.id}`, values)
         if (res.status === 200) {
-            await mutate('products')
+            await mutate('products?page=1')
             await mutate(url)
             history.push('/products')
         }

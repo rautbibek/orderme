@@ -68,7 +68,7 @@ const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, ext
        return await HttpClient.get(`${url}?page=${currentPage}`)
     }
 
-    const { data, mutate } = useSWR(`${url}?page=${currentPage}`, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: false} )
+    const { data, mutate } = useSWR(`${url}?page=${currentPage}`, fetchData, {revalidateOnFocus: false, revalidateOnReconnect: true} )
 
     if (!data) return <div>loading...</div>
     const handlePagination = async(event, value) => {

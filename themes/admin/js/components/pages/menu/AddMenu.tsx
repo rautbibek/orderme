@@ -11,7 +11,7 @@ const AddMenu = () => {
     const handleSubmit = async(values: any) => {
         const res = await HttpClient.post(ListMenus, values)
         if(res.status === 201){
-           await mutate('menus')
+           await mutate('menus?page=1')
             history.push('/menus')
         }
     }

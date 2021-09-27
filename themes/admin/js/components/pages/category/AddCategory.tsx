@@ -11,7 +11,7 @@ const AddCategory = () => {
     const handleSubmit = async(values: any) => {
         const res = await HttpClient.post(listCategory, values)
         if(res.status === 201){
-           await mutate('categories')
+           await mutate('categories?page=1')
             history.push('/categories')
         }
     }

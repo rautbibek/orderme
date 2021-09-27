@@ -11,7 +11,7 @@ const AddCollection = () => {
     const handleSubmit = async(values: any) => {
         const res = await HttpClient.post(ListCollection, values)
         if(res.status === 201){
-           await mutate('collections')
+           await mutate('collections?page=1')
             history.push('/collections')
         }
     }

@@ -11,7 +11,7 @@ const AddPages = () => {
     const handleSubmit = async(values: any) => {
         const res = await HttpClient.post(ListPages, values)
         if(res.status === 201){
-           await mutate('pages')
+           await mutate('pages?page=1')
             history.push('/pages')
         }
     }

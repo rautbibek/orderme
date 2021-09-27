@@ -11,7 +11,7 @@ const AddProduct = () => {
     const handleSubmit = async (values: any) => {
         const res = await HttpClient.post(listProduct, values)
         if(res.status === 201){
-            await mutate(listProduct)
+            await mutate('products?page=1')
             history.push('/products')
         }
     }
