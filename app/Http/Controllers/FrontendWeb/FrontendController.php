@@ -86,9 +86,9 @@ class FrontendController extends Controller
     }
 
     function collectionPage($slug){
-        $theme = Theme::find(['active' => true])->firstOrFail();
+        $theme = Theme::find(['active' => true])->first();
 
-        $collection = Collection::where('slug', $slug)->first();
+        $collection = Collection::where('slug', $slug)->firstOrFail();
 
         $products  = \Illuminate\Support\Facades\DB::table('products')
             ->join('collection_product', 'products.id', '=', 'collection_product.product_id')
