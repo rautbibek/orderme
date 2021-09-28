@@ -53,9 +53,7 @@
                     </div><!-- End .products -->
 
 
-                    <nav aria-label="Page navigation">
                         {{ $products->links() }}
-                    </nav>
                 </div><!-- End .col-lg-9 -->
                 <aside class="col-lg-3 order-lg-first">
                     <div class="sidebar sidebar-shop">
