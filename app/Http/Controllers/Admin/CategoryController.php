@@ -45,7 +45,6 @@ class CategoryController extends Controller
 
         $category = new Category();
         $category->name = $request->name;
-        $category->slug = Str::slug($request->name);
         $category->parent_id = $request->parentId ;
         $category->save();
         return response()->json([
@@ -92,7 +91,6 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->name = $request->name;
         $category->parent_id = $request->category_id;
-        $category->slug = Str::slug($request->slug);
         $category->update();
         return response()->json([
             'message'=>"Collection updated succefully",

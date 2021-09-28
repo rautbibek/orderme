@@ -78,7 +78,7 @@ class FrontendController extends Controller
                     ->where('variants.quantity', '=', \Illuminate\Support\Facades\DB::raw("(SELECT MAX(quantity) FROM bt_variants WHERE product_id = bt_products.id)"));
             })
             ->select('products.*', 'variants.price', 'variants.old_price')
-            ->paginate(5)
+            ->paginate(20)
             ;
 
          return view("themes.$theme->slug.template.category", compact('products', 'category'));
@@ -99,7 +99,7 @@ class FrontendController extends Controller
                     ->where('variants.quantity', '=', \Illuminate\Support\Facades\DB::raw("(SELECT MAX(quantity) FROM bt_variants WHERE product_id = bt_products.id)"));
             })
             ->select('products.*', 'variants.price', 'variants.old_price')
-            ->paginate(5);
+            ->paginate(20);
 
         return view("themes.$theme->slug.template.collection", compact('products', 'collection'));
 

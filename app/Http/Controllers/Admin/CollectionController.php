@@ -38,9 +38,11 @@ class CollectionController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'name'=>'required| max:90 |unique:collections',
+        ]);
         $collection = new Collection();
         $collection->name = $request->name;
-        $collection->slug = Str::slug($request->name);
         $collection->save();
 
         return response()->json($collection, 201);
@@ -79,9 +81,11 @@ class CollectionController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'name'=>'required| max:90 |unique:collections,name,'.$id,
+        ]);
         $collection = Collection::findOrFail($id);
         $collection->name = $request->name;
-        $collection->slug = Str::slug($request->name);
         $collection->update();
 
         return response()->json($collection);
