@@ -50,8 +50,7 @@
                         </div><!-- End .row -->
                     </div><!-- End .products -->
 
-                    {{$products->links()}}
-
+                    {{$products->withQueryString()->links()}}
 
                 </div><!-- End .col-lg-9 -->
                 <aside class="col-lg-3 order-lg-first">

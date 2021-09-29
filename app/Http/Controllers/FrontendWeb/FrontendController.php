@@ -129,7 +129,7 @@ class FrontendController extends Controller
             ->paginate(20)
         ;
 
-        return view("themes.$theme->slug.template.search", compact('products'));
+        return view("themes.$theme->slug.template.search", compact('products', 'search'));
 
     }
 }
