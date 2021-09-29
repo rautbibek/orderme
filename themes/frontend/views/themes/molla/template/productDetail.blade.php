@@ -1,5 +1,11 @@
 @extends(getLayout())
 @section('title', $product->title)
+@section('meta_title', $product->meta_title)
+@section('meta_description', $product->meta_description)
+@section('meta_keyword', $product->meta_keyword)
+@section('og_url', route('product.detail', $product->slug))
+@section('image', productImage($product->id))
+
 @section('content')
     <main class="main">
         <nav aria-label="breadcrumb" class="breadcrumb-nav border-0 mb-0">

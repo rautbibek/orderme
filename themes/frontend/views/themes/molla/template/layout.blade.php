@@ -9,9 +9,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
-    <meta name="keywords" content="tradekunj, e-commerce, shopping, buy and sell, buy, sell, nepal">
-    <meta name="description" content="Tradekunj, A complete ecommerce platform, where you can buy or sell on your own. Get logged in today.">
-    <meta name="author" content="p-themes">
+    <meta name="keywords" content="@yield('meta_keyword', 'tradekunj, e-commerce, shopping, buy and sell, buy, sell, nepal')">
+    <meta name="description" content="@yield('meta_description', 'Tradekunj, A complete ecommerce platform, where you can buy or sell on your own. Get logged in today.')">
+    <meta property="og:url" content="@yield('og_url', '/')" />
+    <meta property="og:title" content="@yield('title')" />
+    <meta property="og:description" content="@yield('meta_description', 'Tradekunj, A complete ecommerce platform, where you can buy or sell on your own. Get logged in today.')" />
+    <meta property="og:site_name" content="Tradekunj" />
+
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="@yield('meta_description', 'Tradekunj, A complete ecommerce platform, where you can buy or sell on your own. Get logged in today.')" />
+    <meta name="twitter:title" content="@yield('title')" />
+    <meta name="twitter:url" content="@yield('og_url', '/')" />
+    <meta property="og:image" content="@yield('image',getConfig('logo'))" />
+    <meta property="twitter:image" content="@yield('image',getConfig('logo'))" />
+
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="{{getConfig('favicon')}}">
 
@@ -71,11 +83,11 @@
                 <div class="header-center">
                     <div class="header-search header-search-extended header-search-visible d-none d-lg-block">
                         <a href="#" class="search-toggle" role="button"><i class="icon-search"></i></a>
-                        <form action="#" method="get">
+                        <form action="{{ route('search') }}" method="get">
                             <div class="header-search-wrapper search-wrapper-wide">
                                 <label for="q" class="sr-only">Search</label>
                                 <button class="btn btn-primary" type="submit"><i class="icon-search"></i></button>
-                                <input type="search" class="form-control" name="q" id="q" placeholder="Search product ..." required>
+                                <input type="search" class="form-control" name="search" id="q" placeholder="Search product ..." required>
                             </div><!-- End .header-search-wrapper -->
                         </form>
                     </div><!-- End .header-search -->
@@ -109,15 +121,15 @@
 {{--                        </div><!-- End .dropdown-menu -->--}}
                     </div><!-- End .compare-dropdown -->
 
-                    <div class="wishlist">
-                        <a href="wishlist.html" title="Wishlist">
-                            <div class="icon">
-                                <i class="icon-heart-o"></i>
-                                <span class="wishlist-count badge">3</span>
-                            </div>
-                            <p>Wishlist</p>
-                        </a>
-                    </div><!-- End .compare-dropdown -->
+{{--                    <div class="wishlist">--}}
+{{--                        <a href="wishlist.html" title="Wishlist">--}}
+{{--                            <div class="icon">--}}
+{{--                                <i class="icon-heart-o"></i>--}}
+{{--                                <span class="wishlist-count badge">3</span>--}}
+{{--                            </div>--}}
+{{--                            <p>Wishlist</p>--}}
+{{--                        </a>--}}
+{{--                    </div><!-- End .compare-dropdown -->--}}
 
 {{--                    <div class="dropdown cart-dropdown">--}}
 {{--                        <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static">--}}

@@ -113,4 +113,23 @@ class FrontendController extends Controller
         return view("themes.$theme->slug.template.page", compact('page'));
 
     }
+
+    function searchPage(Request $request){
+        $theme = Theme::find(['active' => true])->first();
+        $search = $request->input('search');
+
+        $products = \Illuminate\Support\Facades\DB::table('products')
+            ->where('products.title', 'ILIKE', "%{$search}%")
+            ->orWhere('products.description', 'ILIKE', "%{$search}%")
+            ->rightJoin('variants', function ($rightJoin) {
+                $rightJoin->on('variants.product_id', '=', 'products.id')
+                    ->where('variants.quantity', '=', \Illuminate\Support\Facades\DB::raw("(SELECT MAX(quantity) FROM bt_variants WHERE product_id = bt_products.id)"));
+            })
+            ->select('products.*', 'variants.price', 'variants.old_price')
+            ->paginate(20)
+        ;
+
+        return view("themes.$theme->slug.template.search", compact('products'));
+
+    }
 }
