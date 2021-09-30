@@ -47,7 +47,7 @@ function getCollection($key){
 
 function productImage(int $key){
     $product = \App\Models\Product::where('id', $key)->first();
-    return $product->image[0] ?? "";
+    return $product->image[0] ?? "/no-image.jpg";
 }
 
 function getCollectionName(int $key){
