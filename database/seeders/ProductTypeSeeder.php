@@ -21,7 +21,7 @@ class ProductTypeSeeder extends Seeder
                 'field' => [
                     [
                         'name' => 'weight',
-                        'type' => 'number',
+                        'type' => 'text',
                         'as' => 'Weight'
                     ]
                 ],
