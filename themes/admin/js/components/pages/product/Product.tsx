@@ -10,7 +10,7 @@ const columns = [
         headerName: 'Image',
         renderCell: (params) => (
             <div style={{display: "flex", justifyContent: "center", width: '100%'}}>
-                <img src={params.value[0] ?? '/no-image.jpg'} alt="" style={{height: 50}}/>
+                <img src={!!params.value && params.value.length > 0 ? params.value[0] : '/no-image.jpg'} alt="" style={{height: 50}}/>
             </div>
         ),
         width: 150
