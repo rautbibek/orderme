@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="product-gallery product-gallery-separated">
-                                @foreach($product->image as $key => $image)
+                                @foreach($product->image ?? [] as $key => $image)
                                 <figure class="product-separated-item">
                                     <img src="{{$image}}" data-zoom-image="{{$image}}" alt="product image">
                                 </figure>
