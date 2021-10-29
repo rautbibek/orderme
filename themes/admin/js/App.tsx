@@ -22,6 +22,9 @@ import EditPages from "./components/pages/pages/EditPages";
 import Menu from "./components/pages/menu/Menu";
 import AddMenu from "./components/pages/menu/AddMenu";
 import EditMenu from "./components/pages/menu/EditMenu";
+import Brands from "./components/pages/brands/brands";
+import AddBrand from "./components/pages/brands/AddBrand";
+import EditBrand from "./components/pages/brands/EditBrand";
 
 const App = () => {
     return (
@@ -49,6 +52,9 @@ const App = () => {
                         <PrivateRoute exact path="/menus" component={Menu} />
                         <PrivateRoute exact path="/menus/new" component={AddMenu} />
                         <PrivateRoute exact path="/menus/edit/:id" component={EditMenu} />
+                        <PrivateRoute exact path="/brands" component={Brands} />
+                        <PrivateRoute exact path="/brands/new" component={AddBrand} />
+                        <PrivateRoute exact path="/brands/edit/:id" component={EditBrand} />
 
                     </Switch>
                 </Layout>

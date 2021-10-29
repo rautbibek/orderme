@@ -5,6 +5,7 @@ import CustomTextField from '../../Layout/CustomTextField'
 import SelectTable from '../../Layout/SelectTable'
 import SelectProductType from "./SelectProductType";
 import ProductVariance from "./ProductVariance";
+import SelectBrand from "./SelectBrand"
 import arrayMutators from 'final-form-arrays'
 import { Field } from 'react-final-form';
 import ImageDropZone from "../../Layout/ImageDropZone";
@@ -117,10 +118,14 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                         setProductType(item[0])
                     }
                     } />
-                    <hr />
-                    <br />
                     {(!!values.product_type_id || productType.length > 0)  && (
-                        <ProductVariance productType={values.product_type_id} push={push} pop={pop} optionType={values.options} />
+                        <>
+                            <SelectBrand productType={values.product_type_id} value={values.brand}  />
+                            <hr />
+                            <br />
+                            <ProductVariance productType={values.product_type_id} push={push} pop={pop} optionType={values.options} />
+                        </>
+
                     )}
                     <CustomCheckBox color={'primary'} checked={values.active } name={'active'} label={'Active'}/>
                     <CustomCheckBox color={'secondary'} checked={values.out_of_stock} name={'out_of_stock'} label={'Out Of Stock'}/>

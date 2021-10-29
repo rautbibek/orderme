@@ -54,6 +54,7 @@ class ProductController extends Controller
             $product->short_description = $request->short_description;
             $product->description = $request->description;
             $product->cart_system = true;
+            $product->brand_id = $request->brand_id ?? null ;
             $product->inventory_track = true;
             $product->admin_id = Auth::id();
 //        $product->options = json_encode($request->options);
@@ -69,7 +70,7 @@ class ProductController extends Controller
             $product->collections()->attach($request->collections);
 
             foreach($request->variants as $variant){
-                foreach($variant['features'] as $key => $feat){
+                foreach($variant['features'] ?? [] as $key => $feat){
                     $optioval = strtolower($feat);
                     $optionValue = OptionValue::where('product_type_id', $request->product_type_id)
                         ->where('option', $key)
@@ -88,7 +89,7 @@ class ProductController extends Controller
                     'price' => $variant['price'],
                     'old_price' => $variant['old_price'] ?? null,
                 ]);
-                $variance->features = $variant['features'];
+                $variance->features = $variant['features'] ?? [];
                 $batch_variant[] = $variance;
             }
 
@@ -156,6 +157,7 @@ class ProductController extends Controller
             $product->product_type_id = $request->product_type_id;
             $product->short_description = $request->short_description;
             $product->description = $request->description;
+            $product->brand_id = $request->brand_id ?? null ;
 //        $product->options = json_encode($request->options);
             $product->image = json_encode($request->image);
             $product->out_of_stock = $request->out_of_stock;
@@ -178,7 +180,7 @@ class ProductController extends Controller
             }
 
             foreach($request->variants as $variant){
-                foreach($variant['features'] as $key => $feat){
+                foreach($variant['features'] ?? [] as $key => $feat){
                     $optioval = strtolower($feat);
                     $optionValue = OptionValue::where('product_type_id', $request->product_type_id)
                         ->where('option', $key)
@@ -197,7 +199,7 @@ class ProductController extends Controller
 
                 if(!!($variant['id'] ?? null)){
                     $entryVariant = Variant::findOrFail($variant['id']);
-                    $entryVariant->features = $variant['features'];
+                    $entryVariant->features = $variant['features'] ?? [];
                     $entryVariant->update([
                         'quantity' => $variant['quantity'],
                         'code' => $variant['code'],
@@ -212,7 +214,7 @@ class ProductController extends Controller
                         'price' => $variant['price'],
                         'old_price' => $variant['old_price'],
                     ]);
-                    $batch_variant->features = $variant['features'];
+                    $batch_variant->features = $variant['features'] ?? [];
 
                     $product->variants()->save($batch_variant);
 

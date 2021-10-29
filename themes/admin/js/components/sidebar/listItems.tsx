@@ -10,6 +10,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {Link} from 'react-router-dom';
+import {Category, Collections, GroupWork, MenuBook, PostAdd, Style} from "@material-ui/icons";
 
 export const mainListItems = (
   <div>
@@ -24,7 +25,7 @@ export const mainListItems = (
     <Link to="/categories" replace>
       <ListItem button>
         <ListItemIcon>
-          <ShoppingCartIcon />
+          <Category />
         </ListItemIcon>
         <ListItemText primary="Category" />
       </ListItem>
@@ -32,7 +33,7 @@ export const mainListItems = (
       <Link to="/collections" replace>
           <ListItem button>
               <ListItemIcon>
-                  <ShoppingCartIcon />
+                  <Collections />
               </ListItemIcon>
               <ListItemText primary="Collection" />
           </ListItem>
@@ -40,7 +41,7 @@ export const mainListItems = (
     <Link to="/products" replace>
       <ListItem button>
         <ListItemIcon>
-          <PeopleIcon />
+          <ShoppingCartIcon />
         </ListItemIcon>
         <ListItemText primary="Product" />
       </ListItem>
@@ -48,7 +49,7 @@ export const mainListItems = (
       <Link to="/pages" replace>
           <ListItem button>
               <ListItemIcon>
-                  <PeopleIcon />
+                  <PostAdd />
               </ListItemIcon>
               <ListItemText primary="Pages" />
           </ListItem>
@@ -56,15 +57,23 @@ export const mainListItems = (
       <Link to="/menus" replace>
           <ListItem button>
               <ListItemIcon>
-                  <PeopleIcon />
+                  <MenuBook />
               </ListItemIcon>
               <ListItemText primary="Menus" />
+          </ListItem>
+      </Link>
+      <Link to="/brands" replace>
+          <ListItem button>
+              <ListItemIcon>
+                  <GroupWork />
+              </ListItemIcon>
+              <ListItemText primary="Brands" />
           </ListItem>
       </Link>
       <Link to="/themes" replace>
           <ListItem button>
               <ListItemIcon>
-                  <PeopleIcon />
+                  <Style />
               </ListItemIcon>
               <ListItemText primary="Themes" />
           </ListItem>

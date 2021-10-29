@@ -17,7 +17,7 @@ class CreateBrandsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->foreignId('user_id')->constrained('product_types');
+            $table->foreignId('product_type_id')->constrained('product_types');
             $table->text('description')->nullable();
             $table->jsonb('image')->nullable();
             $table->timestamps();

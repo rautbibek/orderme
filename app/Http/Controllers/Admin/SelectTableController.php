@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Collection;
 use App\Models\Menu;
 use App\Models\Page;
+use App\Models\ProductType;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -25,6 +26,9 @@ class SelectTableController extends Controller
                 break;
             case 'menus':
                 $list = Menu::all();
+                break;
+            case 'product-type':
+                $list = ProductType::all();
                 break;
             default:
                 return $list = [];
