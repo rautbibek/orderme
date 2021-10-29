@@ -42,6 +42,58 @@ class ProductTypeSeeder extends Seeder
                     ]
                 ],
                 'cart_system' => true
+            ],
+            [
+                'title' => 'shoes',
+                'field' => [
+                    [
+                        'name' => 'color',
+                        'type' => 'text',
+                        'as' => 'Color'
+                    ],
+                    [
+                        'name' => 'size',
+                        'type' => 'text',
+                        'as' => 'Size'
+                    ]
+                ],
+                'cart_system' => true
+            ],
+            [
+                'title' => 'laptop & computer',
+                'field' => [
+                    [
+                        'name' => 'ram',
+                        'type' => 'text',
+                        'as' => 'Ram'
+                    ],
+                    [
+                        'name' => 'rom',
+                        'type' => 'text',
+                        'as' => 'Rom'
+                    ],
+                    [
+                        'name' => 'processor',
+                        'type' => 'text',
+                        'as' => 'Processor'
+                    ],
+                    [
+                        'name' => 'graphic',
+                        'type' => 'text',
+                        'as' => 'Graphic'
+                    ],
+                    [
+                        'name' => 'storage_type',
+                        'type' => 'text',
+                        'as' => 'Storage Type'
+                    ],
+                    [
+                        'name' => 'gen',
+                        'type' => 'text',
+                        'as' => 'Generation'
+                    ]
+                ],
+                'cart_system' => true
             ]
 
 
