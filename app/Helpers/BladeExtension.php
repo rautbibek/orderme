@@ -31,6 +31,7 @@ function getLayout(){
 function getCollection($key){
 
     $products  = \Illuminate\Support\Facades\DB::table('products')
+        ->where('products.active', true)
         ->join('collection_product', 'products.id', '=', 'collection_product.product_id')
         ->join('collections', 'collections.id', '=', 'collection_product.collection_id')
         ->where('collections.id', $key)

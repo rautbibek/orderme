@@ -34,6 +34,7 @@ class FrontendController extends Controller
                     ->where('variants.quantity', '=', \Illuminate\Support\Facades\DB::raw("(SELECT MAX(quantity) FROM bt_variants WHERE product_id = bt_products.id)"));
             })
             ->where('products.category_id', $product->category_id)
+            ->where('products.active', true)
             ->select('products.*', 'variants.price', 'variants.old_price')->get();
 
         if(count($productLike) > 8){
@@ -71,6 +72,7 @@ class FrontendController extends Controller
         $category = Category::where('slug', $slug)->firstOrFail();
 
         $products = \Illuminate\Support\Facades\DB::table('products')
+            ->where('products.active', true)
             ->join('categories', 'categories.id', '=', 'products.category_id')
             ->where('categories.slug', $slug)
             ->rightJoin('variants', function ($rightJoin) {
@@ -91,6 +93,7 @@ class FrontendController extends Controller
         $collection = Collection::where('slug', $slug)->firstOrFail();
 
         $products  = \Illuminate\Support\Facades\DB::table('products')
+            ->where('products.active', true)
             ->join('collection_product', 'products.id', '=', 'collection_product.product_id')
             ->join('collections', 'collections.id', '=', 'collection_product.collection_id')
             ->where('collections.slug', $slug)
@@ -120,6 +123,7 @@ class FrontendController extends Controller
 
         $products = \Illuminate\Support\Facades\DB::table('products')
             ->where('products.title', 'ILIKE', "%{$search}%")
+            ->where('products.active', true)
             ->orWhere('products.description', 'ILIKE', "%{$search}%")
             ->rightJoin('variants', function ($rightJoin) {
                 $rightJoin->on('variants.product_id', '=', 'products.id')
