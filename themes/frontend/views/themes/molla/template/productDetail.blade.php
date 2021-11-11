@@ -1,10 +1,10 @@
 @extends(getLayout())
-@section('title', $product->title)
-@section('meta_title', $product->meta_title)
-@section('meta_description', $product->meta_description)
-@section('meta_keyword', $product->meta_keyword)
-@section('og_url', route('product.detail', $product->slug))
-@section('image', productImage($product->id))
+@section('title', $prod->title)
+@section('meta_title', $prod->meta_title)
+@section('meta_description', $prod->meta_description)
+@section('meta_keyword', $prod->meta_keyword)
+@section('og_url', route('product.detail', $prod->slug))
+@section('image', productImage($prod->id))
 
 @section('content')
     <main class="main">
@@ -13,7 +13,7 @@
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">Home</a></li>
                     <li class="breadcrumb-item"><a>Products</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{$product->title}}</li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$prod->title}}</li>
                 </ol>
             </div><!-- End .container -->
         </nav><!-- End .breadcrumb-nav -->
@@ -24,7 +24,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="product-gallery product-gallery-separated">
-                                @foreach($product->image ?? [] as $key => $image)
+                                @foreach($prod->image ?? [] as $key => $image)
                                 <figure class="product-separated-item">
                                     <img src="{{$image}}" data-zoom-image="{{$image}}" alt="product image">
                                 </figure>
@@ -35,23 +35,22 @@
 
                         <div class="col-md-6">
                             <div class="product-details sticky-content">
-                                <h1 class="product-title">{{$product->title}}</h1><!-- End .product-title -->
+                                <h1 class="product-title">{{$prod->title}}</h1><!-- End .product-title -->
                                 <div class="product-price">
-                                    <span class="new-price">{{'Rs. '. $product->variants[0]->price}}</span>
-                                    <span class="old-price">{{$product->variants[0]->old_price ?'Rs. '. $product->variants[0]->old_price : ''}}</span>
+                                    <span class="new-price" id="price-selected">{{'Rs. '. $prod->variants[0]->price}}</span>
+                                    <span class="old-price" id="old-price-selected" ><del>{{$prod->variants[0]->old_price ?'Rs. '. $prod->variants[0]->old_price : ''}}</del></span>
                                 </div><!-- End .product-price -->
 
                                 <div class="product-content">
-                                    <p>{{$product->short_description}}</p>
+                                    <p>{{$prod->short_description}}</p>
                                 </div><!-- End .product-content -->
 
                                 <div class="details-filter-row details-row-size">
                                     <label for="size">Variants:</label>
                                     <div class="select-custom">
                                         <select name="variant" id="size" class="form-control">
-                                            <option value="#" selected="selected">Select a variant</option>
-                                            @foreach($pov as $variant)
-                                            <option value="{{$variant['id']}}">{{$variant['options']}}</option>
+                                            @foreach($pov as $key => $variant)
+                                            <option {{$key== 0? 'selected': ''}} value="{{$variant['id']}}">{{$variant['options']}}</option>
                                             @endforeach
 
                                         </select>
@@ -87,7 +86,7 @@
                                         <div id="product-accordion-info" class="collapse show" aria-labelledby="product-info-heading" data-parent="#product-accordion">
                                             <div class="card-body">
                                                 <div class="product-desc-content">
-                                                    {!! $product->description !!}
+                                                    {!! $prod->description !!}
                                                 </div><!-- End .product-desc-content -->
                                             </div><!-- End .card-body -->
                                         </div><!-- End .collapse -->
@@ -131,9 +130,15 @@
                     @foreach($productLike as $product)
                         @include('themes.molla.template.productSingle')
                     @endforeach
+
                 </div><!-- End .owl-carosel -->
             </div><!-- End .container -->
         </div><!-- End .page-content -->
     </main><!-- End .main -->
+
+    <script>
+        var tradekunjProduct = window.tradekunjProduct =  {!! json_encode($prod) !!};
+        var productOption = window.productOption = {!! json_encode($pov) !!}
+    </script>
 
 @stop

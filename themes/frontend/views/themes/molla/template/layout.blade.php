@@ -447,7 +447,22 @@
 <script src="{{asset('themes/frontend/assets/js/main.js')}}"></script>
 <script src="{{asset('themes/frontend/assets/js/demos/demo-4.js')}}"></script>
 {{-- <script src="{{ asset('themes/frontend/js/app.js') }}" ></script> --}}
+<script>
+    $(document).ready(function() {
+        $('#size').on('change', function (e) {
+            var optionSelected = $('#size :selected').val();
+            var variants = tradekunjProduct.variants
+            var result = variants.find( function(variant){
+                return variant.id === parseInt(optionSelected);
+            });
 
+            const price = result.price;
+            const old_price = result.old_price;
+            $('#price-selected').html(`Rs. ${price}`);
+            $('#old-price-selected').html(!!old_price ? `Rs. ${old_price}` : null);
+        })
+    });
+</script>
 </body>
 
 

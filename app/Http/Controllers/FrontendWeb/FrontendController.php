@@ -27,13 +27,13 @@ class FrontendController extends Controller
 
     public function productDetail($slug){
         $theme = Theme::find(['active' => true])->first();
-        $product = Product::where('slug', $slug)->with('variants')->firstOrFail();
+        $prod = Product::where('slug', $slug)->with('variants')->firstOrFail();
         $productLike = DB::table('products')
             ->rightJoin('variants', function ($rightJoin) {
                 $rightJoin->on('variants.product_id', '=', 'products.id')
                     ->where('variants.quantity', '=', \Illuminate\Support\Facades\DB::raw("(SELECT MAX(quantity) FROM bt_variants WHERE product_id = bt_products.id)"));
             })
-            ->where('products.category_id', $product->category_id)
+            ->where('products.category_id', $prod->category_id)
             ->where('products.active', true)
             ->select('products.*', 'variants.price', 'variants.old_price')->get();
 
@@ -42,7 +42,7 @@ class FrontendController extends Controller
         }
 
         $productOptions = DB::table('variants')
-                            ->where('variants.product_id', $product->id)
+                            ->where('variants.product_id', $prod->id)
                             ->select('variants.features', 'variants.id')
                             ->get()
             ;
@@ -63,7 +63,7 @@ class FrontendController extends Controller
             $pov[$key]['options'] = implode(' , ', $opArray);
         }
 
-        return view("themes.$theme->slug.template.productDetail", compact('product', 'productLike', 'pov'));
+        return view("themes.$theme->slug.template.productDetail", compact('prod', 'productLike', 'pov'));
     }
 
     function categoryPage($slug){

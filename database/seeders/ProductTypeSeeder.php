@@ -94,6 +94,97 @@ class ProductTypeSeeder extends Seeder
                     ]
                 ],
                 'cart_system' => true
+            ],
+            [
+                'title' => 'TV',
+                'field' => [
+                    [
+                        'name' => 'display-resolution',
+                        'type' => 'text',
+                        'as' => 'Display Resolution'
+                    ],
+                    [
+                        'name' => 'refresh-rate',
+                        'type' => 'text',
+                        'as' => 'Refresh Rate'
+                    ],
+                    [
+                        'name' => 'technology',
+                        'type' => 'text',
+                        'as' => 'Technology'
+                    ],
+                    [
+                        'name' => 'size',
+                        'type' => 'text',
+                        'as' => 'Size'
+                    ],
+
+                ],
+                'cart_system' => true
+            ],
+            [
+                'title' => 'mobile',
+                'field' => [
+                    [
+                        'name' => 'ram',
+                        'type' => 'text',
+                        'as' => 'Ram'
+                    ],
+                    [
+                        'name' => 'storage',
+                        'type' => 'text',
+                        'as' => 'Storage'
+                    ],
+                    [
+                        'name' => 'processor',
+                        'type' => 'text',
+                        'as' => 'Processor'
+                    ],
+                    [
+                        'name' => 'battery-capacity',
+                        'type' => 'text',
+                        'as' => 'Battery Capacity'
+                    ],
+                    [
+                        'name' => 'protection',
+                        'type' => 'text',
+                        'as' => 'Protection'
+                    ],
+                    [
+                        'name' => 'size',
+                        'type' => 'text',
+                        'as' => 'Size'
+                    ],
+                    [
+                        'name' => 'model-year',
+                        'type' => 'text',
+                        'as' => 'Model Year'
+                    ],
+
+                ],
+                'cart_system' => true
+            ],
+            [
+                'title' => 'refrigerator',
+                'field' => [
+                    [
+                        'name' => 'capacity',
+                        'type' => 'text',
+                        'as' => 'Capacity'
+                    ],
+                    [
+                        'name' => 'type',
+                        'type' => 'text',
+                        'as' => 'Type'
+                    ],
+                    [
+                        'name' => 'model',
+                        'type' => 'text',
+                        'as' => 'Model'
+                    ],
+
+                ],
+                'cart_system' => true
             ]
 
 
