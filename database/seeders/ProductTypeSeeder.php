@@ -185,6 +185,28 @@ class ProductTypeSeeder extends Seeder
 
                 ],
                 'cart_system' => true
+            ],
+            [
+                'title' => 'washing-machine',
+                'field' => [
+                    [
+                        'name' => 'capacity',
+                        'type' => 'text',
+                        'as' => 'Capacity'
+                    ],
+                    [
+                        'name' => 'type',
+                        'type' => 'text',
+                        'as' => 'Type'
+                    ],
+                    [
+                        'name' => 'model',
+                        'type' => 'text',
+                        'as' => 'Model'
+                    ],
+
+                ],
+                'cart_system' => true
             ]
 
 
