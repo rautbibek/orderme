@@ -136,4 +136,9 @@ class FrontendController extends Controller
         return view("themes.$theme->slug.template.search", compact('products', 'search'));
 
     }
+
+    function cartAction(){
+        $theme = Theme::find(['active' => true])->first();
+        return view("themes.$theme->slug.template.cart");
+    }
 }

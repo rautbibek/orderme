@@ -28,3 +28,5 @@ Route::get('/collection/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendCont
 Route::get('/page/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'pageView'])->name('page');
 
 Route::get('/search', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'searchPage'])->name('search');
+Route::get('/cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'cartAction'])->name('cart');
+
