@@ -45,6 +45,10 @@ class RegisteredUserController extends Controller
         ]));
 
         event(new Registered($user));
+        $checkout =  session()->get('checkout');
+        if($checkout){
+            return redirect()->route('checkout');
+        }
 
         return redirect(RouteServiceProvider::HOME);
     }
