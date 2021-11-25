@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Order;
+
 function getConfig(string $key){
     $theme = \App\Models\Theme::where('active', true)
         ->first();
@@ -94,5 +96,15 @@ function menuUrl($key){
         default:
             return $key['value'];
     }
+}
+
+function cartItem(){
+    $cart = session()->get('cart');
+    if(!$cart){
+        return 0;
+    }
+    $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
+    $cartCount = $order->cartItems()->count();
+    return $cartCount;
 }
 

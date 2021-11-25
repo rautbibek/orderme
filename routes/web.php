@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'homeIndex']);
+Route::get('/', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'homeIndex'])->name('welcome');
 
 Route::get('/home', function () {
     return view('home');
@@ -29,4 +29,6 @@ Route::get('/page/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController
 
 Route::get('/search', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'searchPage'])->name('search');
 Route::get('/cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'cartAction'])->name('cart');
+Route::post('/add-to-cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addToCartAction'])->name('addToCart');
+Route::get('/confirm-order', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'confirmOrderAction'])->name('confirm.order');
 

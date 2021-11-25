@@ -1,17 +1,24 @@
 <?php
 
 namespace App\Http\Controllers\FrontendWeb;
+use App\Models\CartItem;
 use App\Models\Category;
 use App\Models\Collection;
+use App\Models\CustomerAddress;
+use App\Models\Order;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Theme;
 use App\Models\ProductType;
 
+use App\Models\Variant;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\Yaml\Yaml;
 
 class FrontendController extends Controller
@@ -137,8 +144,120 @@ class FrontendController extends Controller
 
     }
 
-    function cartAction(){
+    function cartAction(Request $request){
+//        $checkout_referer =  $request->session()->get('checkout');
+//        dd($checkout_referer);
+//        dd(session()->all());
+
         $theme = Theme::find(['active' => true])->first();
-        return view("themes.$theme->slug.template.cart");
+        $cart = session()->get('cart');
+        if($cart){
+            $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
+        }else{
+            $order = [];
+        }
+
+        return view("themes.$theme->slug.template.cart", compact('order'));
     }
+
+    public function addToCartAction(Request $request){
+
+        $cart = $request->session()->get('cart');
+        if(!$cart){
+            $order =  new Order();
+            $order->uuid = Uuid::uuid4();
+            $order->state = 'cart';
+            $order->payment_state = 'cart';
+            $order->shipping_state =  'cart';
+            $order->checkout_state = 'cart';
+            $order->save();
+            session()->put('cart', $order->uuid);
+        }else{
+            $order =  Order::where('uuid', $cart)->first();
+        }
+        $variant = Variant::where('id', $request->variant)->first();
+
+        $cartItem = new CartItem();
+        $cartItem->order_id = $order->id;
+        $cartItem->variant_id = $request->variant;
+        $cartItem->quantity = $request->quantity;
+        $cartItem->unit_price = $variant->price * 100;
+        $cartItem->unit_total = $variant->price * 100 * $request->quantity;
+        $cartItem->total = $variant->price * 100 * $request->quantity;
+        $cartItem->save();
+
+        $order->items_total = $order->cartItems()->sum('unit_total');
+        $order->total =  $order->cartItems()->sum('total');
+        $order->save();
+
+       return redirect()->route('cart');
+
+    }
+
+    public function checkoutAction(Request $request){
+        $theme = Theme::find(['active' => true])->first();
+        $cart = session()->get('cart');
+        if(!$cart){
+            return redirect()->route('welcome');
+        }
+        $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
+        $order->user_id = Auth::id();
+        $order->save();
+        $shipping_address = CustomerAddress::where('user_id', Auth::id())->get();
+        return view("themes.$theme->slug.template.checkout", compact('order', 'shipping_address'));
+    }
+
+    public function addressAction(Request $request){
+
+        $theme = Theme::find(['active' => true])->first();
+        $cart = session()->get('cart');
+        if(!$cart){
+            return redirect()->route('welcome');
+        }
+
+        $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
+
+        if($order->adjustment_total != 0) {
+            return view("themes.$theme->slug.template.confirm", compact('order'));
+        }
+        $addressSelect = $request->address_selected;
+        if(isset($addressSelect)){
+            $order->customer_address_id = $addressSelect;
+        }else{
+
+            $address = new CustomerAddress();
+            $address->name = $request->name;
+            $address->user_id = Auth::id();
+            $address->phone_number = $request->phone;
+            $address->street1 = $request->street1;
+            $address->street2 = $request->street2;
+            $address->save();
+            $order->customer_address_id = $address->id;
+        }
+
+        $order->adjustment_total = 12000;
+        $order->total = $order->total + 12000;
+        $order->save();
+
+        return view("themes.$theme->slug.template.confirm", compact('order'));
+    }
+
+    public function confirmOrderAction(){
+        $theme = Theme::find(['active' => true])->first();
+        $cart = session()->get('cart');
+        if(!$cart){
+            return redirect()->route('welcome');
+        }
+
+        $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
+        $order->checkout_state = 'checkout';
+        $order->save();
+        session()->flush();
+        $order =  Order::where('user_id', Auth::id())->get();
+
+        return view("themes.$theme->slug.template.index", compact('order'));
+
+    }
+
+
 }

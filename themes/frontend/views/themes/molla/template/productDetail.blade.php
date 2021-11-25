@@ -44,7 +44,8 @@
                                 <div class="product-content">
                                     <p>{{$prod->short_description}}</p>
                                 </div><!-- End .product-content -->
-
+                                <form method="post" action="{{route('addToCart')}}">
+                                    @csrf
                                 <div class="details-filter-row details-row-size">
                                     <label for="size">Variants:</label>
                                     <div class="select-custom">
@@ -61,18 +62,20 @@
                                 <div class="details-filter-row details-row-size">
                                     <label for="qty">Qty:</label>
                                     <div class="product-details-quantity">
-                                        <input type="number" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                        <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                        <input type="hidden" value="{{$prod->id}}" name="product_id">
+
                                     </div><!-- End .product-details-quantity -->
                                 </div><!-- End .details-filter-row -->
 
                                 <div class="product-details-action">
-                                    <a href="#" class="btn-product btn-cart"><span>add to cart</span></a>
+                                    <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
 
                                     <div class="details-action-wrapper">
                                         <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
                                     </div><!-- End .details-action-wrapper -->
                                 </div><!-- End .product-details-action -->
-
+                                </form>
                                 <div class="accordion accordion-plus product-details-accordion" id="product-accordion">
 
                                     <div class="card card-box card-sm">

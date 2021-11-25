@@ -62,3 +62,11 @@ Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store']
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
                 ->name('logout');
+Route::get('/checkout', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'checkoutAction'], )->middleware('auth')->name('checkout');
+
+Route::get('/checkout-cart', function () {
+    session()->put('checkout', 'cart_state');
+    return redirect()->route('checkout');
+})->name('checkout-cart');
+
+Route::post('/customer-address', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addressAction'], )->middleware('auth')->name('customer.address');
