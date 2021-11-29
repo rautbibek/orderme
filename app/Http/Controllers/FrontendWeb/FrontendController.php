@@ -73,7 +73,7 @@ class FrontendController extends Controller
         return view("themes.$theme->slug.template.productDetail", compact('prod', 'productLike', 'pov'));
     }
 
-    function categoryPage($slug){
+    public function categoryPage($slug){
         $theme = Theme::find(['active' => true])->first();
 
         $category = Category::where('slug', $slug)->firstOrFail();
@@ -94,7 +94,7 @@ class FrontendController extends Controller
 
     }
 
-    function collectionPage($slug){
+    public function collectionPage($slug){
         $theme = Theme::find(['active' => true])->first();
 
         $collection = Collection::where('slug', $slug)->firstOrFail();
@@ -115,7 +115,7 @@ class FrontendController extends Controller
 
     }
 
-    function pageView($slug){
+    public function pageView($slug){
         $theme = Theme::find(['active' => true])->first();
 
         $page = Page::where('slug', $slug)->firstOrFail();
@@ -124,7 +124,7 @@ class FrontendController extends Controller
 
     }
 
-    function searchPage(Request $request){
+    public function searchPage(Request $request){
         $theme = Theme::find(['active' => true])->first();
         $search = $request->input('search');
 
@@ -250,9 +250,12 @@ class FrontendController extends Controller
         }
 
         $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
-        $order->checkout_state = 'checkout';
+        $order->checkout_state = 'completed';
+        $order->state = 'new';
+        $order->payment_state = 'awaiting_payment';
+        $order->shipping_state = 'ready';
         $order->save();
-        session()->flush();
+        session()->forget(['checkout', 'cart']);
         $order =  Order::where('user_id', Auth::id())->get();
 
         return view("themes.$theme->slug.template.index", compact('order'));

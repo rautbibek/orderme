@@ -20,7 +20,7 @@ const columns = [
 
 const Product = () => {
     return (
-        <DataTablesPaginate url={listProduct} columns={columns} title={'products'} />
+        <DataTablesPaginate newButtonToolbar url={listProduct} columns={columns} title={'products'} />
     )
 }
 

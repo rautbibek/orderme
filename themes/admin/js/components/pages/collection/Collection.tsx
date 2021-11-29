@@ -8,7 +8,7 @@ const columns = [
 
 const Collection = () => {
     return (
-        <DataTablesPaginate url={ListCollection} columns={columns} title={'collections'}/>
+        <DataTablesPaginate newButtonToolbar url={ListCollection} columns={columns} title={'collections'}/>
     )
 }
 

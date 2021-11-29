@@ -1,5 +1,5 @@
 @extends(getLayout())
-@section('title', 'Shopping Cart | Tradekunj')
+@section('title', 'Order Detail | Tradekunj')
 @section('content')
     <main class="main">
         <div class="page-header text-center" style="background-image: url({{asset('/themes/frontend/assets/images/page-header-bg.jpg')}})">
@@ -19,7 +19,7 @@
         <div class="page-content">
             <div class="cart">
                 <div class="container">
-                    ok
+                    Order Completed
                 </div><!-- End .container -->
             </div><!-- End .cart -->
         </div><!-- End .page-content -->

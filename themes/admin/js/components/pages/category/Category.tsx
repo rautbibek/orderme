@@ -8,7 +8,7 @@ const columns = [
 
 const Category = () => {
     return (
-        <DataTablesPaginate url={listCategory} columns={columns} title={'categories'}/>
+        <DataTablesPaginate newButtonToolbar url={listCategory} columns={columns} title={'categories'}/>
     )
 }
 

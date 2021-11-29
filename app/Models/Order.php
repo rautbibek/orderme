@@ -12,4 +12,12 @@ class Order extends Model
     public function cartItems(){
         return $this->hasMany('App\Models\CartItem');
     }
+
+    public function customerAddress(){
+        return $this->belongsTo('App\Models\CustomerAddress');
+    }
+
+    public function user(){
+        return $this->belongsTo('App\Models\User');
+    }
 }

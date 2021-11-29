@@ -14,7 +14,8 @@ interface DatatablesProps {
     columns: any,
     title: string,
     extraAction?: any
-    extraRouteButton?: any
+    extraRouteButton?: any,
+    newButtonToolbar?: any
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, extraAction, extraRouteButton}) => {
+const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, extraAction, extraRouteButton, newButtonToolbar}) => {
     const history = useHistory()
     const [currentPage , setCurrentPage] = React.useState(1)
 
@@ -76,9 +77,9 @@ const DataTablesPaginate: React.FC<DatatablesProps> = ({url, columns, title, ext
     }
     return (
         <div style={{ width: '100%' }}>
-            <Button variant="contained" onClick={() => history.push(`/${title}/new`)} color="primary" style={{marginBottom: 10}}>
+            {!!newButtonToolbar && <Button variant="contained" onClick={() => history.push(`/${title}/new`)} color="primary" style={{marginBottom: 10}}>
                 New
-            </Button>
+            </Button>}
             <div>
                 <DataGrid rows={data.data.data} columns={columnsArray} autoHeight hideFooterPagination hideFooter disableSelectionOnClick />
             </div>

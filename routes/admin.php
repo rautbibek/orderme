@@ -44,6 +44,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::get('/select-table/{type}', [\App\Http\Controllers\Admin\SelectTableController::class, 'selectTable'])->name('selectTable');
     Route::resource('/brands', \App\Http\Controllers\Admin\BrandController::class);
     Route::get('/brands-by-product/{productType}', [\App\Http\Controllers\Admin\BrandController::class, 'brandProductType']);
+    Route::resource('/orders', \App\Http\Controllers\Admin\OrderController::class);
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');
 

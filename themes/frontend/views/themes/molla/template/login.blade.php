@@ -28,8 +28,8 @@
                                 <form action="{{ route('login') }}" method="post">
                                     @csrf
                                     <div class="form-group">
-                                        <label for="singin-email-2">Username or email address *</label>
-                                        <input type="text" class="form-control" id="singin-email-2" name="email" required>
+                                        <label for="singin-email-2">Email address *</label>
+                                        <input type="email" class="form-control" id="singin-email-2" name="email" required>
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
