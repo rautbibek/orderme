@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/skins/skin-demo-4.css')}}">
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/demos/demo-4.css')}}">
+    <link rel="stylesheet" href="{{ asset('themes/frontend/assets/css/mega_menu.css') }}">
     {{-- <script src="{{ asset('themes/frontend/js/hiFive.js') }}" ></script> --}}
 
 </head>
@@ -199,7 +200,7 @@
             </div><!-- End .container -->
         </div><!-- End .header-middle -->
 
-        <div class="header-bottom sticky-header">
+        {{-- <div class="header-bottom sticky-header">
             <div class="container">
                 <div class="header-left">
                     <div class="dropdown category-dropdown">
@@ -246,12 +247,93 @@
 
                             @endforeach
 
-                        </ul><!-- End .menu -->
+                        </ul>
+                        <!-- End .menu -->
                     </nav><!-- End .main-nav -->
-                </div><!-- End .header-center -->
+                </div>
+                <!-- End .header-center -->
 
             </div><!-- End .container -->
-        </div><!-- End .header-bottom -->
+        </div> --}}
+        <!-- End .header-bottom -->
+
+        {{-- <div class="header-bottom sticky-header">
+            <div class="container">
+                <div class="dropdown category-dropdown">
+                    <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                        Browse Categories <i class="icon-angle-down"></i>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <nav class="side-nav">
+                            <ul class="menu-vertical sf-arrows">
+                                @foreach(allCategory() as $category)
+                                    <li class="item-lead"><a href="{{route('category', $category->slug)}}">{{$category->name}}</a></li>
+                                @endforeach
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
+        <div class="header-main">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-3 d-flex align-items-center">
+                        <div class="dropdown category-dropdown">
+                            <a href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-display="static" title="Browse Categories">
+                                Browse Categories
+                                {{-- <i class="icon-angle-down"></i> --}}
+                            </a>
+        
+                            <div class="dropdown-menu">
+                                <nav class="side-nav">
+                                    <ul class="menu-vertical sf-arrows">
+                                        @foreach(allCategory() as $category)
+                                            <li><a href="{{route('category', $category->slug)}}">{{$category->name}}</a></li>
+                                        @endforeach
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <div class="container">
+                            <nav class="navigation-primary">
+                                <ul>
+                                    @foreach(getMenu('main_menu')['design'] ??  [] as $menu)
+                                        <li>
+                                            <a href="{{menuUrl($menu)}}">{{ $menu['name'] }}</a>
+                                            <ul class="mega-menu">
+                                                @if(count($menu['children'] ?? []) > 0)
+                                                    @foreach($menu['children'] ?? [] as $item )
+                                                        <li>
+                                                            <a href="{{menuUrl($item)}}">{{ $item['name'] }}</a>
+                                                            @if(count($item['children'] ?? []) > 0)
+                                                                <ul class="mega-menu-inner">
+                                                                    @foreach($item['children'] ?? [] as $_item)
+                                                                        <li>
+                                                                            <a href="{{menuUrl($_item)}}">{{$_item['name']}}</a>
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </li>
+                                                    @endforeach
+                                                @endif
+                                            </ul>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    {{-- <div class="col-1">Hi</div> --}}
+                </div>
+            </div>
+        </div>
+
     </header><!-- End .header -->
     @yield('content')
 
