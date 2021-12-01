@@ -77,6 +77,7 @@ class FrontendController extends Controller
         $theme = Theme::find(['active' => true])->first();
 
         $category = Category::where('slug', $slug)->firstOrFail();
+        $categories = Category::where('parent_id',null)->get();
 
         $products = \Illuminate\Support\Facades\DB::table('products')
             ->where('products.active', true)
@@ -90,7 +91,7 @@ class FrontendController extends Controller
             ->paginate(20)
             ;
 
-         return view("themes.$theme->slug.template.category", compact('products', 'category'));
+         return view("themes.$theme->slug.template.category", compact('products', 'category','categories'));
 
     }
 
