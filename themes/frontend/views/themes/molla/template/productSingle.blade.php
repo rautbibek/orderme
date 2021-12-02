@@ -15,7 +15,7 @@
     </figure><!-- End .product-media -->
 
     <div class="product-body">
-        <h3 class="product-title"><a href="product.html">{{$product->title}}</a></h3><!-- End .product-title -->
+        <h3 class="product-title"><a href="{{route('product.detail', $product->slug)}}">{{$product->title}}</a></h3><!-- End .product-title -->
         <div class="product-price">
             Rs. {{$product->price}} &nbsp; <del style="color: grey">{{$product->old_price ? 'Rs. '.$product->old_price : ''}}</del>
         </div><!-- End .product-price -->
