@@ -112,7 +112,22 @@
                                                             {{ $child->name }}
                                                         </label>
                                                     </div>
+                                                    <div>
+                                                        <strong class="pull-right" style="cursor: pointer" onclick="$('#collapse-{{ $child->id }}').toggle(400)">
+                                                            +
+                                                        </strong>
+                                                    </div>
                                                 </div>
+
+                                                @foreach($child->childrenCategories as $children)
+                                                <div class="card-body ml-2" id="collapse-{{ $chichildrenld->id }}" style="display: none">
+                                                    <div class="card-header p-1">
+                                                        <label class="for-hover-lable" style="cursor: pointer"
+                                                            onclick="#">{{ $children->name }}</label>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+
                                                 @endforeach
                                             </div>
                                         </div>
