@@ -120,7 +120,7 @@
                                                 </div>
 
                                                 @foreach($child->childrenCategories as $children)
-                                                <div class="card-body ml-2" id="collapse-{{ $chichildrenld->id }}" style="display: none">
+                                                <div class="card-body ml-2" id="collapse-{{ $children->id }}" style="display: none">
                                                     <div class="card-header p-1">
                                                         <label class="for-hover-lable" style="cursor: pointer"
                                                             onclick="#">{{ $children->name }}</label>
