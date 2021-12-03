@@ -71,3 +71,12 @@ Route::get('/checkout-cart', function () {
 
 Route::post('/confirm-order', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addressAction'], )->middleware('auth')->name('confirm.order');
 Route::get('/order-completed', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'orderCompleteAction'])->middleware('auth')->name('complete.order');
+
+Route::get('/auth/google/redirect', function () {
+    return \Laravel\Socialite\Facades\Socialite::driver('google')->redirect();
+})->name('google.signup');
+Route::get('/google/signup', [AuthenticatedSessionController::class, 'googleSignup']);
+Route::get('/auth/facebook/redirect', function () {
+    return \Laravel\Socialite\Facades\Socialite::driver('facebook')->redirect();
+})->name('facebook.signup');
+Route::get('/facebook/signup', [AuthenticatedSessionController::class, 'facebookSignup']);

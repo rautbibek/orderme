@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Theme;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
+use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -56,5 +59,60 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function googleSignup(Request $request){
+        $googleUser = Socialite::driver('google')->user();
+        $gId = $googleUser->getId();
+        $gName = $googleUser->getName();
+        $gImage =  $googleUser->getAvatar();
+        $gEmail = $googleUser->getEmail();
+
+        $user = \App\Models\User::where('email', $gEmail)->first();
+        if(!$user){
+            $user = \App\Models\User::create([
+                'name' => $gName,
+                'email' => $gEmail,
+                'password' => bcrypt('password@12345'),
+            ]);
+            $user->config = [
+                'googleId' => $gId,
+                'avatar' => $gImage,
+            ];
+            $user->email_verified_at = Carbon::now()->toDateTimeString();
+
+            $user->save();
+        }
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
+
+    }
+
+    public function facebookSignup(){
+        $facebookUser = Socialite::driver('facebook')->user();
+        $gId = $facebookUser->getId();
+        $gName = $facebookUser->getName();
+        $gImage =  $facebookUser->getAvatar();
+        $gEmail = $facebookUser->getEmail();
+
+        $user = \App\Models\User::where('email', $gEmail)->first();
+        if(!$user){
+            $user = \App\Models\User::create([
+                'name' => $gName,
+                'email' => $gEmail,
+                'password' => bcrypt('password@12345'),
+            ]);
+            $user->config = [
+                'googleId' => $gId,
+                'avatar' => $gImage,
+            ];
+            $user->email_verified_at = Carbon::now()->toDateTimeString();
+
+            $user->save();
+        }
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
     }
 }
