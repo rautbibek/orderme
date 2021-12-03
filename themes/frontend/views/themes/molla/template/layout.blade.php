@@ -1,3 +1,4 @@
+<?php header('Access-Control-Allow-Origin: *'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,9 +42,48 @@
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/demos/demo-4.css')}}">
     {{-- <script src="{{ asset('themes/frontend/js/hiFive.js') }}" ></script> --}}
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 </head>
 
 <body>
+
+<!-- Messenger Chat Plugin Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Chat Plugin code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "110480434662338");
+      chatbox.setAttribute("attribution", "biz_inbox");
+
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v12.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
 <div class="page-wrapper">
     <header class="header header-intro-clearance header-4">
         <div class="header-top">
@@ -462,6 +502,27 @@
             $('#old-price-selected').html(!!old_price ? `Rs. ${old_price}` : null);
         })
     });
+</script>
+@yield('js')
+<script>
+    @if(Session::has('message'))
+    toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+            toastr.success("{{ session('message') }}");
+    @endif
+
+    @if($errors->any())
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+        toastr.error('{{ $errors->first() }}')
+    @endif
+
 </script>
 </body>
 
