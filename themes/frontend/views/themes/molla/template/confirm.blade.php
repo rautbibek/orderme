@@ -117,7 +117,7 @@
                                     </tbody>
                                 </table><!-- End .table table-summary -->
 
-                                <a href="{{route('confirm.order')}}" class="btn btn-outline-primary-2 btn-order btn-block">Place Order</a>
+                                <a href="{{route('complete.order')}}" class="btn btn-outline-primary-2 btn-order btn-block">Place Order</a>
                             </div><!-- End .summary -->
 
                         </aside><!-- End .col-lg-3 -->

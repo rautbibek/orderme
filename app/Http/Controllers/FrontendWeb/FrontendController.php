@@ -243,7 +243,7 @@ class FrontendController extends Controller
         return view("themes.$theme->slug.template.confirm", compact('order'));
     }
 
-    public function confirmOrderAction(){
+    public function orderCompleteAction(){
         $theme = Theme::find(['active' => true])->first();
         $cart = session()->get('cart');
         if(!$cart){
@@ -251,6 +251,9 @@ class FrontendController extends Controller
         }
 
         $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
+        if(!$order->customer_address_id){
+            return redirect()->route('welcome');
+        }
         $order->checkout_state = 'completed';
         $order->state = 'new';
         $order->payment_state = 'awaiting_payment';
@@ -259,7 +262,26 @@ class FrontendController extends Controller
         session()->forget(['checkout', 'cart']);
         $order =  Order::where('user_id', Auth::id())->get();
 
-        return view("themes.$theme->slug.template.index", compact('order'));
+        return view("themes.$theme->slug.template.completed", compact('order'));
+
+    }
+
+    public function updateCartAction(Request $request){
+        $cart = session()->get('cart');
+        if(!$cart){
+            return redirect()->route('welcome');
+        }
+        $order = Order::where('uuid', $cart)->with('cartItems.variant.product')->first();
+        $cartItem =  CartItem::where('order_id', $order->id)->where('variant_id', $request->variant)->first();
+        $cartItem->quantity = $request->quantity;
+        $cartItem->unit_total = $cartItem->unit_price * $request->quantity;
+
+        $cartItem->save();
+        $order->items_total = $order->cartItems()->sum('unit_total');
+        $order->total =  $order->cartItems()->sum('total');
+        $order->save();
+
+        return redirect()->route('cart');
 
     }
 

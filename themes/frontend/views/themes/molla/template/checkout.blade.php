@@ -23,7 +23,7 @@
                         <div class="col-lg-9">
 
                             <div class="cart-bottom">
-                                <form action="{{route('customer.address')}}" method="post" class="contact-form mb-3">
+                                <form action="{{route('confirm.order')}}" method="post" class="contact-form mb-3">
                                     @csrf
                                     <div class="row">
                                         <div class="col-sm-6">

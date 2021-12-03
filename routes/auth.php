@@ -69,4 +69,5 @@ Route::get('/checkout-cart', function () {
     return redirect()->route('checkout');
 })->name('checkout-cart');
 
-Route::post('/customer-address', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addressAction'], )->middleware('auth')->name('customer.address');
+Route::post('/confirm-order', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addressAction'], )->middleware('auth')->name('confirm.order');
+Route::get('/order-completed', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'orderCompleteAction'])->middleware('auth')->name('complete.order');
