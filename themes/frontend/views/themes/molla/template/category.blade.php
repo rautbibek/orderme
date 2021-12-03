@@ -74,7 +74,7 @@
                         <div class="sidebar sidebar-shop">
                             <div class="widget widget-clean">
                                 <label>Filters:</label>
-                                <a href="#" class="sidebar-filter-clear">Clean All</a>
+{{--                                <a href="#" class="sidebar-filter-clear">Clean All</a>--}}
                             </div><!-- End .widget widget-clean -->
 
                             <div class="widget widget-collapsible">
@@ -87,233 +87,191 @@
 
                                 <div class="collapse show" id="widget-1">
                                     <div class="accordion mt-1" id="shop-categories">
-                                        @foreach ($categories as $category)
-                                        <div class="card">
-                                            <div class="card-header p-1 flex-between">
-                                                <div>
-                                                    <label class="for-hover-lable" style="cursor: pointer"
-                                                        onclick="#">
-                                                        {{$category->name}}
-                                                    </label>
-                                                </div>
-                                                <div>
-                                                    <strong class="pull-right for-brand-hover" style="cursor: pointer"
-                                                        onclick="$('#collapse-{{$category->id}}').toggle(400)">
-                                                        +
-                                                    </strong>
-                                                </div>
-                                            </div>
-                                            <div class="card-body ml-2" id="collapse-{{$category->id}}" style="display: none;">
-                                                @foreach ($category->children as $child)
-                                                <div class=" for-hover-lable card-header p-1 flex-between">
-                                                    <div>
-                                                        <label style="cursor: pointer"
-                                                            onclick="#">
-                                                            {{ $child->name }}
-                                                        </label>
-                                                    </div>
-                                                    <div>
-                                                        <strong class="pull-right" style="cursor: pointer" onclick="$('#collapse-{{ $child->id }}').toggle(400)">
-                                                            +
-                                                        </strong>
-                                                    </div>
-                                                </div>
-
-                                                @foreach($child->childrenCategories as $children)
-                                                <div class="card-body ml-2" id="collapse-{{ $children->id }}" style="display: none">
-                                                    <div class="card-header p-1">
-                                                        <label class="for-hover-lable" style="cursor: pointer"
-                                                            onclick="#">{{ $children->name }}</label>
-                                                    </div>
-                                                </div>
-                                                @endforeach
-
-                                                @endforeach
-                                            </div>
-                                        </div>
+                                        @foreach ($categories as $sub)
+                                            @include('themes.molla.template.subcategory', ['category' => $sub])
                                         @endforeach
                                     </div>
-                                    
+
                                 </div><!-- End .collapse -->
                             </div><!-- End .widget -->
 
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true"
-                                        aria-controls="widget-2">
-                                        Size
-                                    </a>
-                                </h3><!-- End .widget-title -->
+{{--                            <div class="widget widget-collapsible">--}}
+{{--                                <h3 class="widget-title">--}}
+{{--                                    <a data-toggle="collapse" href="#widget-2" role="button" aria-expanded="true"--}}
+{{--                                        aria-controls="widget-2">--}}
+{{--                                        Size--}}
+{{--                                    </a>--}}
+{{--                                </h3><!-- End .widget-title -->--}}
 
-                                <div class="collapse show" id="widget-2">
-                                    <div class="widget-body">
-                                        <div class="filter-items">
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-1">
-                                                    <label class="custom-control-label" for="size-1">XS</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                <div class="collapse show" id="widget-2">--}}
+{{--                                    <div class="widget-body">--}}
+{{--                                        <div class="filter-items">--}}
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="size-1">--}}
+{{--                                                    <label class="custom-control-label" for="size-1">XS</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-2">
-                                                    <label class="custom-control-label" for="size-2">S</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="size-2">--}}
+{{--                                                    <label class="custom-control-label" for="size-2">S</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" checked
-                                                        id="size-3">
-                                                    <label class="custom-control-label" for="size-3">M</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" checked--}}
+{{--                                                        id="size-3">--}}
+{{--                                                    <label class="custom-control-label" for="size-3">M</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" checked
-                                                        id="size-4">
-                                                    <label class="custom-control-label" for="size-4">L</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" checked--}}
+{{--                                                        id="size-4">--}}
+{{--                                                    <label class="custom-control-label" for="size-4">L</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-5">
-                                                    <label class="custom-control-label" for="size-5">XL</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="size-5">--}}
+{{--                                                    <label class="custom-control-label" for="size-5">XL</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="size-6">
-                                                    <label class="custom-control-label" for="size-6">XXL</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
-                                        </div><!-- End .filter-items -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="size-6">--}}
+{{--                                                    <label class="custom-control-label" for="size-6">XXL</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
+{{--                                        </div><!-- End .filter-items -->--}}
+{{--                                    </div><!-- End .widget-body -->--}}
+{{--                                </div><!-- End .collapse -->--}}
+{{--                            </div><!-- End .widget -->--}}
 
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true"
-                                        aria-controls="widget-3">
-                                        Colour
-                                    </a>
-                                </h3><!-- End .widget-title -->
+{{--                            <div class="widget widget-collapsible">--}}
+{{--                                <h3 class="widget-title">--}}
+{{--                                    <a data-toggle="collapse" href="#widget-3" role="button" aria-expanded="true"--}}
+{{--                                        aria-controls="widget-3">--}}
+{{--                                        Colour--}}
+{{--                                    </a>--}}
+{{--                                </h3><!-- End .widget-title -->--}}
 
-                                <div class="collapse show" id="widget-3">
-                                    <div class="widget-body">
-                                        <div class="filter-colors">
-                                            <a href="#" style="background: #b87145;"><span class="sr-only">Color
-                                                    Name</span></a>
-                                            <a href="#" style="background: #f0c04a;"><span class="sr-only">Color
-                                                    Name</span></a>
-                                            <a href="#" style="background: #333333;"><span class="sr-only">Color
-                                                    Name</span></a>
-                                            <a href="#" class="selected" style="background: #cc3333;"><span
-                                                    class="sr-only">Color Name</span></a>
-                                            <a href="#" style="background: #3399cc;"><span class="sr-only">Color
-                                                    Name</span></a>
-                                            <a href="#" style="background: #669933;"><span class="sr-only">Color
-                                                    Name</span></a>
-                                            <a href="#" style="background: #f2719c;"><span class="sr-only">Color
-                                                    Name</span></a>
-                                            <a href="#" style="background: #ebebeb;"><span class="sr-only">Color
-                                                    Name</span></a>
-                                        </div><!-- End .filter-colors -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
+{{--                                <div class="collapse show" id="widget-3">--}}
+{{--                                    <div class="widget-body">--}}
+{{--                                        <div class="filter-colors">--}}
+{{--                                            <a href="#" style="background: #b87145;"><span class="sr-only">Color--}}
+{{--                                                    Name</span></a>--}}
+{{--                                            <a href="#" style="background: #f0c04a;"><span class="sr-only">Color--}}
+{{--                                                    Name</span></a>--}}
+{{--                                            <a href="#" style="background: #333333;"><span class="sr-only">Color--}}
+{{--                                                    Name</span></a>--}}
+{{--                                            <a href="#" class="selected" style="background: #cc3333;"><span--}}
+{{--                                                    class="sr-only">Color Name</span></a>--}}
+{{--                                            <a href="#" style="background: #3399cc;"><span class="sr-only">Color--}}
+{{--                                                    Name</span></a>--}}
+{{--                                            <a href="#" style="background: #669933;"><span class="sr-only">Color--}}
+{{--                                                    Name</span></a>--}}
+{{--                                            <a href="#" style="background: #f2719c;"><span class="sr-only">Color--}}
+{{--                                                    Name</span></a>--}}
+{{--                                            <a href="#" style="background: #ebebeb;"><span class="sr-only">Color--}}
+{{--                                                    Name</span></a>--}}
+{{--                                        </div><!-- End .filter-colors -->--}}
+{{--                                    </div><!-- End .widget-body -->--}}
+{{--                                </div><!-- End .collapse -->--}}
+{{--                            </div><!-- End .widget -->--}}
 
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"
-                                        aria-controls="widget-4">
-                                        Brand
-                                    </a>
-                                </h3><!-- End .widget-title -->
+{{--                            <div class="widget widget-collapsible">--}}
+{{--                                <h3 class="widget-title">--}}
+{{--                                    <a data-toggle="collapse" href="#widget-4" role="button" aria-expanded="true"--}}
+{{--                                        aria-controls="widget-4">--}}
+{{--                                        Brand--}}
+{{--                                    </a>--}}
+{{--                                </h3><!-- End .widget-title -->--}}
 
-                                <div class="collapse show" id="widget-4">
-                                    <div class="widget-body">
-                                        <div class="filter-items">
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-1">
-                                                    <label class="custom-control-label" for="brand-1">Next</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                <div class="collapse show" id="widget-4">--}}
+{{--                                    <div class="widget-body">--}}
+{{--                                        <div class="filter-items">--}}
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="brand-1">--}}
+{{--                                                    <label class="custom-control-label" for="brand-1">Next</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-2">
-                                                    <label class="custom-control-label" for="brand-2">River Island</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="brand-2">--}}
+{{--                                                    <label class="custom-control-label" for="brand-2">River Island</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-3">
-                                                    <label class="custom-control-label" for="brand-3">Geox</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="brand-3">--}}
+{{--                                                    <label class="custom-control-label" for="brand-3">Geox</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-4">
-                                                    <label class="custom-control-label" for="brand-4">New Balance</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="brand-4">--}}
+{{--                                                    <label class="custom-control-label" for="brand-4">New Balance</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-5">
-                                                    <label class="custom-control-label" for="brand-5">UGG</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="brand-5">--}}
+{{--                                                    <label class="custom-control-label" for="brand-5">UGG</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-6">
-                                                    <label class="custom-control-label" for="brand-6">F&F</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="brand-6">--}}
+{{--                                                    <label class="custom-control-label" for="brand-6">F&F</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                            <div class="filter-item">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="brand-7">
-                                                    <label class="custom-control-label" for="brand-7">Nike</label>
-                                                </div><!-- End .custom-checkbox -->
-                                            </div><!-- End .filter-item -->
+{{--                                            <div class="filter-item">--}}
+{{--                                                <div class="custom-control custom-checkbox">--}}
+{{--                                                    <input type="checkbox" class="custom-control-input" id="brand-7">--}}
+{{--                                                    <label class="custom-control-label" for="brand-7">Nike</label>--}}
+{{--                                                </div><!-- End .custom-checkbox -->--}}
+{{--                                            </div><!-- End .filter-item -->--}}
 
-                                        </div><!-- End .filter-items -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
+{{--                                        </div><!-- End .filter-items -->--}}
+{{--                                    </div><!-- End .widget-body -->--}}
+{{--                                </div><!-- End .collapse -->--}}
+{{--                            </div><!-- End .widget -->--}}
 
-                            <div class="widget widget-collapsible">
-                                <h3 class="widget-title">
-                                    <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"
-                                        aria-controls="widget-5">
-                                        Price
-                                    </a>
-                                </h3><!-- End .widget-title -->
+{{--                            <div class="widget widget-collapsible">--}}
+{{--                                <h3 class="widget-title">--}}
+{{--                                    <a data-toggle="collapse" href="#widget-5" role="button" aria-expanded="true"--}}
+{{--                                        aria-controls="widget-5">--}}
+{{--                                        Price--}}
+{{--                                    </a>--}}
+{{--                                </h3><!-- End .widget-title -->--}}
 
-                                <div class="collapse show" id="widget-5">
-                                    <div class="widget-body">
-                                        <div class="filter-price">
-                                            <div class="filter-price-text">
-                                                Price Range:
-                                                <span id="filter-price-range"></span>
-                                            </div><!-- End .filter-price-text -->
+{{--                                <div class="collapse show" id="widget-5">--}}
+{{--                                    <div class="widget-body">--}}
+{{--                                        <div class="filter-price">--}}
+{{--                                            <div class="filter-price-text">--}}
+{{--                                                Price Range:--}}
+{{--                                                <span id="filter-price-range"></span>--}}
+{{--                                            </div><!-- End .filter-price-text -->--}}
 
-                                            <div id="price-slider"></div><!-- End #price-slider -->
-                                        </div><!-- End .filter-price -->
-                                    </div><!-- End .widget-body -->
-                                </div><!-- End .collapse -->
-                            </div><!-- End .widget -->
+{{--                                            <div id="price-slider"></div><!-- End #price-slider -->--}}
+{{--                                        </div><!-- End .filter-price -->--}}
+{{--                                    </div><!-- End .widget-body -->--}}
+{{--                                </div><!-- End .collapse -->--}}
+{{--                            </div><!-- End .widget -->--}}
                         </div><!-- End .sidebar sidebar-shop -->
                     </aside><!-- End .col-lg-3 -->
                 </div><!-- End .row -->
