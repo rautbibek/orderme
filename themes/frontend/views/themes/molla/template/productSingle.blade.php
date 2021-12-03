@@ -1,17 +1,17 @@
 <div class="product product-2">
     <figure class="product-media">
         <a href="{{route('product.detail', $product->slug)}}">
-            <img src="{{productImage($product->id)}}" style="object-fit:contain; height: 300px; background-color: white" alt="Product image" class="product-image">
+            <img class="lozad" data-src="{{productImage($product->id)}}" style="object-fit:contain; height: 300px; background-color: white" alt="Product image" class="product-image">
         </a>
 
         {{--                                            <div class="product-action-vertical">--}}
         {{--                                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"></a>--}}
         {{--                                            </div><!-- End .product-action -->--}}
 
-        <div class="product-action">
-            <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>
-            <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>
-        </div><!-- End .product-action -->
+{{--        <div class="product-action">--}}
+{{--            <a href="#" class="btn-product btn-cart" title="Add to cart"><span>add to cart</span></a>--}}
+{{--            <a href="popup/quickView.html" class="btn-product btn-quickview" title="Quick view"><span>quick view</span></a>--}}
+{{--        </div><!-- End .product-action -->--}}
     </figure><!-- End .product-media -->
 
     <div class="product-body">

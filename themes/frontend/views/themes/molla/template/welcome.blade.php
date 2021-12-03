@@ -57,7 +57,7 @@
                                     <a href="{{route('product.detail', $product->slug)}}" class="cat-block">
                                         <figure>
                                             <span>
-                                                <img src="{{productImage($product->id)}}" style="object-fit:contain; height: 300px; background-color: white"  alt="Collection image">
+                                                <img class="lozad" data-src="{{productImage($product->id)}}" style="object-fit:contain; height: 300px; background-color: white"  alt="Collection image">
                                             </span>
                                         </figure>
 
@@ -81,7 +81,7 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="banner banner-overlay banner-overlay-light">
                                 <a href="#">
-                                    <img src="{{$card['image'] ?? ''}}" alt="Banner">
+                                    <img class="lozad" data-src="{{$card['image'] ?? ''}}" alt="Banner">
                                 </a>
 
                                 <div class="banner-content">
@@ -160,7 +160,7 @@
             @if(count($banner) > 0)
         <div class="container">
             <div class="cta cta-border mb-5" style="background-image: url('{{$banner['backgroundImage'] ?? asset('themes/frontend/assets/images/demos/demo-4/bg-1.jpg')}}');">
-                <img src="{{$banner['image'] ?? ''}}" alt="camera" class="cta-img" style="max-height: 150px">
+                <img class="lozad" data-src="{{$banner['image'] ?? ''}}" alt="camera" class="cta-img" style="max-height: 150px">
                 <div class="row justify-content-center">
                     <div class="col-md-12">
                         <div class="cta-content">
@@ -240,7 +240,7 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="banner banner-overlay banner-overlay-light">
                             <a href="#">
-                                <img src="{{$card['image'] ?? ''}}" alt="Banner">
+                                <img class="lozad" data-src="{{$card['image'] ?? ''}}" alt="Banner">
                             </a>
 
                             <div class="banner-content">
