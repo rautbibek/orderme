@@ -41,6 +41,16 @@
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/demos/demo-4.css')}}">
     {{-- <script src="{{ asset('themes/frontend/js/hiFive.js') }}" ></script> --}}
 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0- 
+     alpha/css/bootstrap.css" rel="stylesheet">
+	
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" 
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+	
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
 </head>
 
 <body>
@@ -462,6 +472,27 @@
             $('#old-price-selected').html(!!old_price ? `Rs. ${old_price}` : null);
         })
     });
+</script>
+@yield('js')
+<script>
+    @if(Session::has('message'))
+    toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+            toastr.success("{{ session('message') }}");
+    @endif
+
+    @if($errors->any())
+        toastr.options =
+        {
+            "closeButton" : true,
+            "progressBar" : true
+        }
+        toastr.error('{{ $errors->first() }}')
+    @endif
+
 </script>
 </body>
 

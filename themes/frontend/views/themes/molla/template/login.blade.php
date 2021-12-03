@@ -29,7 +29,7 @@
                                     @csrf
                                     <div class="form-group">
                                         <label for="singin-email-2">Email address *</label>
-                                        <input type="email" class="form-control" id="singin-email-2" name="email" required>
+                                        <input type="email" class="form-control" id="singin-email-2" name="email">
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -39,7 +39,7 @@
 
                                     <div class="form-group">
                                         <label for="singin-password-2">Password *</label>
-                                        <input type="password" class="form-control" id="singin-password-2" name="password" required>
+                                        <input type="password" class="form-control" id="singin-password-2" name="password">
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -84,20 +84,20 @@
                                    @csrf
                                     <div class="form-group">
                                         <label for="register-email-2">Your Name *</label>
-                                        <input type="text" class="form-control" id="register-email-2" name="name" required>
+                                        <input type="text" class="form-control" id="register-email-2" name="name">
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="register-email-2">Your email address *</label>
-                                        <input type="email" class="form-control" id="register-email-2" name="email" required>
+                                        <input type="email" class="form-control" id="register-email-2" name="email">
                                     </div><!-- End .form-group -->
 
                                     <div class="form-group">
                                         <label for="register-password-2">Password *</label>
-                                        <input type="password" class="form-control" id="register-password-2" name="password" required>
+                                        <input type="password" class="form-control" id="register-password-2" name="password">
                                     </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="register-password-2">Confirm Password *</label>
-                                        <input type="password" class="form-control" id="register-password-2" name="password_confirmation" required>
+                                        <input type="password" class="form-control" id="register-password-2" name="password_confirmation">
                                     </div><!-- End .form-group -->
 
                                     <div class="form-footer">
@@ -137,3 +137,4 @@
         </div><!-- End .login-page section-bg -->
     </main><!-- End .main -->
 @stop
+
