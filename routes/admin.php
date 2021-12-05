@@ -45,6 +45,7 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::resource('/brands', \App\Http\Controllers\Admin\BrandController::class);
     Route::get('/brands-by-product/{productType}', [\App\Http\Controllers\Admin\BrandController::class, 'brandProductType']);
     Route::resource('/orders', \App\Http\Controllers\Admin\OrderController::class);
+    Route::resource('/services', \App\Http\Controllers\Admin\ServiceController::class);
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');
 

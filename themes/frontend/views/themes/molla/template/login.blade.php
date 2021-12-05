@@ -99,6 +99,10 @@
                                         <label for="register-password-2">Confirm Password *</label>
                                         <input type="password" class="form-control" id="register-password-2" name="password_confirmation">
                                     </div><!-- End .form-group -->
+                                    <div class="form-group">
+                                        <label for="register-password-2">Reference Code</label>
+                                        <input type="text" class="form-control" id="register-password-2" name="reference">
+                                    </div><!-- End .form-group -->
 
                                     <div class="form-footer">
                                         <button type="submit" class="btn btn-outline-primary-2">

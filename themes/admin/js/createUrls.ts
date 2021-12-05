@@ -7,4 +7,5 @@ export const ListPages = 'pages'
 export const ListMenus = 'menus'
 export const ListBrands = 'brands'
 export const ListOrder = 'orders'
+export const ListService = 'services'
 

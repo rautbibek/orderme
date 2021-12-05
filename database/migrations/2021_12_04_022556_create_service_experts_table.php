@@ -30,6 +30,8 @@ class CreateServiceExpertsTable extends Migration
             $table->dateTime('expires')->nullable();
             $table->text('plan')->nullable();
             $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('service_id')->constrained('services');
+
             $table->timestamps();
         });
     }

@@ -27,6 +27,9 @@ import AddBrand from "./components/pages/brands/AddBrand";
 import EditBrand from "./components/pages/brands/EditBrand";
 import Order from "./components/pages/order/Order";
 import EditOrder from "./components/pages/order/EditOrder";
+import Service from "./components/pages/service/Service"
+import AddService from "./components/pages/service/AddService";
+import EditService from "./components/pages/service/EditService";
 
 const App = () => {
     return (
@@ -59,6 +62,9 @@ const App = () => {
                         <PrivateRoute exact path="/brands/edit/:id" component={EditBrand} />
                         <PrivateRoute exact path="/orders" component={Order} />
                         <PrivateRoute exact path="/orders/edit/:id" component={EditOrder} />
+                        <PrivateRoute exact path="/services" component={Service} />
+                        <PrivateRoute exact path="/services/new" component={AddService} />
+                        <PrivateRoute exact path="/services/edit/:id" component={EditService} />
 
                     </Switch>
                 </Layout>

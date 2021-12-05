@@ -10,7 +10,7 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import {Link} from 'react-router-dom';
-import {Category, Collections, GroupWork, MenuBook, PostAdd, Style, ShoppingBasket} from "@material-ui/icons";
+import {Category, Collections, GroupWork, MenuBook, PostAdd, Style, ShoppingBasket, RoomService} from "@material-ui/icons";
 
 export const mainListItems = (
   <div>
@@ -76,6 +76,14 @@ export const mainListItems = (
                   <ShoppingBasket />
               </ListItemIcon>
               <ListItemText primary="Order" />
+          </ListItem>
+      </Link>
+      <Link to="/services" replace>
+          <ListItem button>
+              <ListItemIcon>
+                  <RoomService />
+              </ListItemIcon>
+              <ListItemText primary="Service" />
           </ListItem>
       </Link>
       <Link to="/themes" replace>

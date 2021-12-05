@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
+use App\Models\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
-class OrderController extends Controller
+class ServiceController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +16,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = DB::table('orders')
-            ->join('users', 'users.id', '=', 'orders.user_id')
-            ->where('orders.checkout_state', '=', 'completed')
-            ->orderBy('id','desc')
-            ->select('orders.id', 'orders.uuid', 'orders.state', 'orders.created_at', 'orders.total', 'users.name')->paginate(10);
-        return response()->json($orders);
+        $service = Service::orderBy('id','desc')->paginate(10);
+        return response()->json($service);
     }
 
     /**
@@ -42,7 +38,12 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = new Service();
+        $service->title = $request->title;
+        $service->slug =  Str::slug($request->title);
+        $service->save();
+
+        return response()->json($service, 201);
     }
 
     /**
@@ -64,8 +65,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order =  Order::where('id', $id)->with('user', 'customerAddress', 'cartItems.variant.product')->first();
-        return response()->json($order);
+        $service = Service::findOrFail($id);
+        return response()->json($service);
     }
 
     /**
