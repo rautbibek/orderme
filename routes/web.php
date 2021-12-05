@@ -32,3 +32,10 @@ Route::get('/cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class
 Route::post('/add-to-cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addToCartAction'])->name('addToCart');
 Route::get('/confirm-order', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'confirmOrderAction'])->name('confirm.order');
 
+Route::get('/our-services',function(){
+    return view('themes.molla.template.services');
+});
+
+Route::get('/service-detail',function(){
+    return view('themes.molla.template.serviceDetail');
+});
