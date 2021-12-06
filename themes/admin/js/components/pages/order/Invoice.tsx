@@ -61,6 +61,11 @@ const ComponentToPrint:React.FC<ComponentProps> = ({data}) => {
                                     <p className="text-muted">Due to: {new Date(data.data.created_at).toDateString()}</p>
                                 </div>
                             </div>
+                            <div className="col-md-6 offset-md-4">
+                                <h5>Tradekunj Pvt Ltd.</h5>
+                                <p>Kirtimarg, Koteshor-32, Kathmandu</p>
+                                <p>Tel: 01-5147254</p>
+                            </div>
 
                             <hr className="my-5"/>
 
