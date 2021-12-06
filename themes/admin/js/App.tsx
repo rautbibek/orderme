@@ -27,6 +27,7 @@ import AddBrand from "./components/pages/brands/AddBrand";
 import EditBrand from "./components/pages/brands/EditBrand";
 import Order from "./components/pages/order/Order";
 import EditOrder from "./components/pages/order/EditOrder";
+import Invoice from "./components/pages/order/Invoice";
 
 const App = () => {
     return (
@@ -59,6 +60,8 @@ const App = () => {
                         <PrivateRoute exact path="/brands/edit/:id" component={EditBrand} />
                         <PrivateRoute exact path="/orders" component={Order} />
                         <PrivateRoute exact path="/orders/edit/:id" component={EditOrder} />
+                        <PrivateRoute exact path="/orders/invoice/:id" component={Invoice} />
+
 
                     </Switch>
                 </Layout>

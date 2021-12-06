@@ -3,7 +3,7 @@ import HttpClient from "../../../HttpClient";
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import useSWR, { mutate } from "swr";
 import {Col, Row} from "reactstrap";
-import {Box, Grid} from "@material-ui/core";
+import {Box, Button, Grid} from "@material-ui/core";
 
 const EditMenu = () => {
 
@@ -24,6 +24,9 @@ const EditMenu = () => {
 
     return (
         <Grid container spacing={3}>
+            <Grid item xs={8}>
+                <Button color={"primary"} onClick={() => history.push(`/orders/Invoice/${match.params.id}`)}>Invoice </Button>
+            </Grid>
             <Grid item xs={8} >
                 <Box
                     sx={{
@@ -122,8 +125,8 @@ const EditMenu = () => {
 
                         </Col>
                         <Col md={12} style={{justifyContent: 'center'}}>
-                            <h5>Ramesh</h5>
-                            <p>Email: fasdfa@fasdf.com</p>
+                            <h5>{data.data.user.name}</h5>
+                            <p>Email: {data.data.user.email}</p>
                         </Col>
 
                     </Row>
