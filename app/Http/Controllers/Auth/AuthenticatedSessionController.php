@@ -41,7 +41,7 @@ class AuthenticatedSessionController extends Controller
             if($checkout){
                 return redirect()->route('checkout');
             }
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('user.dashboard');
     }
 
     /**
@@ -85,7 +85,7 @@ class AuthenticatedSessionController extends Controller
         }
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('user.dashboard');
 
     }
 
@@ -113,6 +113,6 @@ class AuthenticatedSessionController extends Controller
         }
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('user.dashboard');
     }
 }

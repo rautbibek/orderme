@@ -3,7 +3,8 @@
 namespace App\Services;
 
 class AddressServices {
-    public function getAllState(){
+    public function getAllState() : array
+    {
         $subdivison = [
             'ON' => [
                 "iso_code" => "NP-ON",
@@ -96,9 +97,7 @@ class AddressServices {
                     'Chitwan',
                     'Dhading',
                     'Dolakha',
-                    'Kathmandu' => [
-                        "has_children" => true
-                    ],
+                    'Kathmandu',
                     'Kavrepalanchok',
                     'Lalitpur',
                     'Makwanpur',

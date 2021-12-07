@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
+use App\Models\ServiceExpert;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class OrderController extends Controller
+class ExpertController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = DB::table('orders')
-            ->join('users', 'users.id', '=', 'orders.user_id')
-            ->where('orders.checkout_state', '=', 'completed')
-            ->orderBy('id','desc')
-            ->select('orders.id', 'orders.uuid', 'orders.state', 'orders.created_at', 'orders.total', 'users.name')->paginate(10);
-        return response()->json($orders);
+        $experts = ServiceExpert::orderBy('id','desc')->paginate(10);
+        return response()->json($experts);
     }
 
     /**
@@ -31,7 +26,7 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -42,7 +37,21 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $expert = new ServiceExpert();
+        $expert->name = $request->name;
+        $expert->image = $request->image;
+        $expert->phone  = $request->phone;
+        $expert->email = $request->email;
+        $expert->description = $request->description;
+        $expert->province = $request->province;
+        $expert->city = $request->city;
+        $expert->service_id = $request->service_id;
+        $expert->active = $request->active;
+        $expert->address = $request->address;
+        $expert->save();
+        return response()->json($expert, 201);
+
+
     }
 
     /**
@@ -64,8 +73,8 @@ class OrderController extends Controller
      */
     public function edit($id)
     {
-        $order =  Order::where('id', $id)->with('user', 'customerAddress', 'cartItems.variant.product')->first();
-        return response()->json($order);
+        $expert = ServiceExpert::findOrFail($id);
+        return response()->json($expert);
     }
 
     /**
@@ -77,7 +86,19 @@ class OrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $expert = ServiceExpert::findOrFail($id);
+        $expert->name = $request->name;
+        $expert->image = $request->image;
+        $expert->phone  = $request->phone;
+        $expert->email = $request->email;
+        $expert->description = $request->description;
+        $expert->province = $request->province;
+        $expert->city = $request->city;
+        $expert->service_id = $request->service_id;
+        $expert->active = $request->active;
+        $expert->address = $request->address;
+        $expert->save();
+        return response()->json($expert, 200);
     }
 
     /**
@@ -89,27 +110,5 @@ class OrderController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function confirmOrder($uuid){
-        $order = Order::where('uuid', $uuid)->first();
-        if($order->state === 'new'){
-
-            $order->state = 'confirmed';
-            $order->save();
-        }
-
-        return response()->json($order);
-    }
-    public function confirmShipped($uuid){
-        $order = Order::where('uuid', $uuid)->first();
-        if($order->state === 'confirmed' && $order->shipping_state === 'ready'){
-
-            $order->shipping_state = 'shipped';
-            $order->state = 'completed';
-            $order->save();
-        }
-
-        return response()->json($order);
     }
 }

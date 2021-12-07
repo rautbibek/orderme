@@ -93,6 +93,12 @@ function menuUrl($key){
         case "Page":
             $page = \App\Models\Page::where('id', $key['value'])->first();
             return route('page', ['slug' => $page->slug]);
+        case "Brand":
+            $brand = \App\Models\Brand::where('id', $key['value'])->first();
+            return route('brand', ['slug' => $brand->slug]);
+        case "Service":
+            $service = \App\Models\Service::where('id', $key['value'])->first();
+            return route('service', ['slug' => $service->slug]);
         default:
             return $key['value'];
     }

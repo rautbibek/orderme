@@ -46,6 +46,13 @@ Route::middleware(['auth:admin'])->group(function(){
     Route::get('/brands-by-product/{productType}', [\App\Http\Controllers\Admin\BrandController::class, 'brandProductType']);
     Route::resource('/orders', \App\Http\Controllers\Admin\OrderController::class);
     Route::resource('/services', \App\Http\Controllers\Admin\ServiceController::class);
+    Route::resource('/experts', \App\Http\Controllers\Admin\ExpertController::class);
+    Route::get('/province', [\App\Http\Controllers\Admin\AddressController::class, 'getProvinceAction']);
+    Route::get('/province/{code}', [\App\Http\Controllers\Admin\AddressController::class, 'getCityAction']);
+
+    Route::get('/confirm/order/{uuid}' , [\App\Http\Controllers\Admin\OrderController::class, 'confirmOrder']);
+    Route::get('/confirm/shipped/{uuid}' , [\App\Http\Controllers\Admin\OrderController::class, 'confirmShipped']);
+
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');
 

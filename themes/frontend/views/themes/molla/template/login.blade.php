@@ -90,7 +90,10 @@
                                         <label for="register-email-2">Your email address *</label>
                                         <input type="email" class="form-control" id="register-email-2" name="email">
                                     </div><!-- End .form-group -->
-
+                                    <div class="form-group">
+                                        <label for="register-password-2">Phone Number</label>
+                                        <input type="text" class="form-control" id="register-password-2" name="phone_number">
+                                    </div><!-- End .form-group -->
                                     <div class="form-group">
                                         <label for="register-password-2">Password *</label>
                                         <input type="password" class="form-control" id="register-password-2" name="password">

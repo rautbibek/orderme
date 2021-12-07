@@ -97,7 +97,11 @@
                     <ul class="top-menu">
                         <li>
                             <ul>
-                                <li><a href="/login">Sign in / Sign up</a></li>
+                                @guest
+                                    <li><a href="/login">Sign in / Sign up</a></li>
+                                @else
+                                    {{ Auth::user()->name }}
+                                @endguest
                             </ul>
                         </li>
                     </ul><!-- End .top-menu -->

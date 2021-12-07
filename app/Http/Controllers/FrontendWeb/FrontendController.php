@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\FrontendWeb;
+use App\Models\Brand;
 use App\Models\CartItem;
 use App\Models\Category;
 use App\Models\Collection;
@@ -8,6 +9,8 @@ use App\Models\CustomerAddress;
 use App\Models\Order;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Service;
+use App\Models\ServiceExpert;
 use App\Models\Theme;
 use App\Models\ProductType;
 
@@ -282,6 +285,46 @@ class FrontendController extends Controller
         $order->save();
 
         return redirect()->route('cart');
+
+    }
+
+    public function serviceView($slug){
+        $theme = Theme::find(['active' => true])->first();
+
+        $service = Service::where('slug', $slug)->firstOrFail();
+
+        $experts = ServiceExpert::where('service_id', $service->id)->get();
+
+        return view("themes.$theme->slug.template.service", compact('service', 'experts'));
+
+    }
+
+    public function brandView($slug){
+        $theme = Theme::find(['active' => true])->first();
+
+        $brand = Brand::where('slug', $slug)->firstOrFail();
+
+        $products = \Illuminate\Support\Facades\DB::table('products')
+            ->where('products.active', true)
+            ->join('brands', 'brands.id', '=', 'products.brand_id')
+            ->where('brands.slug', $slug)
+            ->rightJoin('variants', function ($rightJoin) {
+                $rightJoin->on('variants.product_id', '=', 'products.id')
+                    ->where('variants.quantity', '=', \Illuminate\Support\Facades\DB::raw("(SELECT MAX(quantity) FROM bt_variants WHERE product_id = bt_products.id)"));
+            })
+            ->select('products.*', 'variants.price', 'variants.old_price')
+            ->paginate(20)
+        ;
+
+        return view("themes.$theme->slug.template.brand", compact('products', 'brand'));
+
+
+    }
+
+    public function expertView($slug){
+        $theme = Theme::find(['active' => true])->first();
+        $expert = ServiceExpert::where('slug', $slug)->first();
+        return view("themes.$theme->slug.template.expert", compact('expert'));
 
     }
 

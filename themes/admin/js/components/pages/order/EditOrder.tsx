@@ -3,7 +3,7 @@ import HttpClient from "../../../HttpClient";
 import { useHistory, useRouteMatch } from 'react-router-dom'
 import useSWR, { mutate } from "swr";
 import {Col, Row} from "reactstrap";
-import {Box, Grid} from "@material-ui/core";
+import {Box, Button, Grid} from "@material-ui/core";
 
 const EditMenu = () => {
 
@@ -21,9 +21,22 @@ const EditMenu = () => {
     if (error) return <div>failed to load</div>
     if (!data) return <div>loading...</div>
 
+    const confirmOrder = async () => {
+         await HttpClient.get(`/confirm/order/${data.data.uuid}`)
+        mutate(`${url}`)
+    }
+
+    const confirmShipped = async () => {
+        await HttpClient.get(`/confirm/shipped/${data.data.uuid}`)
+        mutate(`${url}`)
+    }
+
 
     return (
         <Grid container spacing={3}>
+            <Grid item xs={8}>
+                <Button color={"primary"} onClick={() => history.push(`/orders/Invoice/${match.params.id}`)}>Invoice </Button>
+            </Grid>
             <Grid item xs={8} >
                 <Box
                     sx={{
@@ -49,8 +62,16 @@ const EditMenu = () => {
                         </Col>
                         <Col>
                             <h5>Status</h5>
-                            <p>Order Status: {data.data.state}</p>
-                            <p>Shipment: {data.data.shipping_state}</p>
+                            <p>Order Status: {data.data.state}
+                                {data.data.state === 'new' &&(
+                                    <Button className="ml-1" color={"secondary"} onClick={() => confirmOrder()} >Confirm</Button>
+                                )}
+                            </p>
+                            <p>Shipment: {data.data.shipping_state}
+                                {data.data.shipping_state === 'ready'&& data.data.state === 'confirmed' &&(
+                                    <Button className="ml-1" color={"secondary"} onClick={() => confirmShipped()} >Ship</Button>
+                                )}
+                            </p>
                             <p>Payment: {data.data.payment_state}</p>
                         </Col>
                     </Row>
@@ -122,8 +143,8 @@ const EditMenu = () => {
 
                         </Col>
                         <Col md={12} style={{justifyContent: 'center'}}>
-                            <h5>Ramesh</h5>
-                            <p>Email: fasdfa@fasdf.com</p>
+                            <h5>{data.data.user.name}</h5>
+                            <p>Email: {data.data.user.email}</p>
                         </Col>
 
                     </Row>

@@ -14,7 +14,7 @@ class AddPointsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->integer('point_value')->default(0);
+            $table->integer('point_value')->default(25);
             $table->integer('hold_point')->default(0);
             $table->string('reference')->nullable();
             $table->boolean('approved_buyer')->default(false);

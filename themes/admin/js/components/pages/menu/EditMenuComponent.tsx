@@ -100,7 +100,7 @@ const EditMenuComponent: React.FC<EditMenuComponentProps> = ({internalMenu, onSp
                                                         <Grid item xs={12} style={{ marginBottom: 20 }}>
                                                             <SingleSelect
                                                                 label={'Select Type'}
-                                                                options={['Category', 'Collection', 'Page', 'Link']}
+                                                                options={['Category', 'Collection', 'Page', 'Link', 'Brand', 'Service']}
                                                                 value={input.value}
                                                                 onChange={(item) => {
                                                                     input.onChange(item)
@@ -250,6 +250,14 @@ const SelectReference:React.FC<SelectReferenceProps> = ({type}) => {
         case 'Link':
             return (
                 <CustomTextField label={'External Link'} type={'text'} name={'value'}/>
+            )
+        case 'Brand':
+            return (
+                <SelectTable label={'Select Brand'} table={'brand'} name={'value'}/>
+            )
+        case 'Service':
+            return (
+                <SelectTable label={'Select Service'} table={'service'} name={'value'}/>
             )
     }
 }

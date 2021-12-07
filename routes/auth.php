@@ -80,3 +80,6 @@ Route::get('/auth/facebook/redirect', function () {
     return \Laravel\Socialite\Facades\Socialite::driver('facebook')->redirect();
 })->name('facebook.signup');
 Route::get('/facebook/signup', [AuthenticatedSessionController::class, 'facebookSignup']);
+
+Route::get('/me', [\App\Http\Controllers\User\DashboardController::class, 'dashboard'])
+    ->middleware('auth')->name('user.dashboard');

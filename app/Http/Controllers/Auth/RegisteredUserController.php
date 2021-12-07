@@ -36,6 +36,7 @@ class RegisteredUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|confirmed|min:8',
+            'phone_number' => 'required|min:10'
         ]);
 
         Auth::login($user = User::create([
@@ -50,6 +51,6 @@ class RegisteredUserController extends Controller
             return redirect()->route('checkout');
         }
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect()->route('user.dashboard');
     }
 }

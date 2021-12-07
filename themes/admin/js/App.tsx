@@ -30,6 +30,10 @@ import EditOrder from "./components/pages/order/EditOrder";
 import Service from "./components/pages/service/Service"
 import AddService from "./components/pages/service/AddService";
 import EditService from "./components/pages/service/EditService";
+import Invoice from "./components/pages/order/Invoice";
+import Expert from "./components/pages/service/Expert";
+import AddExpert from "./components/pages/service/AddExpert";
+import EditExpert from "./components/pages/service/EditExpert";
 
 const App = () => {
     return (
@@ -65,6 +69,10 @@ const App = () => {
                         <PrivateRoute exact path="/services" component={Service} />
                         <PrivateRoute exact path="/services/new" component={AddService} />
                         <PrivateRoute exact path="/services/edit/:id" component={EditService} />
+                        <PrivateRoute exact path="/orders/invoice/:id" component={Invoice} />
+                        <PrivateRoute exact path="/experts" component={Expert} />
+                        <PrivateRoute exact path="/experts/new" component={AddExpert} />
+                        <PrivateRoute exact path="/experts/edit/:id" component={EditExpert} />
 
                     </Switch>
                 </Layout>

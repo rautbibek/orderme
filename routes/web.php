@@ -26,8 +26,12 @@ Route::get('/category/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendContro
 Route::get('/collection/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'collectionPage'])->name('collection');
 
 Route::get('/page/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'pageView'])->name('page');
+Route::get('/service/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'serviceView'])->name('service');
+Route::get('/brand/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'brandView'])->name('brand');
+
 
 Route::get('/search', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'searchPage'])->name('search');
 Route::get('/cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'cartAction'])->name('cart');
 Route::post('/add-to-cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addToCartAction'])->name('addToCart');
 Route::post('/update-cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'updateCartAction'])->name('update.cart');
+Route::get('/experts/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'expertView'])->name('experts.detail');
