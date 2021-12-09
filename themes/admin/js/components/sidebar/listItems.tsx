@@ -19,7 +19,8 @@ import {
     Style,
     ShoppingBasket,
     RoomService,
-    BeachAccess
+    BeachAccess,
+    PersonPin
 } from "@material-ui/icons";
 
 export const mainListItems = (
@@ -63,6 +64,14 @@ export const mainListItems = (
         </ListItemIcon>
         <ListItemText primary="Product" />
       </ListItem>
+    </Link>
+    <Link to="/customers" replace>
+        <ListItem button>
+            <ListItemIcon>
+              <PersonPin />
+            </ListItemIcon>
+            <ListItemText primary="Customers" />
+        </ListItem>
     </Link>
       <Link to="/pages" replace>
           <ListItem button>

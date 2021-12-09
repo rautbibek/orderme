@@ -9,4 +9,5 @@ export const ListBrands = 'brands'
 export const ListOrder = 'orders'
 export const ListService = 'services'
 export const ListExpert = 'experts'
+export const listCustomer = 'customers'
 

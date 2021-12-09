@@ -4,6 +4,8 @@ import Dashboard from "./components/pages/dashboard/Dashboard";
 import PrivateRoute from "./PrivateRoute";
 import Category from "./components/pages/category/Category";
 import Product from "./components/pages/product/Product";
+import Customer from './components/pages/customer/Customer';
+import EditCustomer from './components/pages/customer/EditCustomer';
 import Layout from './components/Layout/Layout';
 import AddCategory from "./components/pages/category/AddCategory";
 import EditCategory from "./components/pages/category/EditCategory";
@@ -48,6 +50,8 @@ const App = () => {
                         <PrivateRoute exact path="/products" component={Product} />
                         <PrivateRoute exact path="/products/new" component={AddProduct} />
                         <PrivateRoute exact path="/products/edit/:id" component={EditProduct} />
+                        <PrivateRoute exact path="/customers" component={Customer} />
+                        <PrivateRoute exact path="/customers/edit/:id" component={EditCustomer} />
                         <PrivateRoute exact path="/themes" component={Themes} />
                         <PrivateRoute exact path="/themes/new" component={AddTheme} />
                         <PrivateRoute exact path="/themes/edit/:id" component={EditTheme} />
