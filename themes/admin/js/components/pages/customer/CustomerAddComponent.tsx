@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-interface CustomerEditComponentProps {
+interface CustomerAddComponentProps {
     onSubmit: any,
     customer?: any
 }
@@ -36,7 +36,7 @@ const CustomerValidationSchema = yup.object().shape({
 
 })
 
-const CustomerEditComponent: React.FC<CustomerEditComponentProps> = ({ onSubmit, customer }) => {
+const CustomerAddComponent: React.FC<CustomerAddComponentProps> = ({ onSubmit, customer }) => {
     const classes = useStyles();
     const history = useHistory()
 
@@ -74,8 +74,10 @@ const CustomerEditComponent: React.FC<CustomerEditComponentProps> = ({ onSubmit,
             }) => (
                 <form className={classes.form}>
                     <CustomTextField name="name" type={'text'} label={'Name'} />
-                    <CustomTextField name="email" type={'text'} label={'Email'} disabled/>
+                    <CustomTextField name="email" type={'text'} label={'Email'} />
                     <CustomTextField name="phone_number" type={'text'} label={'Phone Number'} />
+                    <CustomTextField name="password" type={'password'} label={'Password'} />
+                    <CustomTextField name="password_confirmation" type={'password'} label={'Confirm Password'} />
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"} color="primary" type="button" onClick={handleSubmit} >Submit</Button>
                          <Button variant={"contained"}  color="secondary" onClick={() => history.push('/customers')}>Back</Button>
@@ -86,5 +88,5 @@ const CustomerEditComponent: React.FC<CustomerEditComponentProps> = ({ onSubmit,
     )
 }
 
-export default CustomerEditComponent
+export default CustomerAddComponent
 

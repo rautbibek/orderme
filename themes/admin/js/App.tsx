@@ -5,6 +5,7 @@ import PrivateRoute from "./PrivateRoute";
 import Category from "./components/pages/category/Category";
 import Product from "./components/pages/product/Product";
 import Customer from './components/pages/customer/Customer';
+import AddCustomer from './components/pages/customer/AddCustomer';
 import EditCustomer from './components/pages/customer/EditCustomer';
 import Layout from './components/Layout/Layout';
 import AddCategory from "./components/pages/category/AddCategory";
@@ -51,6 +52,7 @@ const App = () => {
                         <PrivateRoute exact path="/products/new" component={AddProduct} />
                         <PrivateRoute exact path="/products/edit/:id" component={EditProduct} />
                         <PrivateRoute exact path="/customers" component={Customer} />
+                        <PrivateRoute exact path="/customers/new" component={AddCustomer} />
                         <PrivateRoute exact path="/customers/edit/:id" component={EditCustomer} />
                         <PrivateRoute exact path="/themes" component={Themes} />
                         <PrivateRoute exact path="/themes/new" component={AddTheme} />
