@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9a558a137ef57860b3d5fa7e978a29b4",
+    "content-hash": "3603dd8083d50d4c3fa62f208b6dc10c",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2604,22 +2604,22 @@
         },
         {
             "name": "spatie/laravel-sluggable",
-            "version": "3.1.0",
+            "version": "2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-sluggable.git",
-                "reference": "03dd6b573efb66f2eb96892b3646a6a8b7722adf"
+                "reference": "297097239a675747d74fbd1ecb3ae0d4724a17de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/03dd6b573efb66f2eb96892b3646a6a8b7722adf",
-                "reference": "03dd6b573efb66f2eb96892b3646a6a8b7722adf",
+                "url": "https://api.github.com/repos/spatie/laravel-sluggable/zipball/297097239a675747d74fbd1ecb3ae0d4724a17de",
+                "reference": "297097239a675747d74fbd1ecb3ae0d4724a17de",
                 "shasum": ""
             },
             "require": {
                 "illuminate/database": "^7.30|^8.0",
                 "illuminate/support": "^7.30|^8.0",
-                "php": "^8.0"
+                "php": "^7.4|^8.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.18",
@@ -2653,7 +2653,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-sluggable/issues",
-                "source": "https://github.com/spatie/laravel-sluggable/tree/3.1.0"
+                "source": "https://github.com/spatie/laravel-sluggable/tree/2.6.2"
             },
             "funding": [
                 {
@@ -2661,7 +2661,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-04T13:53:45+00:00"
+            "time": "2021-03-20T18:07:00+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
