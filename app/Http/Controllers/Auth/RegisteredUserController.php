@@ -46,7 +46,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]));
         $reference = $request->reference ?? null;
-        if($reference){
+        if(!!$reference){
             session()->put('reference', $request->reference);
         }
 
