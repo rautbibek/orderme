@@ -19,8 +19,12 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(Request $request)
     {
+        $reference = $request->query('reference');
+        if(!!$reference){
+            session()->put('reference', $reference);
+        }
         $theme = Theme::find(['active' => true])->first();
 
         return view("themes.$theme->slug.template.login");
@@ -80,6 +84,12 @@ class AuthenticatedSessionController extends Controller
                 'avatar' => $gImage,
             ];
             $user->email_verified_at = Carbon::now()->toDateTimeString();
+            $refUser = \App\Models\User::where('reference', session()->get('reference'))->first();
+            if(!!$refUser){
+                $user->reference_id = $refUser->id;
+                $user->point_value = 35;
+                session()->forget('reference');
+            }
 
             $user->save();
         }
@@ -108,6 +118,12 @@ class AuthenticatedSessionController extends Controller
                 'avatar' => $gImage,
             ];
             $user->email_verified_at = Carbon::now()->toDateTimeString();
+            $refUser = \App\Models\User::where('reference', session()->get('reference'))->first();
+            if(!!$refUser){
+                $user->reference_id = $refUser->id;
+                $user->point_value = 35;
+                session()->forget('reference');
+            }
 
             $user->save();
         }

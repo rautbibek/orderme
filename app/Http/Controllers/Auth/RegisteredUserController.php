@@ -32,6 +32,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -44,6 +45,19 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]));
+        $reference = $request->reference ?? null;
+        if($reference){
+            session()->put('reference', $request->reference);
+        }
+
+
+        $refUser = User::where('reference', session()->get('reference'))->first();
+        if(!!$refUser){
+            $user->reference_id = $refUser->id;
+            $user->point_value = 35;
+            $user->save();
+            session()->forget('reference');
+        }
 
         event(new Registered($user));
         $checkout =  session()->get('checkout');

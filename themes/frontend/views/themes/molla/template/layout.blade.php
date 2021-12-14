@@ -267,28 +267,63 @@
                     <nav class="main-nav">
                         <ul class="menu sf-arrows">
                             @foreach(getMenu('main_menu')['design'] ??  [] as $menu)
-                            <li>
-                                <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{$menu['name']}}</a>
-                                @if(count($menu['children'] ?? []) > 0)
-                                    <ul>
-                                        @foreach($menu['children'] ?? [] as $item )
-                                        <li>
-                                            <a href="{{menuUrl($item)}}" class="sf-with-ul">{{$item['name']}}</a>
-                                            @if(count($item['children'] ?? []) > 0)
-                                            <ul>
+                                                    <li>
+                                                        <li>
+                                                            <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{$menu['name']}}</a>
+                                    @if(count($menu['children'] ?? []) > 0)
+                                                            <div class="megamenu megamenu-md ">
+                                                                <div class="row no-gutters">
+                                                                    <div class="col-md-8">
+                                                                        <div class="menu-col">
+                                                                            <div class="row ">
+                                                                                @foreach($menu['children'] ?? [] as $item )
+                                                                                <div class="col-md-6">
+                                                                                    <div class="menu-title">
+                                                                                        <a href="{{menuUrl($item)}}" class="text-success">{{$item['name']}}</a>
+                                                                                    </div><!-- End .menu-title -->
+                                                                                    @if(count($item['children'] ?? []) > 0)
+                                                                                    <ul>
+                                                                                        @foreach($item['children'] ?? [] as $_item)
+                                                                                        <li><a href="{{menuUrl($_item)}}">{{$_item['name']}}</a></li>
+                                                                                        @endforeach
+                                                                                    </ul>
+                                                                                    @endif
 
-                                                @foreach($item['children'] ?? [] as $_item)
-                                                     <li><a href="{{menuUrl($_item)}}">{{$_item['name']}}</a></li>
-                                                @endforeach
-                                            </ul>
-                                                @endif
-                                        </li>
-                                        @endforeach
-                                    </ul>
-                                @endif
-                            </li>
+                                                                                </div><!-- End .col-md-6 -->
+                                                                                @endforeach
+                                                                            </div><!-- End .row -->
+                                                                        </div><!-- End .menu-col -->
+                                                                    </div><!-- End .col-md-8 -->
 
+
+                                                                </div><!-- End .row -->
+                                                            </div><!-- End .megamenu megamenu-md -->
+                                        @endif
+                                                        </li>
                             @endforeach
+                            {{--                            @foreach(getMenu('main_menu')['design'] ??  [] as $menu)--}}
+{{--                            <li>--}}
+{{--                                <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{$menu['name']}}</a>--}}
+{{--                                @if(count($menu['children'] ?? []) > 0)--}}
+{{--                                    <ul>--}}
+{{--                                        @foreach($menu['children'] ?? [] as $item )--}}
+{{--                                        <li>--}}
+{{--                                            <a href="{{menuUrl($item)}}" class="sf-with-ul">{{$item['name']}}</a>--}}
+{{--                                            @if(count($item['children'] ?? []) > 0)--}}
+{{--                                            <ul>--}}
+
+{{--                                                @foreach($item['children'] ?? [] as $_item)--}}
+{{--                                                     <li><a href="{{menuUrl($_item)}}">{{$_item['name']}}</a></li>--}}
+{{--                                                @endforeach--}}
+{{--                                            </ul>--}}
+{{--                                                @endif--}}
+{{--                                        </li>--}}
+{{--                                        @endforeach--}}
+{{--                                    </ul>--}}
+{{--                                @endif--}}
+{{--                            </li>--}}
+
+{{--                            @endforeach--}}
 
                         </ul><!-- End .menu -->
                     </nav><!-- End .main-nav -->
@@ -477,6 +512,7 @@
 {{--    </div>--}}
 {{--</div>--}}
 <!-- Plugins JS File -->
+ <script src="{{ asset('themes/frontend/js/frontend.js') }}" ></script>
 <script src="{{asset('themes/frontend/assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('themes/frontend/assets/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('themes/frontend/assets/js/jquery.hoverIntent.min.js')}}"></script>
@@ -491,7 +527,7 @@
 <script src="{{asset('themes/frontend/assets/js/main.js')}}"></script>
 <script src="{{asset('themes/frontend/assets/js/demos/demo-4.js')}}"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script>
-{{-- <script src="{{ asset('themes/frontend/js/app.js') }}" ></script> --}}
+
 <script>
     $(document).ready(function() {
         $('#size').on('change', function (e) {

@@ -13,7 +13,7 @@ const mix = require("laravel-mix");
 
 
 mix.setPublicPath("public/themes/frontend")
-    .js(`${__dirname}/js/app.js`, "js")
+    .js(`${__dirname}/js/index.js`, "js/frontend.js")
     .react()
     .sass(`${__dirname}/sass/app.scss`, "css");
 

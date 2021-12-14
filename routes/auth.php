@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Models\Theme;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/register', [RegisteredUserController::class, 'create'])
@@ -83,3 +84,9 @@ Route::get('/facebook/signup', [AuthenticatedSessionController::class, 'facebook
 
 Route::get('/me', [\App\Http\Controllers\User\DashboardController::class, 'dashboard'])
     ->middleware('auth')->name('user.dashboard');
+Route::get('/me/{path?}', [\App\Http\Controllers\User\DashboardController::class, 'dashboard'])->middleware('auth');
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('/reference-code', [\App\Http\Controllers\User\DashboardController::class, 'getReference']);
+
+});
