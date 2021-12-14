@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { DropdownButton } from "react-bootstrap";
-import './Sidebar.css'
 import {MenuItem} from "@material-ui/core";
 
 class SideBar extends React.Component {

@@ -100,7 +100,16 @@
                                 @guest
                                     <li><a href="/login">Sign in / Sign up</a></li>
                                 @else
-                                    {{ Auth::user()->name }}
+                                    <li><a href="/me">{{ Auth::user()->name }}</a></li>
+                                    <li><a  href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                             document.getElementById('logout-for').submit();">
+                                            {{ __('Logout') }}
+                                        </a>
+
+                                        <form id="logout-for" action="{{ route('logout') }}" method="POST" >
+                                            @csrf
+                                        </form></li>
                                 @endguest
                             </ul>
                         </li>

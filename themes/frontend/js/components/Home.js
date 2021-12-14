@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const Home = () => {
     return (
-        <div className={'container'}>
+        <div>
             home
         </div>
     )

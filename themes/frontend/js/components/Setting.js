@@ -15,7 +15,7 @@ const Setting = () => {
         )
     }
     return (
-        <div className={'container'}>
+        <div >
             <div style={{margin:20}}>
                 <p className={"mb-2"}>Reference code: {data.data.reference} </p>
                 <p className={"mb-2"}>Reference Link: <a href={`https://tradekunj.com/login?reference=${data.data.reference}`}>{`https://tradekunj.com/login?reference=${data.data.reference}`}</a> </p>

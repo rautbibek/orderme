@@ -7,7 +7,7 @@
 require('./bootstrap');
 const {render} = require("react-dom");
 import App from './app.js'
-
+import './layout/Sidebar.css'
 
 /**
  * Next, we will create a fresh React component instance and attach it to

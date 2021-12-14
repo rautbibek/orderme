@@ -2,6 +2,7 @@
 @section('title', 'User | Tradekunj')
 @section('content')
     <main class="main">
+
     <div class="container">
         <div id="__tradekunj.frontend__" ></div>
 {{--        <p>under maintenance</p>--}}
