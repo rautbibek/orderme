@@ -11,10 +11,6 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Models\Theme;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/register', [RegisteredUserController::class, 'create'])
-                ->middleware('guest')
-                ->name('register');
-
 Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest');
 
@@ -89,5 +85,10 @@ Route::get('/me/{path?}', [\App\Http\Controllers\User\DashboardController::class
 Route::middleware(['auth'])->group(function(){
     Route::get('/reference-code', [\App\Http\Controllers\User\DashboardController::class, 'getReference']);
     Route::get('/all-orders', [\App\Http\Controllers\User\DashboardController::class, 'getOrders']);
+    Route::get('/user-profile', [\App\Http\Controllers\User\DashboardController::class, 'getProfile']);
+    Route::post('/user-profile', [\App\Http\Controllers\User\DashboardController::class, 'getProfile']);
+    Route::get('/register', function () {
+        return redirect()->route('login');
+    })->name('register');
 
 });

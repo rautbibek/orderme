@@ -8,6 +8,7 @@ use App\Models\Theme;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class DashboardController extends Controller
@@ -33,5 +34,31 @@ class DashboardController extends Controller
         $user = Auth::user();
         $orders = Order::where('user_id', $user->id)->where('checkout_state', 'completed')->orderBy('id','desc')->get();
         return response()->json($orders);
+    }
+
+    public function getProfile(Request $request){
+        $user = Auth::user();
+        if($request->isMethod('post')){
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:users,email,'.$user->id,
+                'phone' => 'required|min:10',
+                'password' => 'required',
+                'confirm_password' => 'required'
+            ]);
+
+
+            if(Hash::check($request->password, $user->password) && $request->password === $request->confirm_password){
+
+                $user->name = $request->name;
+                $user->email = $request->email;
+                $user->phone_number = $request->phone;
+                $user->config = ['image' => $request->image];
+                $user->save();
+            }else{
+                abort(403, 'Unauthorized action.');
+            }
+        }
+        return response()->json($user);
     }
 }

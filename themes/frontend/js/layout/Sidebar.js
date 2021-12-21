@@ -26,16 +26,16 @@ const SideBar  = ({show}) => {
                                <MonetizationOn/> <span> Refer Code</span>
                             </Link>
                         </li>
-                        {/*<li>*/}
-                        {/*    <Link to="/profile" replace>*/}
-                        {/*        <People/> <span> Profile</span>*/}
-                        {/*    </Link>*/}
-                        {/*</li>*/}
-                        {/*<li>*/}
-                        {/*    <Link to="/address" replace>*/}
-                        {/*        <Map/> <span>Addresses</span>*/}
-                        {/*    </Link>*/}
-                        {/*</li>*/}
+                        <li>
+                            <Link to="/profile" replace>
+                                <People/> <span> Profile</span>
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/addresses" replace>
+                                <Map/> <span>Addresses</span>
+                            </Link>
+                        </li>
                     </ul>
                 </div>
                 </>
