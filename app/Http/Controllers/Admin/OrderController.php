@@ -118,21 +118,21 @@ class OrderController extends Controller
     public function confirmPayment($uuid){
         $order = Order::where('uuid', $uuid)->first();
 
-
-            $order->payment_state = 'completed';
-            $order->save();
-            $user = User::where('id', $order->user_id)->first();
+        $order->payment_state = 'completed';
+        $order->state = 'confirmed';
+        $order->save();
+        $user = User::where('id', $order->user_id)->first();
 //        Adding 1 % of total amount to point value
 
-            $user->point_value = $user->point_value + $order->total / 10000;
-            $user->save();
+        $user->point_value = $user->point_value + $order->total / 10000;
+        $user->save();
 
 //        Adding 0.5% of total amount to point value
-            $refUser = User::where('id', $user->reference_id)->first();
-            if(!!$refUser && !!$refUser->id){
-                $refUser->point_value = $refUser->point_value + $order->total /20000;
-                $refUser->save();
-            }
+        $refUser = User::where('id', $user->reference_id)->first();
+        if(!!$refUser && !!$refUser->id){
+            $refUser->point_value = $refUser->point_value + $order->total /20000;
+            $refUser->save();
+        }
 
 
         return response()->json($order);
