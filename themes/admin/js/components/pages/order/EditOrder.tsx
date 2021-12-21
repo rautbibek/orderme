@@ -31,6 +31,11 @@ const EditMenu = () => {
         mutate(`${url}`)
     }
 
+    const confirmPayment = async () => {
+        await HttpClient.get(`/confirm/payment/${data.data.uuid}`)
+        mutate(`${url}`)
+    }
+
 
     return (
         <Grid container spacing={3}>
@@ -72,7 +77,10 @@ const EditMenu = () => {
                                     <Button className="ml-1" color={"secondary"} onClick={() => confirmShipped()} >Ship</Button>
                                 )}
                             </p>
-                            <p>Payment: {data.data.payment_state}</p>
+                            <p>Payment: {data.data.payment_state}
+                                {data.data.payment_state === 'awaiting_payment' &&(
+                                    <Button className="ml-1" color={"secondary"} onClick={() => confirmPayment()} >Complete</Button>
+                                )}</p>
                         </Col>
                     </Row>
                 </Box>

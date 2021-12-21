@@ -52,6 +52,7 @@ Route::middleware(['auth:admin'])->group(function(){
 
     Route::get('/confirm/order/{uuid}' , [\App\Http\Controllers\Admin\OrderController::class, 'confirmOrder']);
     Route::get('/confirm/shipped/{uuid}' , [\App\Http\Controllers\Admin\OrderController::class, 'confirmShipped']);
+    Route::get('/confirm/payment/{uuid}' , [\App\Http\Controllers\Admin\OrderController::class, 'confirmPayment']);
 
 });
 //Route::view('{path}', 'home')->where('path', '([A-z\d\-\/_.]+)?');

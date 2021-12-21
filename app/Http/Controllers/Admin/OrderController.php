@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -109,6 +111,29 @@ class OrderController extends Controller
             $order->state = 'completed';
             $order->save();
         }
+
+        return response()->json($order);
+    }
+
+    public function confirmPayment($uuid){
+        $order = Order::where('uuid', $uuid)->first();
+
+
+            $order->payment_state = 'completed';
+            $order->save();
+            $user = User::where('id', $order->user_id)->first();
+//        Adding 1 % of total amount to point value
+
+            $user->point_value = $user->point_value + $order->total / 10000;
+            $user->save();
+
+//        Adding 0.5% of total amount to point value
+            $refUser = User::where('id', $user->reference_id)->first();
+            if(!!$refUser && !!$refUser->id){
+                $refUser->point_value = $refUser->point_value + $order->total /20000;
+                $refUser->save();
+            }
+
 
         return response()->json($order);
     }
