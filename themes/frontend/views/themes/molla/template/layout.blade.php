@@ -42,6 +42,16 @@
     <link rel="stylesheet" href="{{asset('themes/frontend/assets/css/demos/demo-4.css')}}">
     {{-- <script src="{{ asset('themes/frontend/js/hiFive.js') }}" ></script> --}}
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-S1Z2XN3VY5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-S1Z2XN3VY5');
+</script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-
      alpha/css/bootstrap.css" rel="stylesheet">
 
