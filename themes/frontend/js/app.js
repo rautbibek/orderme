@@ -1,35 +1,25 @@
 import React from "react";
-import { BrowserRouter as HashRouter, Route, Switch } from "react-router-dom";
-import SideBar from "./layout/Sidebar";
-import Setting from "./components/Setting";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import Home from "./components/Home";
 import PrivateRoute from "./PrivateRoute";
+import Order from "./components/Order";
+import Reference from "./components/Reference";
 
-class App extends React.Component {
-    state = { open: false };
+const App = () => {
 
-    toggleMenu = () => {
-        this.setState({ open: !this.state.open });
-        console.log(this.state.open);
-    };
-
-    render = () => {
-        const { open } = this.state;
 
         return (
-            <HashRouter>
-                <div className="wrapper">
-                    <SideBar open={open} />
-                    <div>
-                        <Switch>
-                            <PrivateRoute exact path="/me/" component={Home} />
-                            <PrivateRoute exact path="/me/setting" component={Setting} />
-                        </Switch>
-                    </div>
-                </div>
-            </HashRouter>
+            <>
+               <HashRouter>
+                   <Switch>
+                       <PrivateRoute path={"/"} exact component={Home} />
+                       <PrivateRoute path={"/orders"} exact component={Order} />
+                       <PrivateRoute path={"/reference-code"} exact component={Reference} />
+                   </Switch>
+               </HashRouter>
+            </>
+
         );
-    };
 }
 
 export default App;

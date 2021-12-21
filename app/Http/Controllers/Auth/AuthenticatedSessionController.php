@@ -88,6 +88,8 @@ class AuthenticatedSessionController extends Controller
             if(!!$refUser){
                 $user->reference_id = $refUser->id;
                 $user->point_value = 35;
+                $refUser->point_value += 10;
+                $refUser->save();
                 session()->forget('reference');
             }
 
@@ -122,6 +124,8 @@ class AuthenticatedSessionController extends Controller
             if(!!$refUser){
                 $user->reference_id = $refUser->id;
                 $user->point_value = 35;
+                $refUser->point_value += 10;
+                $refUser->save();
                 session()->forget('reference');
             }
 

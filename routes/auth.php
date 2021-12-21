@@ -88,5 +88,6 @@ Route::get('/me/{path?}', [\App\Http\Controllers\User\DashboardController::class
 
 Route::middleware(['auth'])->group(function(){
     Route::get('/reference-code', [\App\Http\Controllers\User\DashboardController::class, 'getReference']);
+    Route::get('/all-orders', [\App\Http\Controllers\User\DashboardController::class, 'getOrders']);
 
 });

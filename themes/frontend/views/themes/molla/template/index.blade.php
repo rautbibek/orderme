@@ -3,7 +3,7 @@
 @section('content')
     <main class="main">
 
-    <div class="container">
+    <div class="container" style="height: 80vh">
         <div id="__tradekunj.frontend__" ></div>
 {{--        <p>under maintenance</p>--}}
 {{--        <p><a class="dropdown-item" href="{{ route('logout') }}"--}}

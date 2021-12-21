@@ -14,6 +14,7 @@ use App\Models\ServiceExpert;
 use App\Models\Theme;
 use App\Models\ProductType;
 
+use App\Models\User;
 use App\Models\Variant;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -257,15 +258,26 @@ class FrontendController extends Controller
         if(!$order->customer_address_id){
             return redirect()->route('welcome');
         }
+        $user = Auth::user();
+//        Adding 1 % of total amount to point value
+
+        $user->point_value = $user->point_value + $order->total / 10000;
+        $user->save();
+
+//        Adding 0.5% of total amount to point value
+        $refUser = User::where('id', $user->reference_id)->first();
+        if(!!$refUser->id){
+            $refUser->point_value = $refUser->point_value + $order->total /20000;
+            $refUser->save();
+        }
         $order->checkout_state = 'completed';
         $order->state = 'new';
         $order->payment_state = 'awaiting_payment';
         $order->shipping_state = 'ready';
         $order->save();
         session()->forget(['checkout', 'cart']);
-        $order =  Order::where('user_id', Auth::id())->get();
 
-        return view("themes.$theme->slug.template.completed", compact('order'));
+        return redirect('/me#/orders');
 
     }
 
