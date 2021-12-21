@@ -31,7 +31,7 @@ class DashboardController extends Controller
 
     public function getOrders(){
         $user = Auth::user();
-        $orders = Order::where('user_id', $user->id)->orderBy('id','desc')->get();
+        $orders = Order::where('user_id', $user->id)->where('checkout_state', 'completed')->orderBy('id','desc')->get();
         return response()->json($orders);
     }
 }
