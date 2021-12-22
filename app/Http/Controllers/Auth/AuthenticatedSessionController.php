@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use http\Client\Curl\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticatedSessionController extends Controller
@@ -72,7 +73,7 @@ class AuthenticatedSessionController extends Controller
         $gImage =  $googleUser->getAvatar();
         $gEmail = $googleUser->getEmail();
 
-        $user = \App\Models\User::where('email', $gEmail)->first();
+        $user = \App\Models\User::where('email', $gEmail)->orWhere('google_id', $gId)->first();
         if(!$user){
             $user = \App\Models\User::create([
                 'name' => $gName,
@@ -83,6 +84,7 @@ class AuthenticatedSessionController extends Controller
                 'googleId' => $gId,
                 'avatar' => $gImage,
             ];
+            $user->google_id = $googleUser->getId();
             $user->email_verified_at = Carbon::now()->toDateTimeString();
             $refUser = \App\Models\User::where('reference', session()->get('reference'))->first();
             if(!!$refUser){
@@ -106,9 +108,9 @@ class AuthenticatedSessionController extends Controller
         $gId = $facebookUser->getId();
         $gName = $facebookUser->getName();
         $gImage =  $facebookUser->getAvatar();
-        $gEmail = $facebookUser->getEmail();
+        $gEmail = $facebookUser->getEmail() ?? $facebookUser->getId().'@tradekunj.com';
 
-        $user = \App\Models\User::where('email', $gEmail)->first();
+        $user = \App\Models\User::where('email', $gEmail)->orWhere('facebook_id', $gId)->first();
         if(!$user){
             $user = \App\Models\User::create([
                 'name' => $gName,
@@ -119,6 +121,7 @@ class AuthenticatedSessionController extends Controller
                 'googleId' => $gId,
                 'avatar' => $gImage,
             ];
+            $user->facebook_id = $gId;
             $user->email_verified_at = Carbon::now()->toDateTimeString();
             $refUser = \App\Models\User::where('reference', session()->get('reference'))->first();
             if(!!$refUser){
