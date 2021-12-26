@@ -48,6 +48,7 @@ class ExpertController extends Controller
         $expert->service_id = $request->service_id;
         $expert->active = $request->active;
         $expert->address = $request->address;
+        $expert->experience = $request->experience;
         $expert->save();
         return response()->json($expert, 201);
 
@@ -97,6 +98,7 @@ class ExpertController extends Controller
         $expert->service_id = $request->service_id;
         $expert->active = $request->active;
         $expert->address = $request->address;
+        $expert->experience = $request->experience;
         $expert->save();
         return response()->json($expert, 200);
     }
