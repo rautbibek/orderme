@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\PointValueTransaction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\PointValue;
 use App\Models\Theme;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
@@ -86,14 +88,8 @@ class AuthenticatedSessionController extends Controller
             ];
             $user->google_id = $googleUser->getId();
             $user->email_verified_at = Carbon::now()->toDateTimeString();
-            $refUser = \App\Models\User::where('reference', session()->get('reference'))->first();
-            if(!!$refUser){
-                $user->reference_id = $refUser->id;
-                $user->point_value = 35;
-                $refUser->point_value += 10;
-                $refUser->save();
-                session()->forget('reference');
-            }
+            $reference = session()->get('reference');
+            event(new PointValueTransaction($user, PointValue::SCHEME_SELF_REGISTERED, $reference));
 
             $user->save();
         }
@@ -108,10 +104,13 @@ class AuthenticatedSessionController extends Controller
         $gId = $facebookUser->getId();
         $gName = $facebookUser->getName();
         $gImage =  $facebookUser->getAvatar();
-        $gEmail = $facebookUser->getEmail() ?? $facebookUser->getId().'@tradekunj.com';
+        $gEmail = $facebookUser->getEmail();
 
         $user = \App\Models\User::where('email', $gEmail)->orWhere('facebook_id', $gId)->first();
         if(!$user){
+            if(!$gEmail){
+                $gEmail = $facebookUser->getId().'@tradekunj.com';
+            }
             $user = \App\Models\User::create([
                 'name' => $gName,
                 'email' => $gEmail,
@@ -123,14 +122,9 @@ class AuthenticatedSessionController extends Controller
             ];
             $user->facebook_id = $gId;
             $user->email_verified_at = Carbon::now()->toDateTimeString();
-            $refUser = \App\Models\User::where('reference', session()->get('reference'))->first();
-            if(!!$refUser){
-                $user->reference_id = $refUser->id;
-                $user->point_value = 35;
-                $refUser->point_value += 10;
-                $refUser->save();
-                session()->forget('reference');
-            }
+            $reference = session()->get('reference');
+
+            event(new PointValueTransaction($user, PointValue::SCHEME_SELF_REGISTERED, $reference));
 
             $user->save();
         }

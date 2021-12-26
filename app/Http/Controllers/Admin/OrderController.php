@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\PointValueTransaction;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\PointValue;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -117,23 +119,15 @@ class OrderController extends Controller
 
     public function confirmPayment($uuid){
         $order = Order::where('uuid', $uuid)->first();
+        if($order->payment_state != 'completed'){
 
-        $order->payment_state = 'completed';
-        $order->state = 'confirmed';
-        $order->save();
-        $user = User::where('id', $order->user_id)->first();
-//        Adding 1 % of total amount to point value
+            $order->payment_state = 'completed';
+            $order->state = 'confirmed';
+            $order->save();
+            $user = User::where('id', $order->user_id)->first();
 
-        $user->point_value = $user->point_value + $order->total / 10000;
-        $user->save();
-
-//        Adding 0.5% of total amount to point value
-        $refUser = User::where('id', $user->reference_id)->first();
-        if(!!$refUser && !!$refUser->id){
-            $refUser->point_value = $refUser->point_value + $order->total /20000;
-            $refUser->save();
+            event(new PointValueTransaction($user, PointValue::SCHEME_PURCHASE_DIRECT, null , $order->total));
         }
-
 
         return response()->json($order);
     }

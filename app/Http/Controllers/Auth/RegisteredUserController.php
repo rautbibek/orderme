@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\PointValueTransaction;
 use App\Http\Controllers\Controller;
+use App\Models\PointValue;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -33,6 +35,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
 
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -45,21 +48,10 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]));
-        $reference = $request->reference ?? null;
-        if(!!$reference){
-            session()->put('reference', $request->reference);
-        }
 
+        $reference = $request->reference ?? session()->get('reference');
 
-        $refUser = User::where('reference', session()->get('reference'))->first();
-        if(!!$refUser){
-            $user->reference_id = $refUser->id;
-            $user->point_value = 35;
-            $refUser->point_value += 10;
-            $refUser->save();
-            $user->save();
-            session()->forget('reference');
-        }
+        event(new PointValueTransaction($user, PointValue::SCHEME_SELF_REGISTERED, $reference));
 
         event(new Registered($user));
         $checkout =  session()->get('checkout');
