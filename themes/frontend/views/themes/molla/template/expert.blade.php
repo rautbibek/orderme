@@ -1,10 +1,13 @@
 @extends(getLayout())
 @section('title', 'Service Detail | Tradekunj')
 @section('content')
+
     <div class="page-content">
         <div class="page-header text-center mb-2">
             <h1 class="page-title text">Detail</h1>
         </div>
+        
+
 
         <div class="container">
             <div class="row">
@@ -14,13 +17,18 @@
                     </figure><!-- End .store-media -->
                 </div><!-- End .col-xl-6 -->
                 <div class="col-sm-7 col-xl-6">
-                    <div class="store-content">
+                    <div class="store-content" id="store-content">
                         <h3 class="store-title">About {{$expert->name}}</h3><!-- End .store-title -->
-                        <p>{!! $expert->description !!}</p>
+                        <p id="store-description">
+                            {!! $expert->description !!}
+                        </p>
                     </div><!-- End .store-content -->
+
                 </div><!-- End .col-xl-6 -->
             </div>
         </div>
+
+        <hr>
 
         <div class="page-content pb-0 mt-2">
             <div class="container">
@@ -33,6 +41,10 @@
                                     <h3>Personal Info</h3>
 
                                     <ul class="contact-list">
+                                        <li>
+                                            <i class="icon-user"></i>
+                                            <a href="">{{ $expert->name }}</a>
+                                        </li>
                                         <li>
                                             <i class="icon-map-marker"></i>
                                             {{$expert->address}}, {{$expert->province}}, {{$expert->city}}
@@ -56,11 +68,24 @@
                                     <ul class="contact-list">
                                         <li>
                                             <i class="icon-cog"></i>
-                                            <span class="text-dark">{{$expert->service->title}}</span> <br>Electrician
+                                            <span class="text-dark">{{$expert->service->title}}</span> 
                                         </li>
                                         <li>
                                             <i class="icon-calendar"></i>
                                             <span class="text-dark">Service Area</span> <br>{{$expert->address}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="contact-info">
+                                    <h3>Experience</h3>
+
+                                    <ul class="contact-list">
+                                        <li>
+                                            <i class="icon-list-alt"></i>
+                                            <a href="">{{ $expert->experience }}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -74,3 +99,15 @@
     </div>
 
 @endsection
+
+@section('js')
+    <script>
+        function toggleTextArea()
+        {
+            var limitedHeight = '40px';
+            var targetEle = document.getElementById("store-description");
+            targetEle.style.height = (targetEle.style.height === '') ? limitedHeight : '';
+        }
+    </script>
+@endsection
+

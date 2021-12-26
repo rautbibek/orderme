@@ -88,6 +88,7 @@ const ExpertEditComponent: React.FC<ExpertEditComponentProps> = ({onSubmit, expe
                     <AddressSelect values={values}/>
                     <CustomTextField name="address" type={'text'} label={'Address'}/>
                     <SelectTable label={'Services'} name={'service_id'} table={'service'} />
+                    <CustomTextField name="experience" type={'text'} label={'Experience'}/>
                     <CustomCheckBox color={'primary'} checked={values.active } name={'active'} label={'Active'}/>
                     <div className={classes.buttonWrapper}>
                         <Button variant={"contained"}  color="primary" type="submit">Submit</Button>
