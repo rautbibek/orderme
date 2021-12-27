@@ -16,6 +16,7 @@ use App\Models\ProductType;
 
 use App\Models\User;
 use App\Models\Variant;
+use App\Services\AddressServices;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -199,7 +200,7 @@ class FrontendController extends Controller
 
     }
 
-    public function checkoutAction(Request $request){
+    public function checkoutAction(Request $request, AddressServices $addressServices){
         $theme = Theme::find(['active' => true])->first();
         $cart = session()->get('cart');
         if(!$cart){
@@ -209,11 +210,11 @@ class FrontendController extends Controller
         $order->user_id = Auth::id();
         $order->save();
         $shipping_address = CustomerAddress::where('user_id', Auth::id())->get();
-        return view("themes.$theme->slug.template.checkout", compact('order', 'shipping_address'));
+        $provinces = $addressServices->getAllState();
+        return view("themes.$theme->slug.template.checkout", compact('order', 'shipping_address', 'provinces'));
     }
 
     public function addressAction(Request $request){
-
         $theme = Theme::find(['active' => true])->first();
         $cart = session()->get('cart');
         if(!$cart){
@@ -230,10 +231,20 @@ class FrontendController extends Controller
             $order->customer_address_id = $addressSelect;
         }else{
 
+            $validated = $request->validate([
+                'name' => 'required|max:255',
+                'phone' => 'required|min:9',
+                'province' => 'required',
+                'city' => 'required',
+                'street1' => 'required'
+            ]);
+
             $address = new CustomerAddress();
             $address->name = $request->name;
             $address->user_id = Auth::id();
             $address->phone_number = $request->phone;
+            $address->province = $request->province;
+            $address->city = $request->city;
             $address->street1 = $request->street1;
             $address->street2 = $request->street2;
             $address->save();

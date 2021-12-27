@@ -31,3 +31,4 @@ Route::get('/cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class
 Route::post('/add-to-cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'addToCartAction'])->name('addToCart');
 Route::post('/update-cart', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'updateCartAction'])->name('update.cart');
 Route::get('/experts/{slug}', [\App\Http\Controllers\FrontendWeb\FrontendController::class, 'expertView'])->name('experts.detail');
+Route::get('/province/{code}', [\App\Http\Controllers\Admin\AddressController::class, 'getCityAction']);

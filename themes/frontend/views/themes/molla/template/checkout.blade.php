@@ -30,11 +30,26 @@
                                             <label for="cname" class="sr-only">Name</label>
                                             <input type="text" name="name" class="form-control" id="cname" placeholder="Name *" >
                                         </div><!-- End .col-sm-6 -->
-
                                         <div class="col-sm-6">
                                             <label for="cphone" class="sr-only">Phone</label>
                                             <input type="tel" name="phone" class="form-control" id="cphone" placeholder="Phone">
                                         </div><!-- End .col-sm-6 -->
+                                        <div class="col-sm-6">
+                                            <label for="province" class="sr-only">Province</label>
+                                            <select name="province" class="form-control" id="province">
+                                                <option value="" selected disabled hidden>Select Province</option>
+                                                @foreach($provinces as $key =>  $province)
+                                                    <option value="{{$province['iso_code']}}">{{$province['name']}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div><!-- End .col-sm-6 -->
+                                        <div class="col-sm-6">
+                                            <label for="city" class="sr-only">City</label>
+                                            <select name="city" class="form-control" id="city">
+                                                <option value="" selected disabled hidden>Select City</option>
+                                            </select>
+                                        </div><!-- End .col-sm-6 -->
+
                                         <div class="col-sm-12">
                                             <label for="cstreet" class="sr-only">Street 1 *</label>
                                             <input type="tel" name="street1" class="form-control" placeholder="Street 1">
@@ -134,4 +149,28 @@
             </div><!-- End .cart -->
         </div><!-- End .page-content -->
     </main><!-- End .main -->
+    <script>
+        $(document).ready(function() {
+            $('#province').on('change', function (e) {
+                var provinceSelected = $('#province :selected').val();
+                // console.log(provinceSelected);
+                $.ajax({
+                    url: `/province/${provinceSelected}`,
+                    type: "GET",
+                    cache: true,
+                    data:{},
+                    success: function(dataResult){
+                        var $el = $("#city");
+                        $el.empty(); // remove old options
+                        $.each(dataResult.subdivisions, function(key,value) {
+                            $el.append($("<option></option>")
+                                .attr("value", value).text(value));
+                        });
+                    }
+                });
+
+            })
+
+        });
+    </script>
 @stop
