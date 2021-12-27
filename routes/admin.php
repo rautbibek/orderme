@@ -25,6 +25,7 @@ Route::middleware(['guest:admin'])->group(function() {
 
 Route::middleware(['auth:admin'])->group(function(){
     Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard-chart', [HomeController::class, 'getDashboardChart']);
     //Collection controller
     Route::resource('/categories',CategoryController::class)->except('show','create');
     Route::resource('/collections',\App\Http\Controllers\Admin\CollectionController::class)->except('show','create');
