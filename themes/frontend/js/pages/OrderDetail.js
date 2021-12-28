@@ -27,7 +27,7 @@ export default function OrderDetail(props) {
             <Grid item xs={8}>
                 <Button size={"sm"} onClick={() => history.push(`/orders`)}>Back </Button>
             </Grid>
-            <Grid item xs={8} >
+            <Grid item xs={12} >
                 <Box
                     sx={{
                         width: '100%',
@@ -109,28 +109,6 @@ export default function OrderDetail(props) {
 
                 </Box>
 
-            </Grid>
-            <Grid item xs={4}>
-                <Box
-                    sx={{
-                        width: '100%',
-                        border: '1px solid #3daf3b',
-                        borderRadius: 5,
-                        justifyContent: 'center',
-                        padding: 10
-                    }}
-                >
-                    <Row style={{display:'flex'}}>
-                        <Col md={12}>
-
-                        </Col>
-                        <Col md={12} style={{justifyContent: 'center'}}>
-                            <h5>{data.data.user.name}</h5>
-                            <p>Email: {data.data.user.email}</p>
-                        </Col>
-
-                    </Row>
-                </Box>
             </Grid>
         </Grid>
     )
