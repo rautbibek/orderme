@@ -81,7 +81,7 @@ class PointValueTransactionListner
                 $refUser->point_value = $refUser->point_value + $event->orderTotal /20000;
                 $refUser->save();
                 $pointValue = new PointValue();
-                $pointValue->user_id = $user->id;
+                $pointValue->user_id = $refUser->id;
                 $pointValue->point_value = $refUser->point_value;
                 $pointValue->scheme = PointValue::SCHEME_PURCHASE_REFERRAL;
                 $pointValue->save();
