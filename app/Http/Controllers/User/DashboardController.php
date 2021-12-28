@@ -36,6 +36,11 @@ class DashboardController extends Controller
         return response()->json($orders);
     }
 
+    public function orderDetail($id){
+        $order =  Order::where('id', $id)->with('user', 'customerAddress', 'cartItems.variant.product')->first();
+        return response()->json($order);
+    }
+
     public function getProfile(Request $request){
         $user = Auth::user();
         if($request->isMethod('post')){

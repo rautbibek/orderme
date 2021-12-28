@@ -67,6 +67,8 @@
                                     <address>{{ $expert->address }}</address>
 
                                     <h3 class="store-title mb-1"><i class="icon-calendar"></i></i>Experience</h3>
+                                    <address>{{ $expert->experience }}</address>
+
                                     <!-- End .store-title -->
                                     <address></address>
 
