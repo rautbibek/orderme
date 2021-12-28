@@ -65,9 +65,9 @@ class PointValueTransactionListner
 
            // Adding 1 % of total amount to point value to direct purchase
 
-            $user->point_value = $user->point_value + $event->orderTotal / 10000;
+            $user->point_value += $event->orderTotal / 10000;
             $user->save();
-            $pointValue->point_value = $user->point_value;
+            $pointValue->point_value = $event->orderTotal / 10000;
             $pointValue->scheme = PointValue::SCHEME_PURCHASE_DIRECT;
             $pointValue->save();
 
@@ -78,11 +78,11 @@ class PointValueTransactionListner
             }
 
             if(!!$refUser){
-                $refUser->point_value = $refUser->point_value + $event->orderTotal /20000;
+                $refUser->point_value += $event->orderTotal /20000;
                 $refUser->save();
                 $pointValue = new PointValue();
                 $pointValue->user_id = $refUser->id;
-                $pointValue->point_value = $refUser->point_value;
+                $pointValue->point_value = $event->orderTotal /20000;
                 $pointValue->scheme = PointValue::SCHEME_PURCHASE_REFERRAL;
                 $pointValue->save();
             }
