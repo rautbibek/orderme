@@ -45,6 +45,12 @@ class PointValueTransactionListner
                 $user->save();
                 $pointValue->point_value = 35;
                 $pointValue->scheme = PointValue::SCHEME_REFERRAL;
+                $pointValueForReferal = new PointValue();
+                $pointValueForReferal->point_value = 10;
+                $pointValueForReferal->user_id = $refUser->id;
+                $pointValueForReferal->scheme = PointValue::SCHEME_INDIRECT_REFERRAL;
+                $pointValueForReferal->save();
+
             }else{
                 $user->point_value = 25;
                 $user->save();
