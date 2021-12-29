@@ -8,6 +8,7 @@ use App\Models\Theme;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -43,6 +44,8 @@ class DashboardController extends Controller
 
     public function getProfile(Request $request){
         $user = Auth::user();
+        // $orders = DB::table('orders')->where('user_id',auth()->user()->id)->get();
+        // $addresses =  DB::table('customer_addresses')->where('user_id',auth()->user()->id)->get();
         if($request->isMethod('post')){
             $request->validate([
                 'name' => 'required|string|max:255',
