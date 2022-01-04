@@ -276,15 +276,15 @@
                                     @foreach(allCategory() as $category)
                                         <li class="item-lead"><a href="{{route('category', $category->slug)}}">{{$category->name}}</a></li>
                                     @endforeach
-                                </ul><!-- End .menu-vertical -->
-                            </nav><!-- End .side-nav -->
-                        </div><!-- End .dropdown-menu -->
-                    </div><!-- End .category-dropdown -->
-                </div><!-- End .header-left -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="header-center">
+                <!-- <div class="header-center">
                     <nav class="main-nav">
-                        <ul class="menu sf-arrows">
+                        <ul class="menu sf-arrows" style="white-space:nowrap">
                             @foreach(getMenu('main_menu')['design'] ??  [] as $menu)
                                                     <li>
                                                         <li>
@@ -299,7 +299,7 @@
                                                                                 <div class="col-md-6">
                                                                                     <div class="menu-title">
                                                                                         <a href="{{menuUrl($item)}}" class="text-success">{{$item['name']}}</a>
-                                                                                    </div><!-- End .menu-title -->
+                                                                                    </div>
                                                                                     @if(count($item['children'] ?? []) > 0)
                                                                                     <ul>
                                                                                         @foreach($item['children'] ?? [] as $_item)
@@ -308,49 +308,130 @@
                                                                                     </ul>
                                                                                     @endif
 
-                                                                                </div><!-- End .col-md-6 -->
+                                                                                </div>
                                                                                 @endforeach
-                                                                            </div><!-- End .row -->
-                                                                        </div><!-- End .menu-col -->
-                                                                    </div><!-- End .col-md-8 -->
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
 
 
-                                                                </div><!-- End .row -->
-                                                            </div><!-- End .megamenu megamenu-md -->
+                                                                </div>
+                                                            </div>
                                         @endif
                                                         </li>
                             @endforeach
-                            {{--                            @foreach(getMenu('main_menu')['design'] ??  [] as $menu)--}}
-{{--                            <li>--}}
-{{--                                <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{$menu['name']}}</a>--}}
-{{--                                @if(count($menu['children'] ?? []) > 0)--}}
-{{--                                    <ul>--}}
-{{--                                        @foreach($menu['children'] ?? [] as $item )--}}
-{{--                                        <li>--}}
-{{--                                            <a href="{{menuUrl($item)}}" class="sf-with-ul">{{$item['name']}}</a>--}}
-{{--                                            @if(count($item['children'] ?? []) > 0)--}}
-{{--                                            <ul>--}}
 
-{{--                                                @foreach($item['children'] ?? [] as $_item)--}}
-{{--                                                     <li><a href="{{menuUrl($_item)}}">{{$_item['name']}}</a></li>--}}
-{{--                                                @endforeach--}}
-{{--                                            </ul>--}}
-{{--                                                @endif--}}
-{{--                                        </li>--}}
-{{--                                        @endforeach--}}
-{{--                                    </ul>--}}
-{{--                                @endif--}}
-{{--                            </li>--}}
+                        </ul>
+                    </nav>
+                </div> -->
 
-{{--                            @endforeach--}}
+                <!-- <div class="sticky-wrapper">
+                    <div class="header-middle sticky-header">
+                        <div class="container">
+                            <div class="header-left">
+                                <button class="mobile-menu-toggler">
+                                    <span class="sr-only">Toggle mobile menu</span>
+                                    <i class="icon-bars"></i>
+                                </button>
 
-                        </ul><!-- End .menu -->
-                    </nav><!-- End .main-nav -->
-                </div><!-- End .header-center -->
+                                <nav class="main-nav">
+                                    <ul class="menu sf-arrows sf-js-enabled" style="touch-action: pan-y;">
+                                    @foreach(getMenu('main_menu')['design'] ??  [] as $menu)
+                                        <li class="">
+                                            <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{ $menu['name'] }}</a>
 
-            </div><!-- End .container -->
-        </div><!-- End .header-bottom -->
-    </header><!-- End .header -->
+                                            <div class="megamenu megamenu-md" style="display: none;">
+                                                <div class="row no-gutters">
+                                                    <div class="col-md-12">
+                                                        <div class="menu-col">
+                                                            <div class="row">
+                                                            @foreach($menu['children'] ?? [] as $item )
+                                                                <div class="col-md-3">
+                                                                    <div class="menu-title"><a href="{{ menuUrl($item) }}">{{ $item['name'] }}</a></div>
+
+                                                                    @if(count($item['children'] ?? []) > 0)
+                                                                    <ul>
+                                                                        @foreach($item['children'] ?? [] as $_item)
+                                                                            <li><a href="{{ menuUrl($_item) }}">{{ $_item['name'] }}</a></li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                    @endif
+
+                                                                </div>
+                                                            @endforeach
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </li>
+                                    @endforeach
+                                    </ul>
+                                </nav>
+                            </div>
+
+                            <div class="header-right">
+
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
+
+                <style>
+                    .megamenu{
+                        min-width:1140px;
+                    }
+                    .menu>li>a{
+                        white-space: nowrap;
+                    }
+                    .menu{
+                        flex-wrap: wrap !important;
+                    }
+                    /* .menu .megamenu {
+                        position: absolute;
+                        z-index: 1052;
+                    } */
+                </style>
+
+                <nav class="main-nav">
+                    <ul class="menu sf-arrows sf-js-enabled" style="touch-action: pan-y;">
+                        @foreach(getMenu('main_menu')['design'] ??  [] as $menu)
+                        <li class="megamenu-container">
+                            <a href="{{menuUrl($menu)}}" class="sf-with-ul">{{ $menu['name'] }}</a>
+
+                            <div class="megamenu megamenu-md" style="display: none;">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-12">
+                                                <div class="menu-col">
+                                                    <div class="row">
+                                                    @foreach($menu['children'] ?? [] as $item )
+                                                        <div class="col-md-3">
+                                                            <div class="menu-title"><a href="{{ menuUrl($item) }}">{{ $item['name'] }}</a></div>
+
+                                                            @if(count($item['children'] ?? []) > 0)
+                                                            <ul>
+                                                                @foreach($item['children'] ?? [] as $_item)
+                                                                    <li><a href="{{ menuUrl($_item) }}">{{ $_item['name'] }}</a></li>
+                                                                @endforeach
+                                                            </ul>
+                                                            @endif
+
+                                                        </div>
+                                                    @endforeach
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </li>
+                        @endforeach
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </header>
     @yield('content')
 
     <footer class="footer">
