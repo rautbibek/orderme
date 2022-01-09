@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import HttpClient from "../HttpClient";
 import useSWR from "swr";
 import {Button} from "react-bootstrap";
+import { Link,useHistory, useLocation } from "react-router-dom"
 
 const Order = () => {
     const url = `all-orders`
     const fetchData = async () => {
         return await HttpClient.get(url)
     }
+
+    const history = useHistory()
+    const [currentPage , setCurrentPage] = React.useState(1)
 
     const { data: data, error } = useSWR(`${url}`, fetchData, { revalidateOnFocus: false, revalidateOnReconnect: true })
 
@@ -31,7 +35,9 @@ const Order = () => {
                                <p className="float-right" >Total: Rs. {item.total/100}</p>
                                <br/>
                                <br/>
-                               <Button size={"sm"} className="float-right">View</Button>
+                                <Button size={"sm"} className="float-right" onClick={()=>history.push(`order-detail/${item.id}`)}>
+                                    View
+                                </Button>
                            </div>
                        </div>
                     </div>

@@ -6,6 +6,7 @@ import Order from "./pages/Order";
 import Reference from "./pages/Reference";
 import Profile from "./pages/Profile";
 import Addresses from "./pages/Addresses";
+import OrderDetail from "./pages/OrderDetail";
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
                        <PrivateRoute path={"/reference-code"} exact component={Reference} />
                        <PrivateRoute path={"/profile"} exact component={Profile} />
                        <PrivateRoute path={"/addresses"} exact component={Addresses} />
+                       <PrivateRoute path={"/order-detail/:id"} exact component={OrderDetail} />
                    </Switch>
                </HashRouter>
             </>

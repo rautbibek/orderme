@@ -85,6 +85,7 @@ Route::get('/me/{path?}', [\App\Http\Controllers\User\DashboardController::class
 Route::middleware(['auth'])->group(function(){
     Route::get('/reference-code', [\App\Http\Controllers\User\DashboardController::class, 'getReference']);
     Route::get('/all-orders', [\App\Http\Controllers\User\DashboardController::class, 'getOrders']);
+    Route::get('/order/{id}', [\App\Http\Controllers\User\DashboardController::class, 'orderDetail']);
     Route::get('/user-profile', [\App\Http\Controllers\User\DashboardController::class, 'getProfile']);
     Route::post('/user-profile', [\App\Http\Controllers\User\DashboardController::class, 'getProfile']);
     Route::get('/register', function () {
