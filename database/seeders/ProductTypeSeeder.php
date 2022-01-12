@@ -207,6 +207,50 @@ class ProductTypeSeeder extends Seeder
 
                 ],
                 'cart_system' => true
+            ],
+            [
+                'title' => 'automobile-and-parts',
+                'field' => [
+                    [
+                        'name' => 'type',
+                        'type' => 'text',
+                        'as' => 'Type'
+                    ],
+                    [
+                        'name' => 'model',
+                        'type' => 'text',
+                        'as' => 'Model'
+                    ]
+
+                ],
+                'cart_system' => true
+            ],
+            [
+                'title' => 'home-and-land',
+                'field' => [
+                    [
+                        'name' => 'area',
+                        'type' => 'text',
+                        'as' => 'Area'
+                    ],
+                    [
+                        'name' => 'type',
+                        'type' => 'landType',
+                        'as' => 'Type'
+                    ],
+                    [
+                        'name' => 'phone',
+                        'type' => 'text',
+                        'as' => 'Phone'
+                    ],
+                    [
+                        'name' => 'address',
+                        'type' => 'text',
+                        'as' => 'Address'
+                    ]
+
+                ],
+                'cart_system' => false
             ]
 
 

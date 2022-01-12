@@ -10,15 +10,19 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { IconButton } from '@material-ui/core';
 import { Delete } from '@material-ui/icons';
 import {forEach} from "lodash";
+import TypeCondition from '../../Layout/TypeCondition';
+import AddressSelect from '../../Layout/AddressSelect';
+import VariantTypeSelect from '../../Layout/VariantTypeSelect';
 
 
 interface productVarianceProps {
     productType?: any,
     optionType?: any,
     push?: any,
-    pop?:any
+    pop?:any,
+    values: any,
 }
-const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionType , push, pop}) => {
+const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionType , push, pop, values}) => {
     const [selectType, setSelectType] = React.useState([] as any);
     const [cartSystem, setCartSystem] = React.useState(false)
 
@@ -43,6 +47,7 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
     }, [productType, data])
     if(!cartSystem){
         return(
+            <>
             <FieldArray name={'variants'}>
                 {({ fields, meta }) =>{
                     return (
@@ -53,7 +58,7 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
                                         selectType.map((i, number) => {
                                             return (
                                                 <Grid key={number} item xs={1} style={{ marginBottom: 20 }}>
-                                                    <CustomTextField name={`variants[${0}]features.${i.name}`} type={i.type} label={i.as} />
+                                                    <VariantTypeSelect name={`variants[${0}]features.${i.name}`} type={i.type} label={i.as} />
                                                 </Grid>
                                             )
                                         })
@@ -80,6 +85,8 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
 
                 }
             </FieldArray>
+            <AddressSelect values={values} />
+            </>
         )
     }
 
@@ -143,6 +150,8 @@ const ProductVariance: React.FC<productVarianceProps> = ({ productType, optionTy
 
                     }
                 </FieldArray>
+                <TypeCondition/>
+                
             </div>
         )
 

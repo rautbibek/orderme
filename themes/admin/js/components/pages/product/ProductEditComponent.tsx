@@ -13,6 +13,8 @@ import CustomCheckBox from "../../Layout/CustomCheckBox";
 import {useHistory} from 'react-router-dom'
 import * as yup from "yup";
 import CkTextfield from "../../Layout/CkTextfield";
+import TypeCondition from '../../Layout/TypeCondition'
+import AddressSelect from '../../Layout/AddressSelect'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -123,10 +125,10 @@ const ProductEditComponent: React.FC<ProductEditComponentProps> = ({ onSubmit, p
                             <SelectBrand productType={values.product_type_id} value={values.brand}  />
                             <hr />
                             <br />
-                            <ProductVariance productType={values.product_type_id} push={push} pop={pop} optionType={values.options} />
+                            <ProductVariance values={values} productType={values.product_type_id} push={push} pop={pop} optionType={values.options} />
                         </>
 
-                    )}
+                    )}                    
                     <CustomCheckBox color={'primary'} checked={values.active } name={'active'} label={'Active'}/>
                     <CustomCheckBox color={'secondary'} checked={values.out_of_stock} name={'out_of_stock'} label={'Out Of Stock'}/>
                     <CustomTextField name="meta_tag_title" type={'text'} rows={3} label={'Meta Tag Title'} />

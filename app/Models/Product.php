@@ -10,6 +10,10 @@ class Product extends Model
 {
     use HasFactory;
 
+    const CONDITION_NEW = 'new';
+    const CONDITION_OLD = 'old';
+    const CONDITION_REFURBISH = 'refurbish';
+
     protected $appends = ['collections'];
 
     public function variants(){

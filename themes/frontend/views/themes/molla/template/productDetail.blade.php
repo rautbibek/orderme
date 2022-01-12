@@ -32,7 +32,6 @@
 
                             </div><!-- End .product-gallery -->
                         </div><!-- End .col-md-6 -->
-
                         <div class="col-md-6">
                             <div class="product-details sticky-content">
                                 <h1 class="product-title">{{$prod->title}}</h1><!-- End .product-title -->
@@ -46,7 +45,7 @@
                                 </div><!-- End .product-content -->
                                 <form method="post" action="{{route('addToCart')}}">
                                     @csrf
-                                <div class="details-filter-row details-row-size">
+                                <div {{!$prod->cart_system ? 'hidden': ''}} class="details-filter-row details-row-size">
                                     <label for="size">Variants:</label>
                                     <div class="select-custom">
                                         <select name="variant" id="size" class="form-control">
@@ -59,22 +58,41 @@
 
                                     {{-- <a href="#" class="size-guide"><i class="icon-th-list"></i>size guide</a> --}}
                                 </div><!-- End .details-filter-row -->
-                                <div class="details-filter-row details-row-size">
-                                    <label for="qty">Qty:</label>
-                                    <div class="product-details-quantity">
-                                        <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
-                                        <input type="hidden" value="{{$prod->id}}" name="product_id">
 
-                                    </div><!-- End .product-details-quantity -->
-                                </div><!-- End .details-filter-row -->
+                                @if(!$prod->cart_system)
+                                <div class="border px-3 mb-2">
+                                   
+                                        @foreach($prod->variants[0]->features as $key => $feat)
+                                            <span style="display: block; font-weight:bold">{{ucfirst($key)}} : {{$feat}}</span>
+                                        @endforeach
+                                        <span style="display: block; font-weight:bold"> Location: {{$prod->city}}</span>
+                                    </div>
+                                    @endif
+                                    @if($prod->cart_system)
+                                    <div class="border px-3 mb-2">
+                                       
+                                        @if(!!$prod->condition)
+                                         <span style="display: block; font-weight:bold"> Contidion Type: {{$prod->condition}}</span>
+                                        @endif
+                                        </div>
 
-                                <div class="product-details-action">
-                                    <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
-
-                                    <div class="details-action-wrapper">
-                                        <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
-                                    </div><!-- End .details-action-wrapper -->
-                                </div><!-- End .product-details-action -->
+                                        <div class="details-filter-row details-row-size">
+                                            <label for="qty">Qty:</label>
+                                            <div class="product-details-quantity">
+                                                <input type="number" name="quantity" id="qty" class="form-control" value="1" min="1" max="10" step="1" data-decimals="0" required>
+                                                <input type="hidden" value="{{$prod->id}}" name="product_id">
+        
+                                            </div><!-- End .product-details-quantity -->
+                                        </div><!-- End .details-filter-row -->
+        
+                                        <div class="product-details-action">
+                                            <button type="submit" class="btn-product btn-cart"><span>add to cart</span></button>
+        
+                                            {{-- <div class="details-action-wrapper">
+                                                <a href="#" class="btn-product btn-wishlist" title="Wishlist"><span>Add to Wishlist</span></a>
+                                            </div><!-- End .details-action-wrapper --> --}}
+                                        </div><!-- End .product-details-action -->
+                                    @endif
                                 </form>
                                 <div class="accordion accordion-plus product-details-accordion" id="product-accordion">
 

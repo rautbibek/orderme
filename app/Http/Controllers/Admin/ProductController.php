@@ -53,11 +53,13 @@ class ProductController extends Controller
             $product->product_type_id = $request->product_type_id;
             $product->short_description = $request->short_description;
             $product->description = $request->description;
-            $product->cart_system = true;
             $product->brand_id = $request->brand_id ?? null ;
             $product->inventory_track = true;
             $product->admin_id = Auth::id();
 //        $product->options = json_encode($request->options);
+            $product->condition = $request->condition;
+            $product->province = $request->province ?? null;
+            $product->city = $request->city ?? null;
             $product->out_of_stock = $request->out_of_stock;
             $product->active = $request->active;
             $product->meta_tag_title = $request->meta_tag_title;
@@ -160,6 +162,9 @@ class ProductController extends Controller
             $product->brand_id = $request->brand_id ?? null ;
 //        $product->options = json_encode($request->options);
             $product->image = json_encode($request->image);
+            $product->condition = $request->condition;
+            $product->province = $request->province ?? null;
+            $product->city = $request->city ?? null;
             $product->out_of_stock = $request->out_of_stock;
             $product->active = $request->active;
             $product->meta_tag_title = $request->meta_tag_title;

@@ -182,6 +182,9 @@ class FrontendController extends Controller
             $order =  Order::where('uuid', $cart)->first();
         }
         $variant = Variant::where('id', $request->variant)->first();
+        if(!$variant->product->cart_system){
+            abort('404', 'Unauthorized');
+        }
 
         $cartItem = new CartItem();
         $cartItem->order_id = $order->id;
