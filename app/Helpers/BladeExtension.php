@@ -86,18 +86,23 @@ function menuUrl($key){
     switch ($key['reference']) {
         case "Category":
             $category = \App\Models\Category::where('id', $key['value'])->first();
+            if(!$category) return route('welcome');
             return route('category', ['slug' => $category->slug]);
         case "Collection":
             $collection = \App\Models\Collection::where('id', $key['value'])->first();
+            if(!$collection) return route('welcome');
             return route('collection', ['slug' => $collection->slug]);
         case "Page":
             $page = \App\Models\Page::where('id', $key['value'])->first();
+            if(!$page) return route('welcome');
             return route('page', ['slug' => $page->slug]);
         case "Brand":
             $brand = \App\Models\Brand::where('id', $key['value'])->first();
+            if(!$brand) return route('welcome');
             return route('brand', ['slug' => $brand->slug]);
         case "Service":
             $service = \App\Models\Service::where('id', $key['value'])->first();
+            if(!$service) return route('welcome');
             return route('service', ['slug' => $service->slug]);
         default:
             return $key['value'];
